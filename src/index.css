@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
 :root {
@@ -27,8 +28,8 @@ body {
 .hero {
   text-align: center;
   position: relative;
-  /* Reduced padding to save vertical space */
-  padding: 1rem;
+  /* Shift content up to avoid overlap with bottom oval */
+  padding-top: 5vh;
   width: 100%; /* FORCE full width */
   max-width: 100%; 
   /* Ensure hero takes full height to allow bottom positioning relative to it */
@@ -36,15 +37,16 @@ body {
   /* Changed from just being content based */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* Align to top instead of center */
   overflow: hidden; /* Hide overflow from the oval */
+  box-sizing: border-box; /* Ensure padding is included in height */
 }
 
 .image-wrapper {
   position: relative;
   /* Reduced size to fit in viewport */
-  width: 350px;
-  max-width: 50%;
+  width: 340px;
+  max-width: 55%;
   margin: 0 auto;
 }
 
@@ -87,12 +89,12 @@ body {
 }
 
 .liquid-title {
-  font-family: 'Amatic SC', cursive;
-  font-weight: 700;
-  font-size: 10rem; /* Reduced to fit in viewport */
+  font-family: 'Permanent Marker', cursive;
+  font-weight: 400; /* Permanent Marker only has 400 */
+  font-size: 8rem; 
   margin: 0;
-  line-height: 1;
-  letter-spacing: 0.05em;
+  line-height: 1.1;
+  letter-spacing: 0.05em; /* Standard spacing for this font */
 
   /* Outline effect REMOVED */
   -webkit-text-stroke: 0;
@@ -231,16 +233,17 @@ html, body {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%) translateY(80vh); /* Start mostly hidden */
+  transform: translateX(-50%) translateY(88vh); /* Start mostly hidden */
   
-  width: 90%;
+  width: 120%;
   height: 100vh;
   
   background-color: var(--coffee-brown);
+  /* Revert to standard semi-circle/oval top for the floating look */
   border-radius: 50% 50% 0 0;
   
   z-index: 100;
-  box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
+  box-shadow: none;
   
   display: flex;
   flex-direction: column;
