@@ -198,56 +198,118 @@ body {
   }
 }
 
-/* Slider Component Styles - Vertical Pull */
-.pull-trigger-container {
+/* Fixed Page Transition Layout */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* No native scroll */
+  background-color: var(--paper-bg);
+  font-family: 'Patrick Hand', cursive;
+  color: var(--text-stroke);
+}
+
+.app-container-fixed {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section-fixed {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 25vh; /* Reduced height to avoid crowding */
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  z-index: 20; /* Ensure it's above other elements */
-  cursor: grab;
-  touch-action: none; /* Prevent default scroll when dragging */
-  overflow: hidden; /* Hide the overflow if we make the curve wider */
+  height: 100vh;
+  z-index: 1;
 }
 
-.pull-trigger-container:active {
-  cursor: grabbing;
-}
-
-.pull-curve {
-  width: 90%; /* Reduced to 90% as requested */
-  /* margin-left removed to rely on flex centering */
-  background-color: var(--coffee-brown);
-  border-radius: 50%; /* Full oval shape */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 25px; 
-  box-shadow: 0 -5px 20px rgba(59, 47, 47, 0.4);
-  /* height and transition are handled in JS */
-  will-change: height;
+/* The Main Content Overlay */
+.main-content-fixed {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(80vh); /* Start mostly hidden */
   
-  /* Submerge the oval so only the top part is visible */
-  transform: translateY(60%); 
+  width: 90%;
+  height: 100vh;
+  
+  background-color: var(--coffee-brown);
+  border-radius: 50% 50% 0 0;
+  
+  z-index: 100;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  /* Transition Properties for the "Jelly" effect */
+  transition: 
+    transform 1.0s cubic-bezier(0.65, 0, 0.35, 1),
+    width 1.0s cubic-bezier(0.65, 0, 0.35, 1),
+    border-radius 1.0s cubic-bezier(0.65, 0, 0.35, 1);
+    
+  /* Handle internal scrolling when expanded */
+  overflow-y: hidden; 
 }
 
-.pull-text {
+/* Expanded State */
+.main-content-fixed.expanded {
+  transform: translateX(-50%) translateY(0); /* Fully visible */
+  width: 100%;
+  border-radius: 0;
+  overflow-y: auto; /* Allow reading content */
+}
+
+/* Ensure indicator is positioned correctly */
+.pull-text-indicator {
+  margin-top: 30px;
+  flex-shrink: 0;
+}
+
+.slider-content {
+  width: 100%;
+  padding-top: 2rem;
+  /* Ensure content doesn't get hidden behind rounded corners initially */
+}
+
+/* Re-use pull text styles but position them inside the wrapper */
+.pull-text-indicator {
   font-family: 'Amatic SC', cursive;
   font-weight: 700;
   font-size: 1.8rem;
   color: #F0ECE5;
   letter-spacing: 3px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
   pointer-events: none;
+  /* Ensure it fades out */
+  transition: opacity 0.2s;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
+
+.slider-content {
+  width: 100%;
+  /* Ensure content is readable */
+  padding-top: 2rem;
+}
+
+/* Keep existing Hero styles but ensure they fit */
+.hero {
+  /* ... existing styles ... */
+  height: 100%;
+  /* Remove flex centering if it conflicts, but usually it's fine */
+}
+
+/* ... keep other styles ... */
+
 
 .arrow-icon {
   font-size: 1.2rem;

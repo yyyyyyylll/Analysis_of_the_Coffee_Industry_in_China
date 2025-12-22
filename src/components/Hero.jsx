@@ -1,8 +1,8 @@
 import React from 'react';
 import coffeeUp from '../assets/coffee-cup.png';
-import Slider from './Slider';
+// Slider is no longer used here, it's replaced by the main content transition in App.jsx
 
-export default function Hero({ children }) {
+export default function Hero() {
   return (
     <section className="hero">
       <div className="watermark-grid">
@@ -18,10 +18,6 @@ export default function Hero({ children }) {
         <div className="subtitle">Data & Beans</div>
         <div className="credits">By Antigravity</div>
       </div>
-
-      <Slider>
-        {children}
-      </Slider>
     </section>
   );
 }
