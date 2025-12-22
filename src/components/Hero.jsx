@@ -1,7 +1,8 @@
 import React from 'react';
 import coffeeUp from '../assets/coffee-cup.png';
+import Slider from './Slider';
 
-export default function Hero() {
+export default function Hero({ onEnter }) {
   return (
     <section className="hero">
       <div className="watermark-grid">
@@ -17,6 +18,8 @@ export default function Hero() {
         <div className="subtitle">Data & Beans</div>
         <div className="credits">By Antigravity</div>
       </div>
+
+      <Slider onComplete={onEnter} />
     </section>
   );
 }

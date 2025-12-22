@@ -30,6 +30,12 @@ body {
   /* Reduced padding to save vertical space */
   padding: 1rem;
   max-width: 1200px;
+  /* Ensure hero takes full height to allow bottom positioning relative to it */
+  min-height: 90vh;
+  /* Changed from just being content based */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .image-wrapper {
@@ -189,4 +195,93 @@ body {
   to {
     opacity: 1;
   }
+}
+
+/* Slider Component Styles - Vertical Pull */
+.pull-trigger-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  /* Touch target area */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 10;
+  cursor: grab;
+  /* Ensure it doesn't block clicks on content above it initially */
+  pointer-events: auto;
+}
+
+.pull-trigger-container:active {
+  cursor: grabbing;
+}
+
+.pull-curve {
+  width: 100%;
+  background-color: var(--coffee-brown);
+  /* Brown color */
+  border-radius: 50% 50% 0 0;
+  /* Hill shape */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 15px;
+  box-shadow: 0 -5px 15px rgba(59, 47, 47, 0.3);
+  transition: height 0.1s ease-out, transform 0.1s ease-out;
+  transform-origin: bottom center;
+}
+
+.pull-text {
+  font-family: 'Amatic SC', cursive;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #F0ECE5;
+  /* Paper white text */
+  opacity: 0.9;
+  letter-spacing: 2px;
+  pointer-events: none;
+  animation: bounceUp 2s infinite;
+}
+
+@keyframes bounceUp {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Main Content Section */
+#main-content {
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-placeholder {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+.content-placeholder h2 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 4rem;
+  color: var(--coffee-brown);
+  margin-bottom: 2rem;
+}
+
+.content-placeholder p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
 }
