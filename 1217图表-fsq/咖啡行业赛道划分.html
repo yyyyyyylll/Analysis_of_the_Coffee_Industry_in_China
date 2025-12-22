@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>咖啡产品分类思维导图</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 保持中文字体美观和一致性 */
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background-color: #ffffff;
+            overflow-x: auto; /* 允许水平滚动以适应内容扩展 */
+        }
+
+        /* 节点基本样式 */
+        .node {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 9999px; /* 胶囊形状 */
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); 
+            transition: all 0.3s ease;
+            transform-origin: left; /* 动画从左侧展开 */
+            white-space: nowrap; /* 防止节点内容换行 */
+        }
+
+        /* 鼠标悬停交互效果 */
+        .node:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* -------- 核心布局 CSS (横向树) --------- */
+        
+        #mindmap-root {
+            /* 确保内容从左上角开始，并提供足够的内边距 */
+            display: flex;
+            align-items: flex-start;
+            padding: 40px 20px;
+            min-height: 80vh; 
+        }
+
+        /* 根节点和主分支容器 (水平排列) */
+        .root-branch-container {
+            display: flex;
+            align-items: center;
+            width: auto;
+        }
+        
+        /* 右侧主分支列表区域：包含垂直线和列表 */
+        .main-branches-area {
+            position: relative;
+            display: flex;
+            align-items: center; /* 确保垂直线和列表水平对齐 */
+        }
+
+        /* 根节点标签样式 */
+        .root-label {
+            z-index: 50;
+            flex-shrink: 0;
+            margin-right: -4px; /* 稍微覆盖连接线 */
+        }
+        
+        /* 连接根节点到主分支的线条 (大括号/主干) */
+        .root-connector-line {
+            position: absolute;
+            left: 0;
+            width: 4px; /* 垂直线宽度 */
+            background-color: #d1d5db; 
+            z-index: 1;
+            /* 实际高度将在 JS 中计算并设置 */
+        }
+
+        /* 主分支列表容器 */
+        .main-branch-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-left: 20px; /* 确保列表在垂直线右侧 */
+        }
+
+        .branch {
+            list-style: none;
+            position: relative;
+            /* 移除 branch 自身的 margin-left，由父容器控制 */
+        }
+
+        /* 子节点列表容器 (所有子节点的父容器) */
+        .tree-container {
+            position: relative;
+            /* 确保子分支水平排列在父节点右侧 */
+            padding-left: 30px; 
+            padding-top: 5px;
+        }
+
+        /* 垂直连接线 (用于二级及以下分支) */
+        .tree-container:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background-color: #e5e7eb;
+        }
+
+        /* 水平连接线 (连接父节点和子节点) */
+        .branch .node:before {
+            content: "";
+            position: absolute;
+            top: 19px; /* 垂直居中 */
+            left: -30px; /* 从左侧连接线处开始 */
+            width: 30px;
+            height: 2px;
+            background-color: #e5e7eb;
+            z-index: 10;
+        }
+        
+        /* 交叉点圆点 */
+        .branch .node:after {
+            content: "";
+            position: absolute;
+            top: 17px; 
+            left: -32px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #d1d5db;
+            z-index: 20;
+        }
+        
+        /* 根节点的主分支不需要左侧连接线 */
+        .main-branch-list > .branch .node:before,
+        .main-branch-list > .branch .node:after {
+            display: none;
+        }
+        
+        /* ------------------ 隐藏收起的内容 ------------------ */
+        .collapsed > .tree-container {
+            display: none;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 text-gray-800">
+
+    <h1 class="text-3xl font-bold text-center mb-10 text-amber-800">☕️ 中国咖啡行业赛道划分</h1>
+
+    <div id="mindmap-root">
+        <!-- Mind map will be rendered here -->
+    </div>
+
+    <script>
+        // 思维导图数据结构 (基于提供的分类)
+        const mindMapData = {
+            label: "咖啡 (Coffee)",
+            icon: "☕️",
+            color: "bg-amber-100 border-amber-300 text-amber-800", // 主题色：温暖咖啡色
+            children: [
+                {
+                    label: "现制咖啡",
+                    icon: "✨",
+                    color: "bg-green-50 border-green-300 text-green-700",
+                    children: [
+                        {
+                            label: "咖啡专饮店",
+                            color: "bg-white border-gray-300 text-gray-700",
+                            children: [
+                                { label: "连锁咖啡店", icon: "🔗", color: "bg-blue-50 border-blue-200 text-blue-600" },
+                                { label: "独立咖啡店", icon: "🏠", color: "bg-blue-50 border-blue-200 text-blue-600" },
+                            ]
+                        },
+                        {
+                            label: "其他渠道",
+                            color: "bg-white border-gray-300 text-gray-700",
+                            children: [
+                                { label: "快餐店咖啡", icon: "🍔", color: "bg-red-50 border-red-200 text-red-600" },
+                                { label: "茶饮店咖啡", icon: "🍹", color: "bg-red-50 border-red-200 text-red-600" },
+                                { label: "便利店咖啡", icon: "🏪", color: "bg-red-50 border-red-200 text-red-600" },
+                                { label: "自助咖啡机", icon: "🤖", color: "bg-red-50 border-red-200 text-red-600" },
+                            ]
+                        }
+                    ]
+                },
+                {
+                    label: "包装/零售",
+                    icon: "📦",
+                    color: "bg-blue-50 border-blue-300 text-blue-700",
+                    children: [
+                        { label: "即饮咖啡", icon: "🥤", color: "bg-white border-gray-300 text-gray-700" },
+                        {
+                            label: "咖啡豆/粉",
+                            color: "bg-white border-gray-300 text-gray-700",
+                            children: [
+                                { label: "速溶咖啡", icon: "🥄", color: "bg-yellow-50 border-yellow-200 text-yellow-700" },
+                                { label: "挂耳咖啡", icon: "💧", color: "bg-yellow-50 border-yellow-200 text-yellow-700" },
+                                { label: "胶囊咖啡", icon: "💊", color: "bg-yellow-50 border-yellow-200 text-yellow-700" },
+                                { label: "原生豆/粉", icon: "🌱", color: "bg-yellow-50 border-yellow-200 text-yellow-700" },
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        /**
+         * 切换节点展开/收起状态
+         * @param {Event} event 
+         */
+        function toggleNode(event) {
+            const nodeElement = event.currentTarget.parentNode;
+            const childrenContainer = nodeElement.querySelector('.tree-container');
+            const arrowIcon = event.currentTarget.querySelector('.arrow-icon');
+            
+            if (childrenContainer) {
+                const isCollapsed = childrenContainer.classList.toggle('hidden');
+                nodeElement.classList.toggle('collapsed', isCollapsed); 
+                
+                // 切换箭头方向
+                if (arrowIcon) {
+                    arrowIcon.classList.toggle('rotate-90', !isCollapsed);
+                }
+            }
+        }
+
+        /**
+         * 递归渲染思维导图节点
+         * @param {Object} data 节点数据
+         * @param {boolean} isRootLevel 是否是根节点下的一级子节点
+         * @returns {HTMLElement} 节点元素
+         */
+        function renderNode(data, isRootLevel = false) {
+            const nodeWrapper = document.createElement('li');
+            nodeWrapper.classList.add('branch', 'mt-4', 'mb-4', 'relative');
+            
+            // 节点标签元素
+            const nodeLabel = document.createElement('div');
+            nodeLabel.classList.add('node', 'border', 'text-sm', 'font-semibold', 'max-w-xs', 'relative', 'z-20');
+            nodeLabel.classList.add(...data.color.split(' '));
+            
+            // 箭头图标
+            const arrowIcon = document.createElement('span');
+            arrowIcon.classList.add('arrow-icon', 'mr-2', 'transition-transform', 'duration-300', 'text-gray-600');
+            arrowIcon.innerHTML = '▶'; 
+
+            // 标签内容
+            const labelContent = document.createElement('span');
+            labelContent.textContent = (data.icon ? data.icon + ' ' : '') + data.label;
+            
+            if (data.children && data.children.length > 0) {
+                nodeLabel.prepend(arrowIcon);
+                nodeLabel.addEventListener('click', toggleNode);
+            } else {
+                // 叶子节点样式
+                nodeLabel.classList.add('shadow-none'); 
+            }
+
+            nodeLabel.appendChild(labelContent);
+            nodeWrapper.appendChild(nodeLabel);
+
+            if (data.children && data.children.length > 0) {
+                // 子节点列表容器
+                const childrenContainer = document.createElement('ul');
+                childrenContainer.classList.add('tree-container', 'branch-list');
+                
+                data.children.forEach(childData => {
+                    childrenContainer.appendChild(renderNode(childData, false));
+                });
+                
+                nodeWrapper.appendChild(childrenContainer);
+                
+                // 默认展开第一级子节点
+                if (isRootLevel) {
+                     arrowIcon.classList.add('rotate-90'); 
+                } else {
+                    // 其他节点默认收起
+                    childrenContainer.classList.add('hidden');
+                    nodeWrapper.classList.add('collapsed');
+                }
+            }
+            
+            return nodeWrapper;
+        }
+
+        function initMindMap() {
+            const rootElement = document.getElementById('mindmap-root');
+            rootElement.innerHTML = '';
+            
+            // 1. 根节点 (最左边)
+            const rootLabel = document.createElement('div');
+            rootLabel.classList.add('node', 'border', 'text-xl', 'font-extrabold', 'shadow-xl', 'text-center', 'cursor-default', 'root-label');
+            rootLabel.classList.add(...mindMapData.color.split(' '));
+            rootLabel.textContent = mindMapData.icon + ' ' + mindMapData.label;
+            
+            // 2. 右侧主分支列表区域
+            const mainBranchesArea = document.createElement('div');
+            mainBranchesArea.classList.add('main-branches-area');
+            
+            const mainBranchList = document.createElement('ul');
+            mainBranchList.classList.add('main-branch-list', 'ml-0');
+            
+            // 用于计算垂直线高度的容器
+            const listWrapper = document.createElement('div');
+            listWrapper.classList.add('relative');
+            
+            // 渲染两个主要分支 (现制咖啡 and 包装/零售)
+            mindMapData.children.forEach(childData => {
+                const branchItem = document.createElement('li');
+                branchItem.classList.add('branch', 'mt-4', 'mb-4', 'relative');
+                
+                // 渲染节点
+                const renderedNode = renderNode(childData, true);
+                
+                // 将 renderedNode 的子元素移动到 branchItem 中
+                while (renderedNode.firstChild) {
+                    branchItem.appendChild(renderedNode.firstChild);
+                }
+                
+                // 添加水平线从根节点到主分支
+                const mainHorizontalLine = document.createElement('div');
+                // 40px 的水平线，从左侧连接到垂直线
+                mainHorizontalLine.classList.add('absolute', 'h-0.5', 'bg-gray-300', 'top-1/2', '-translate-y-1/2', 'left-[-40px]', 'w-10', 'z-10'); 
+                branchItem.appendChild(mainHorizontalLine);
+                
+                mainBranchList.appendChild(branchItem);
+            });
+            
+            listWrapper.appendChild(mainBranchList);
+            mainBranchesArea.appendChild(listWrapper);
+            
+            // 3. 根节点和主分支的对齐
+            const overallWrapper = document.createElement('div');
+            overallWrapper.classList.add('flex', 'items-center', 'w-full');
+            overallWrapper.appendChild(rootLabel);
+            
+            // 4. 垂直连接线（大括号的垂直部分）
+            // 在 JS 中动态创建垂直线，使其与主分支列表高度对齐
+            const mainVerticalLine = document.createElement('div');
+            mainVerticalLine.classList.add('root-connector-line');
+            mainBranchesArea.prepend(mainVerticalLine); // 放在列表前
+            
+            overallWrapper.appendChild(mainBranchesArea);
+            rootElement.appendChild(overallWrapper);
+
+            // 5. 延迟计算并设置垂直线高度 (必须在元素添加到 DOM 后才能获取高度)
+            window.requestAnimationFrame(() => {
+                const listHeight = mainBranchList.offsetHeight;
+                // 垂直线的高度覆盖整个列表，并向上/向下延伸一点点
+                mainVerticalLine.style.height = `${listHeight + 20}px`; 
+                mainVerticalLine.style.top = `-10px`; // 向上移动 10px
+            });
+        }
+
+        window.onload = initMindMap;
+    </script>
+</body>
+</html>

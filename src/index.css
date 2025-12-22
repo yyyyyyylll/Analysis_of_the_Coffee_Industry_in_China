@@ -341,21 +341,73 @@ html, body {
   z-index: 50; 
 }
 
-.content-placeholder {
-  max-width: 1400px;
-  width: 100%;
-  text-align: center;
+/* New Two-Column Content Styles */
+.content-container {
+  display: flex;
+  flex-direction: row; /* Side by side */
+  align-items: center; /* Vertically centered */
+  justify-content: center;
+  gap: 4rem; /* Space between image and text */
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 5vh; 
+  height: auto;
 }
 
-.content-placeholder h2 {
-  font-family: 'Amatic SC', cursive;
-  font-size: 4rem;
-  color: var(--paper-bg); /* Changed to light color for contrast on brown bg */
-  margin-bottom: 2rem;
+.content-image-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end; /* Align closer to text */
+  padding-right: 20px;
 }
 
-.content-placeholder p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
+.content-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 50vh; /* Limit height */
+  object-fit: contain;
+  /* Attempt to remove white background via blending */
+  mix-blend-mode: multiply;
+  filter: contrast(1.1) brightness(1.1); /* Compensate for darkening */
+}
+
+.content-text-wrapper {
+  flex: 1.2; /* Give text slightly more space */
+  text-align: left;
+}
+
+.content-body-text {
+  font-family: "SimSun", "Songti SC", serif; 
+  font-size: 18px; 
+  line-height: 1.8;
+  color: var(--paper-bg);
+  text-align: justify;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .content-container {
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 2vh;
+  }
+  
+  .content-image-wrapper {
+    justify-content: center;
+    padding-right: 0;
+  }
+  
+  .content-image {
+    max-height: 35vh;
+  }
+  
+  .content-text-wrapper {
+    text-align: center; /* Center text on mobile */
+  }
+  
+  .content-body-text {
+    font-size: 1.2rem;
+    text-align: left; /* Keep readable */
+  }
 }

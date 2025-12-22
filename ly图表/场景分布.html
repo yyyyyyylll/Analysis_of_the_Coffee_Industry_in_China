@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang=zh-CN>
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content=width=device-width,initial-scale=1>
+  <title>消费者咖啡饮用场景分别</title>
+  <script src=https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js></script>
+  <style>
+    html,body{height:100%;margin:0;background:#fff}
+    body{
+    display: flex;
+    justify-content: center;  /* 水平居中 */
+    align-items: center;      /* 垂直居中 */
+    background: #fff;
+  }
+    body{margin:0;background:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+    #main{width:1100px;max-width:96vw;height:620px;margin:18px auto}
+  </style>
+</head>
+
+<body>
+  <div id=main></div>
+
+  <script>
+    const dom = document.getElementById(`main`)
+    const chart = echarts.init(dom)
+
+    const data = [
+      { name: `学习/工作`, value: 47.89, description: `咖啡作为生产力工具，多用于提神醒脑与提升专注力。` },
+      { name: `休闲放松`, value: 45.20, description: `以社交与放松为主，偏向享受型消费。` },
+      { name: `驾车出行`, value: 36.62, description: `出行途中补充精力，降低疲劳感。` },
+      { name: `熬夜提神`, value: 33.29, description: `加班或熬夜场景中的即时提神手段。` },
+      { name: `商务洽谈`, value: 33.16, description: `会面与洽谈中的社交饮品与空间消费。` }
+    ]
+
+    const maxVal = Math.max(...data.map(d => d.value))
+    const axisMax = Math.ceil(maxVal / 5) * 5
+
+    const option = {
+      backgroundColor: `#ffffff`,
+      title: {
+        text: `消费者咖啡饮用场景分布`,
+        left: `center`,
+        top: 3,
+        textStyle: { fontSize: 30, fontWeight: 700, color: `#1c1917` }
+      },
+      grid: { left: 40, right: 40, top: 80, bottom: 70 },
+      xAxis: {
+        type: `category`,
+        data: data.map(d => d.name),
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: { color: `#78716c`, fontSize: 13, fontWeight: 650, margin: 18 }
+      },
+      yAxis: {
+        type: `value`,
+        max: axisMax,
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: { show: false },
+        splitLine: { show: true, lineStyle: { color: `#e7e5e4`, type: `dashed` } }
+      },
+      tooltip: {
+        trigger: `item`,
+        backgroundColor: `rgba(255,255,255,0.96)`,
+        borderColor: `#e7e5e4`,
+        borderWidth: 1,
+        extraCssText: `border-radius:16px; box-shadow:0 18px 40px rgba(0,0,0,0.12); backdrop-filter: blur(10px);`,
+        formatter: (p) => {
+          const d = data[p.dataIndex]
+          return `
+            <div style=padding:14px;min-width:260px>
+              <div style=display:flex;align-items:center;gap:10px;margin-bottom:8px>
+                <div style=width:8px;height:18px;border-radius:999px;background:#f59e0b></div>
+                <div style=font-size:18px;font-weight:650;color:#292524>${d.name}</div>
+              </div>
+              <div style=display:flex;align-items:baseline;gap:8px;margin:2px 0 10px 0>
+                <div style=font-size:44px;font-weight:800;color:#d97706;line-height:1>${Number(d.value).toFixed(2)}</div>
+                <div style=font-size:14px;color:#78716c;font-weight:600>%</div>
+              </div>
+              ${d.description ? `<div style=border-top:1px solid #f5f5f4;padding-top:10px;font-size:12px;line-height:1.6;color:#78716c>${d.description}</div>` : ``}
+            </div>
+          `
+        }
+      },
+      series: [
+        {
+          name: `占比`,
+          type: `bar`,
+          data: data.map(d => d.value),
+          barWidth: 80,
+          barCategoryGap: `5%`,
+
+          showBackground: true,
+          backgroundStyle: {
+            color: `#f5f5f4`,
+            borderRadius: [18, 18, 12, 12]
+          },
+
+          itemStyle: {
+            borderRadius: [18, 18, 12, 12],
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: `#fbbf24` },
+              { offset: 1, color: `#b45309` }
+            ])
+          },
+
+          label: {
+            show: true,
+            position: `top`,
+            distance: 14,
+            color: `#78716c`,
+            fontSize: 14,
+            fontWeight: 800,
+            formatter: (p) => `${Number(p.value).toFixed(2)}%`
+          },
+
+          emphasis: {
+            focus: `self`,
+            itemStyle: {
+              color: `#f59e0b`,
+              shadowBlur: 22,
+              shadowColor: `rgba(245,158,11,0.35)`,
+              shadowOffsetX: 0,
+              shadowOffsetY: 10
+            }
+          },
+          blur: {
+            itemStyle: { opacity: 0.35 }
+          }
+        }
+      ]
+    }
+
+    chart.setOption(option)
+    window.addEventListener(`resize`, () => chart.resize())
+  </script>
+</body>
+</html>

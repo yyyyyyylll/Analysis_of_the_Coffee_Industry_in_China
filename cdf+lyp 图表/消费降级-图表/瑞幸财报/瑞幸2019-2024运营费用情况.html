@@ -1,0 +1,196 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=mix-line-bar&code=zVZbb9xEFH6v1P8wCKVuxda1x5e1UwKKCkiVykUqah-qPMzuTnZNvfbKnm2zRJGCotL2ISIREQXUVi1SUSQQIGhLmwb6XwreJE_9C5yxx5ddr5OAeGgUre0z536--Wb8HnN8D82gxaNHEGqQ5uV24Pe91hnf9YNpJLGAeGGPBNRjUu3oEa7EHObS6cQAvugCA72d9bvR0ydYUe2TWMH67vO13bUHuw-f7mxsDleuRZ8_4tZc36XzXL8JDmmQCpnfm0aqkn6By_NsEAdBTZHI64qiSDU073vsvPMpLKlm8nWROu0Od9nw3ZaElriPpTRV33eZA77TZAOn3abcHVlwwjQ6f__Id3hCPCIb9MC91Az8EFRQ_CynY9s2BIsjcR_zftAlLPYw3_eacVOPQ99INzyRRkdg7YUMDSgJoOPJKjp2TLzJLvXarIPeFt-XlDmZp3aBuH2KIKZ0etSP63g0BEeXuMM5WEyXhT_I6V3S7BwvJFTIBSFnHiRySAOHhh-QLkUzMzNIGi4_K05PGjGB-fGgcq8fdsC2S4LLNEBvIAmNmb3c_lYCeU--EmfPNaLVlejainQiqwLmlOdclc7erc1o61bRdbR6b_jzxnheSUuaPvzMcD8twkjc2_hNjhdem0Fe33VP8BYXxNDak3lv9yvyxfq9cj6i1NhVRZ0jHqW_lpfh_8X6_arays2b-rdtG95ZG371zfDG2vD2j69C28r5_Pe2VdV2iLaJFy5NPwLK-oEnIn0CNHBcerMRnHorMy0xSsNfyBhlnhIwz-kQId6gCw69ytki7PjwZEGf1iAOaX3ouQMgCOKGNGMOhLqk7TQ_jlln1CRhoksSzw2YSGqQQJorGAY0ZH4cvGBWWA_JFTobngX_JZ0Jpbm0Tb1WzpWck3VDOONV8VTG2QGyqtyhsFYJw7li5HbgjMW107NAHBfWVErWwOAx2-eShs-Y3wWRijMZwJoRxztHGtRNSi7GW5gFWoVqEt1scinxE0bbfjBIfeXF8-ONVwUnHD-L-FMVTyyemnjq0lxmPvl8CTuk5V8VB5YYBbfhz8G-CcbwzrPzYNODtETAN5Id9XL7Zq7LUzkHaCpBBp06haLfv9_ZerT7x8Pop7s7W88zFPVch5WNavGWyQ5GkVuLhB3Kj2Hhc-_-472VzWh7ebjxJ-zPv5-s7mw8S_xHv3wGqyOZJeNaLJ6m0mJc7lLeKFHM4boCcIuuQ_DH0bUHgLu966vQmKmRnnQdbxqleOO7EXa3qihx-sPby3s_fB0tb3PJ1OG6-MVvh-ziOA8c1IKpyWBJqL-Mlsm4yOsWfeOkksng432ycNFpsQ5s_rwpDqPd8h1o1nrHmMWQVe5z7MLF_-Lk35t0P4pXxg4kQcela8NEHh_foSbW6opu15BpYsW04IZoGYqu1es1pGJVMy1FqyGsWvW6oVs1pCm2ZtYNLSajCcgSHawmuLFWJjydCuNNfNZrUY6nnJNh9OcHXbisim2ULQih1HSCplvwkywkl14rk45svmwiqmEaZzg3XU1GqAlQ7n55Z_fmr_tPU9gWukq7vQ4JORNxPDb78CIlaCtqid7n81lMpjeNTCzDLPgJD5nYWLHrSsGuoGjoMs4UDctQLb1CEctGqqjrpqaaVYqqrKeKgAps1a3JinpdVlNFVcG2rhlGhUtFBswITaOuYEO1cywegKHKg_DVw9AZE1vYKmNoZ-u7AzEkbP9HDGFTBioWXYdJarhi4ppSGKRtG5pVATatLgMxCLCptmUYuAIaWAbiSBQNtW7ZJm_FJEW7gAzFsjFWK5LUjTy2qquqge0JGIrZ_eiRpdP_AA&enc=deflate
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  backgroundColor: 'transparent',
+
+  title: {
+    text: '瑞幸2019-2024运营费用情况',
+    left: 'center',
+    top: 10,
+    textStyle: { color: '#000', fontSize: 16, fontWeight: 'bold' }
+  },
+
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: { type: 'cross', crossStyle: { color: '#999' } },
+    formatter: function (params) {
+      const year = params && params.length ? params[0].axisValue : '';
+      const lines = [year];
+
+      params.forEach(function (p) {
+        if (p.seriesName === '总运营费用') {
+          lines.push(p.marker + ' 总运营费用：' + p.value + ' 千元');
+        }
+
+        if (p.seriesName === '门店运营费用占比') {
+          const cost = (p.data && p.data.cost != null) ? p.data.cost : '-';
+          lines.push(p.marker + ' ①门店运营费用：' + cost + ' 千元');
+          lines.push('　　②门店运营费用占比：' + p.value + '%');
+        }
+
+        if (p.seriesName === '材料成本费用占比') {
+          const cost = (p.data && p.data.cost != null) ? p.data.cost : '-';
+          lines.push(p.marker + ' ①材料成本费用：' + cost + ' 千元');
+          lines.push('　　②材料成本费用占比：' + p.value + '%');
+        }
+      });
+
+      return lines.join('<br/>');
+    }
+  },
+
+  toolbox: {
+    feature: {
+      dataView: { show: true, readOnly: false },
+      magicType: { show: true, type: ['line', 'bar'] },
+      restore: { show: true },
+      saveAsImage: { show: true }
+    }
+  },
+
+  legend: {
+    top: 45,
+    data: ['总运营费用', '门店运营费用占比', '材料成本费用占比']
+  },
+
+  grid: {
+    top: 90,
+    left: '8%',
+    right: '8%',
+    bottom: '12%',
+    containLabel: true
+  },
+
+  xAxis: [
+    {
+      type: 'category',
+      data: ['2019', '2020', '2021', '2022', '2023', '2024'],
+      axisPointer: { type: 'shadow' }
+    }
+  ],
+
+  yAxis: [
+    {
+      type: 'value',
+      name: '总运营费用（千元）',
+      axisLine: { show: true }, // 左纵轴实线
+      splitLine: { show: true, lineStyle: { type: 'dashed' } }, // 顶部开放：不画实线封顶
+      axisLabel: { formatter: '{value}' }
+    },
+    {
+      type: 'value',
+      name: '占净收入比重（%）',
+      min: 0,
+      max: 100, // 最高值 100%
+      axisLine: { show: true }, // 右纵轴实线
+      splitLine: { show: false },
+      axisLabel: { formatter: '{value}%' }
+    }
+  ],
+
+  series: [
+    {
+      name: '总运营费用',
+      type: 'bar',
+      barMaxWidth: 40,
+      itemStyle: { color: '#A8D5A2' },
+      tooltip: {
+        valueFormatter: function (value) {
+          return value + ' 千元';
+        }
+      },
+      data: [6237049, 6620686, 8504377, 12136803, 21877548, 30936753]
+    },
+    {
+      name: '门店运营费用占比',
+      type: 'line',
+      yAxisIndex: 1,
+      showSymbol: true,
+      symbol: 'circle',
+      symbolSize: 8,
+      lineStyle: { color: '#1565C0', width: 3 }, // 蓝色
+      itemStyle: { color: '#1565C0' },
+      emphasis: { focus: 'series' },
+      data: [
+        { value: 62.9, cost: 3920970 },
+        { value: 54.2, cost: 3585184 },
+        { value: 52.5, cost: 4463164 },
+        { value: 51.4, cost: 6232878 },
+        { value: 47.1, cost: 10294355 },
+        { value: 50.8, cost: 15702519 }
+      ]
+    },
+    {
+      name: '材料成本费用占比',
+      type: 'line',
+      yAxisIndex: 1,
+      showSymbol: true,
+      symbol: 'circle',
+      symbolSize: 8,
+      lineStyle: { color: '#C62828', width: 3 }, // 红色
+      itemStyle: { color: '#C62828' },
+      emphasis: { focus: 'series' },
+      data: [
+        { value: 26.0, cost: 1623324 },
+        { value: 30.1, cost: 1995380 },
+        { value: 37.6, cost: 3198552 },
+        { value: 42.7, cost: 5178963 },
+        { value: 49.8, cost: 10892214 },
+        { value: 45.6, cost: 14115299 }
+      ]
+    }
+  ]
+};
+
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

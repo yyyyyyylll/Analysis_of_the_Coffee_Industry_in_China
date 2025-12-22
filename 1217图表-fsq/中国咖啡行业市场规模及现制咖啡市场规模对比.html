@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>中国咖啡行业市场规模及现制咖啡市场规模对比（2020—2025E）</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        /* 设置图表容器的样式 */
+        #main {
+            width: 1000px; /* 根据需要调整宽度 */
+            height: 600px; /* 根据需要调整高度 */
+            margin: 20px auto; /* 居中显示 */
+        }
+    </style>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script type="text/javascript">
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        // 整理后的数据，来自您上传的“工作簿1.xlsx - Sheet1.csv”
+        const csvData = {
+            '年份': ['2020', '2021', '2022', '2023', '2024', '2025'],
+            '中国咖啡行业市场规模（亿元）': [3000, 3817, 4895, 6235, 7893, 10027], 
+            '中国咖啡行业市场规模增长率': ['', 0.272, 0.282, 0.274, 0.266, 0.27],
+            '中国现制咖啡市场规模（亿元）': [751.9, 924.5, 1223.1, 1623.5, 1930.4, 2238.4],
+            '中国现制咖啡市场规模增长率': ['', '23.0%', '0.323', '32.7%', '18.9%', '16.0%'] 
+        };
+
+        /**
+         * 统一增长率格式：
+         * 将百分号形式（如 '2.9%'）转为数值（2.9），
+         * 将小数形式（如 0.323）转为百分数数值（32.3），
+         * 确保所有增长率数据都适用于百分比Y轴。
+         */
+        const formatGrowthRate = (data) => {
+            return data.map(item => {
+                if (!item || item === '') return '-';
+
+                // 1. 处理带有百分号的字符串
+                if (String(item).includes('%')) {
+                    // 移除百分号并转为浮点数
+                    return parseFloat(String(item).replace(/%E?$/, ''));
+                }
+                
+                // 2. 处理小数形式的数值 (如 0.272)
+                let value = parseFloat(item);
+                if (!isNaN(value) && value < 2) { 
+                    // 转换为百分数并保留一位小数
+                    return (value * 100).toFixed(1);
+                }
+                
+                // 3. 已经是百分比数值的情况，或无法识别的情况
+                return item;
+            });
+        };
+
+        const formattedData = {
+            '年份': csvData['年份'],
+            '中国咖啡行业市场规模（亿元）': csvData['中国咖啡行业市场规模（亿元）'],
+            '中国现制咖啡市场规模（亿元）': csvData['中国现制咖啡市场规模（亿元）'],
+            '中国咖啡行业市场规模增长率（%）': formatGrowthRate(csvData['中国咖啡行业市场规模增长率']),
+            '中国现制咖啡市场规模增长率（%）': formatGrowthRate(csvData['中国现制咖啡市场规模增长率'])
+        };
+
+
+        option = {
+            title: {
+                text: '中国咖啡行业市场规模及现制咖啡市场规模对比（2020—2025E）',
+                left: 'center',
+                textStyle: { fontSize: 16 }
+            },
+            // 颜色配置：4个系列的颜色顺序
+            color: [
+                '#5470C6', // 柱状图 1: 咖啡行业规模
+                '#91CC75', // 柱状图 2: 现制咖啡规模
+                '#EE6666', // 折线图 1: 咖啡行业增长率 (红色)
+                '#FAC858'  // 折线图 2: 现制咖啡增长率 (黄色/金色)
+            ],
+            // 工具箱已移除
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'cross', crossStyle: { color: '#999' } },
+                // 自定义 tooltip 格式
+                formatter: function (params) {
+                    let res = params[0].name + '<br/>';
+                    params.forEach(function (item) {
+                        let unit = '';
+                        if (item.seriesName.includes('亿元')) { unit = ' 亿元'; } 
+                        else if (item.seriesName.includes('增长率')) { unit = ' %'; }
+                        res += item.marker + item.seriesName + ': ' + (item.value !== '-' ? item.value : '无数据') + unit + '<br/>';
+                    });
+                    return res;
+                }
+            },
+            legend: {
+                data: [
+                    '中国咖啡行业市场规模（亿元）',
+                    '中国现制咖啡市场规模（亿元）',
+                    '中国咖啡行业市场规模增长率（%）',
+                    '中国现制咖啡市场规模增长率（%）'
+                ],
+                bottom: 5,
+                type: 'scroll'
+            },
+            xAxis: [
+                {
+                    type: 'category', 
+                    data: formattedData['年份'], 
+                    axisPointer: { type: 'shadow' } 
+                }
+            ],
+            yAxis: [
+                // Y轴 0: 市场规模 (亿元) - 对应柱状图
+                {
+                    type: 'value',
+                    name: '市场规模 (亿元)',
+                    min: 0,
+                    axisLabel: { formatter: '{value} 亿元' },
+                    nameTextStyle: { padding: [0, 0, 0, 50] }
+                },
+                // Y轴 1: 增长率 (%) - 对应折线图
+                {
+                    type: 'value',
+                    name: '增长率 (%)',
+                    axisLabel: { formatter: '{value} %' },
+                    nameTextStyle: { padding: [0, 50, 0, 0] }
+                }
+            ],
+            series: [
+                // 柱状图 1: 中国咖啡行业市场规模 (yAxis[0])
+                {
+                    name: '中国咖啡行业市场规模（亿元）', type: 'bar',
+                    tooltip: { valueFormatter: function (value) { return value + ' 亿元'; } },
+                    data: formattedData['中国咖啡行业市场规模（亿元）']
+                },
+                // 柱状图 2: 中国现制咖啡市场规模 (yAxis[0])
+                {
+                    name: '中国现制咖啡市场规模（亿元）', type: 'bar',
+                    tooltip: { valueFormatter: function (value) { return value + ' 亿元'; } },
+                    data: formattedData['中国现制咖啡市场规模（亿元）']
+                },
+                // 折线图 1: 中国咖啡行业市场规模增长率 (yAxis[1], 红色)
+                {
+                    name: '中国咖啡行业市场规模增长率（%）', type: 'line', yAxisIndex: 1, 
+                    color: '#EE6666', 
+                    tooltip: { valueFormatter: function (value) { return value + ' %'; } },
+                    data: formattedData['中国咖啡行业市场规模增长率（%）']
+                },
+                // 折线图 2: 中国现制咖啡市场规模增长率 (yAxis[1], 金色)
+                {
+                    name: '中国现制咖啡市场规模增长率（%）', type: 'line', yAxisIndex: 1, 
+                    color: '#FAC858', 
+                    tooltip: { valueFormatter: function (value) { return value + ' %'; } },
+                    data: formattedData['中国现制咖啡市场规模增长率（%）']
+                }
+            ]
+        };
+
+        option && myChart.setOption(option);
+    </script>
+</body>
+</html>

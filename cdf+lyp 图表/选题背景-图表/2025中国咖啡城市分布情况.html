@@ -1,0 +1,110 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=pie-simple&code=jVPNitRAEL4PzDs0LENWGIbMn0jEiz6Ahz2soHvopDuZxk46dHpW1yEgLi7-oSC4lzmIB4-CB4W4Ir7M9PoaVifTSWZmQSHQpOqrr76vukukiokE3UKLbgchHwcPIynmCbkjuJAecpTESZZiSRPl9LsdA1JMcepVBfBHHyvAjdzRdFV80ctf-v25_vBJf3yri2f6xZkuTi9Pn-uz76bcFHAamoIAGKm0QSVSDw1d-wecB-qk1QWhYC1oz3VdW4VQKBJ1wJ4AcHh9I3hIWTQzfXzBiVNlcnPk1oUQXDHoan1IFkXUdGCKxrZDKGSMFQiF-MLPEcCDvIf2FyTvXStpLR-nEU1ITSckA4NQdUylYgHmW_bNsWHeiRkhnG5wZhRYMg_dr3D1LBIcg-Ny5vrHt92BN_NRJ6lBpow2MYkJmwOrM532mmh1H9DLmboQrrJHdZpghWshpRh0jPncDH4yGPatpFXx9M_F70qLU_rYwY_Gg2mNvzz_-h8lwxuDUdPi4s2_8JNJG1-81MulKXn3avXz86p4Xdfa0samufvtlwdrISSh0q7EXhiGzdxs9pARNQN3Nt4Io3E6wxmDibcor24EVz7DRDy6zefQqd6HdupuGGZU3fPQVUkrUUY-3nf7gCm_waR6q2tluxI59infULL18B8k5t23Xdf7OB6Pa_I1dXkcdTv5zb8&enc=deflate
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  backgroundColor: 'transparent',
+
+  title: {
+    text: '2025中国咖啡城市分布情况',
+    left: 'center',
+    top: 10,
+    textStyle: {
+      color: '#000',
+      fontSize: 16,
+      fontWeight: 'bold'
+    }
+  },
+
+  tooltip: {
+    trigger: 'item',
+    formatter: '{b} : {c}% ({d}%)'
+  },
+
+  legend: {
+    orient: 'vertical',
+    left: 'left',
+    top: 'middle'
+  },
+
+  series: [
+    {
+      name: '2025年咖啡城市分布',
+      type: 'pie',
+      radius: '55%',
+      center: ['50%', '55%'],
+      data: [
+        { value: 14.1, name: '一线城市' },
+        { value: 23.5, name: '新一线城市' },
+        { value: 18.2, name: '二线城市' },
+        { value: 44.2, name: '三四线及以下城市' }
+      ],
+      itemStyle: {
+        borderColor: '#fff',
+        borderWidth: 2
+      },
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.4)'
+        }
+      },
+      label: {
+        formatter: '{b}\n{c}%',
+        color: '#333'
+      }
+    }
+  ]
+};
+
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

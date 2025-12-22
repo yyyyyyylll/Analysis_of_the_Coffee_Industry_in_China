@@ -1,0 +1,164 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=mix-line-bar&code=tVVPaxNBFL8X-h0GpKxi2mY3afOneIiKUKgoVOxBepjsTpLBzU6YnbSJpSCUYiuoCJ4rXopeBMVWrdV-mjTtqV_B93b2X5No68E97Jt98_6_33srWooLj9wga-NjhFSp_bguRdtzbglXyDIxlKSe36KSecrIjI-hkOLKZWWtAF-so0Cu_3qn9_2blTVLk1bWyve2Phzv7_ZePdeH_stnqI3yLquhvA0GmYyYSrTKxMxGX2ByUXVTTgixw3iuZLPZSIuQmvDUIn8CgubsOeYS4_UG-qkK1zH0zTqS9SgJIVzFwWuUhuT1OkMPtMP9yAOe7wuOoaZiUd0WeDRsKfxYEiLEzyjsJN5SqWRo1yMiqIpObLfGqGrLdM4OVfQhZ6toz28IoEq2WYZIRp17ntstkxp1fRZY1BpNWuf2gyC88yo65EeGyz1mZKAsVBrLKUXJfCUC5ym11L1PV1jFnwf7QzIjUnNZnXlOUlvsbn4mNIZZYSgaGWeHW70XG73NjbPDbQwsxgtcTCBvOW24LvmA2VIEmhBXxYmoI9DQAAEJpyqUEk1gmVbMswEslHsLtMpcnVHaX6cCAIBgtewQAKhidSG7CQai3HAOMBsYBUBrQM2QWiHNhTRvLMfq5-EWufEb1BGr50GEOki7fw1whbptaHfE9WgTuaMKn45gATAyBAQyPU16X3f7B3snP7_0Pu70D45ibLRcrkKliAfcBH0JE-EXj0gYpEP9BnMgPXRx-m7_dON97_Dp8ZtfkVqCwiA63ak1GHPZpCoolbEWZLqe1ChU-ZeCpDCXzBP3ymQyXkw4YDCwZjZh_LFgo6oTSgxO7UVpTYzuvc8kZyOaf4k2h-XALRDz4OMu7SxxRzVgWpMMuWLN4bVWKd6eqVgQWICM473N_o-jk-3Px28_xT4GNiw-QT53kgxrbc8O_j9Xg5traVlcSrAQPa1ErhOD6EyMuUQorEsaJOEMTubMglXKZ6B9s1bOwsOMaZmFYoZYhRIMKNBisTCbh0PeyhZz-VKwakaA50KYhOXUyzViBqM57zkMEZPAARCw2G3Cb2lgOPyQadhc2m7Kjr7Qf7lizE1PUlKOuD0zN3MVC1ZQcrWqG5sbLtjoBocWUnKs2WpQH9cNotRuw8HQGExL_Ye2T1yy44WpHHTZmpqFd34KG4yv4pSFr7i7wQiNj63P_QY&enc=deflate
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  backgroundColor: 'transparent',
+
+  title: {
+    text: '瑞幸2019-2024利润及利润率',
+    left: 'center',
+    top: 10,
+    textStyle: {
+      color: '#000',
+      fontSize: 16,
+      fontWeight: 'bold'
+    }
+  },
+
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross',
+      crossStyle: { color: '#999' }
+    }
+  },
+
+  toolbox: {
+    feature: {
+      dataView: { show: true, readOnly: false },
+      magicType: { show: true, type: ['line', 'bar'] },
+      restore: { show: true },
+      saveAsImage: { show: true }
+    }
+  },
+
+  legend: {
+    top: 45,
+    data: ['利润（千元）', '利润率（%）']
+  },
+
+  grid: {
+    top: 90,
+    left: '8%',
+    right: '8%',
+    bottom: '12%',
+    containLabel: true
+  },
+
+  xAxis: [
+    {
+      type: 'category',
+      data: ['2019', '2020', '2021', '2022', '2023', '2024'],
+      axisPointer: { type: 'shadow' }
+    }
+  ],
+
+  yAxis: [
+    {
+      type: 'value',
+      name: '利润（千元）',
+      axisLine: { show: true }, // 左纵轴实线
+      splitLine: {
+        show: true,
+        lineStyle: { type: 'dashed' } // 顶部开放
+      },
+      axisLabel: { formatter: '{value}' }
+    },
+    {
+      type: 'value',
+      name: '利润率（%）',
+      min: -10,
+      max: 100,
+      axisLine: { show: true },
+      splitLine: { show: false },
+      axisLabel: { formatter: '{value}%' }
+    }
+  ],
+
+  series: [
+    {
+      name: '利润（千元）',
+      type: 'bar',
+      barMaxWidth: 40,
+      itemStyle: { color: '#A8D5A2' }, // 浅绿色柱
+      tooltip: {
+        valueFormatter: function (value) {
+          return value + ' 千元';
+        }
+      },
+      data: [-317294, -162324, -512178, 279201, 2887641, 4208349]
+    },
+    {
+      name: '利润率（%）',
+      type: 'line',
+      yAxisIndex: 1,
+      showSymbol: true,
+      symbol: 'circle',
+      symbolSize: 8,
+      lineStyle: {
+        color: '#5B3A29',
+        width: 3
+      },
+      itemStyle: { color: '#5B3A29' },
+      emphasis: { focus: 'series' },
+      tooltip: {
+        valueFormatter: function (value) {
+          return value + ' %';
+        }
+      },
+      data: [-7.3, -2.6, -4.1, 2.1, 8.2, 8.9]
+    }
+  ]
+};
+
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
