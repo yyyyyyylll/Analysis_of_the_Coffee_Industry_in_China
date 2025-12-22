@@ -1,5 +1,5 @@
 import React from 'react';
-import coffeePlant from '../assets/coffee-plant.png';
+import coffeeUp from '../assets/coffee-cup.png';
 
 export default function Hero() {
   return (
@@ -7,11 +7,11 @@ export default function Hero() {
       <div className="watermark-grid">
         {/* Optional: Add a grid background if time permits */}
       </div>
-      
-      <img src={coffeePlant} alt="Vintage coffee plant sketch" className="vine-image" />
-      
+
+      <img src={coffeeUp} alt="Sketch of a coffee cup" className="vine-image" />
+
       <div className="title-container">
-        <h1 className="liquid-title">COFFEE</h1>
+        <h1 className="liquid-title" data-text="COFFEE">COFFEE</h1>
         <div className="subtitle">Data & Beans</div>
         <div className="credits">By Antigravity</div>
       </div>

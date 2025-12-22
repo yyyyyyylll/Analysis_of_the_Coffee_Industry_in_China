@@ -3,7 +3,7 @@
 
 :root {
   --coffee-brown: #3b2f2f;
-  --paper-bg: #fdfbf7;
+  --paper-bg: #F0ECE5;
   --text-stroke: #2c2c2c;
 }
 
@@ -57,25 +57,23 @@ body {
   line-height: 1;
   letter-spacing: 0.05em;
 
-  /* Outline effect */
-  -webkit-text-stroke: 3px var(--text-stroke);
+  /* Outline effect REMOVED */
+  -webkit-text-stroke: 0;
   color: transparent;
+  position: relative;
+  /* For pseudo-element absolute positioning */
 
   /* Single Color Liquid Wave Animation 
-     Using a single SVG layer that is seamless */
+     Color updated to #512615 */
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath fill='%233b2f2f' fill-opacity='1' d='M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,149.3C672,139,768,149,864,170.7C960,192,1056,224,1152,224C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath fill='%23512615' fill-opacity='1' d='M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,149.3C672,139,768,149,864,170.7C960,192,1056,224,1152,224C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
 
   background-repeat: repeat-x;
 
   /* 
      Seamless Loop Large Wave Logic:
-     - Scale: 200% width (Large wave, 0.5 cycle visible at once) 
-     - Offset Calculation: (Container - Image) = (C - 2C) = -1C.
-     - Moving 0% -> 100% moves -1C.
-     - Wait, if we want to move exactly 1 Image Width (2C)?
-     - If 0->100% moves 1C. Then 0->200% moves 2C.
-     - So we animate background-position-x from 0% to 200%.
+     - Scale: 200% width
+     - Offset Calculation for seamless loop: 0 -> 200%
   */
   background-size: 200% 150%;
 
@@ -84,11 +82,30 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
 
-  /* Dual Animation:
-     - waveScroll: Horizontal linear loop. 16s (Very Slow)
-     - waveTide: Vertical organic fluctuation. 20s (Very Slow)
-  */
+  /* Dual Animation: Very Slow */
   animation: waveScroll 16s linear infinite, waveTide 20s ease-in-out infinite alternate;
+}
+
+/* Pseudo-element for the "Ghost" blurred text (Unsubmerged part) */
+.liquid-title::before {
+  content: attr(data-text);
+  /* Duplicate text content */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Style matching the liquid color but faint and blurry */
+  color: #512615;
+  opacity: 0.35;
+  filter: blur(4px);
+
+  /* Sits behind the main element */
+  z-index: -1;
+
+  /* Ensure no stroke inheritance issues */
+  -webkit-text-stroke: 0;
 }
 
 @keyframes waveScroll {
