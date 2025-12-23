@@ -11,7 +11,7 @@ export const TIMELINE_DATA = [
   {
     id: 't2',
     date: '2023.04',
-    brands: ['瑞幸咖啡', '库迪咖啡'],
+    brands: ['瑞幸咖啡、库迪咖啡'],
     title: '贴身肉搏战',
     description: '瑞幸在库迪周边投放9.9元优惠券精准狙击；库迪应声而动，将价格进一步压低至8.8元。',
     priceTag: '8.8元',

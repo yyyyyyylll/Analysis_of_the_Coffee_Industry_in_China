@@ -2,7 +2,7 @@
 
 .price-war-container {
   width: 100%;
-  height: 60vh; /* Reduced to 3/4 of 80vh */
+  height: 65vh; /* Increased from 60vh */
   overflow-x: auto;
   overflow-y: hidden;
   display: flex;
@@ -17,8 +17,8 @@
   backdrop-filter: blur(5px);
   border-radius: 12px;
   border: none; /* Removed border */
-  padding-top: 2rem; /* Reduced padding */
-  padding-bottom: 2rem; /* Reduced padding */
+  padding-top: 5rem; /* Increased significantly to push content down */
+  padding-bottom: 1rem; /* Reduced to balance */
   
   /* Fade edges */
   -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
@@ -32,7 +32,7 @@
 /* Background Line */
 .timeline-bg-line {
   position: absolute; /* Changed from fixed to absolute to stay within container */
-  top: 50%;
+  top: calc(50% + 2rem); /* Adjusted to match flex item center with unequal padding */
   left: 0;
   right: 0;
   height: 1px;
@@ -43,7 +43,7 @@
 /* Liquid Progress Line */
 .timeline-progress-line {
   position: absolute;
-  top: 50%;
+  top: calc(50% + 2rem); /* Adjusted to match flex item center with unequal padding */
   left: 0;
   height: 3px;
   background: linear-gradient(to right, #d6d3d1, #f59e0b, #fbbf24); /* stone-300 via amber-500 to amber-400 */
@@ -105,12 +105,12 @@
 }
 
 .connection-line.active {
-  height: 48px; /* Increased from 40px to match card offset */
+  height: 95px; /* Reduced from 110px */
   background-color: rgba(252, 211, 77, 0.5); /* amber-300/50 */
 }
 
 .connection-line.inactive {
-  height: 20px; /* Reduced from 30px */
+  height: 25px; /* Slightly adjusted */
 }
 
 /* Central Node */
@@ -124,7 +124,7 @@
 }
 
 .node-circle {
-  width: 12px; /* Reduced from 16px */
+  width: 12px;
   height: 12px;
   border-radius: 50%;
   border: 2px solid;
@@ -135,7 +135,7 @@
   background-color: #f59e0b; /* amber-500 */
   border-color: white;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-  transform: scale(1.3); /* Reduced scale */
+  transform: scale(1.3);
 }
 
 .node-circle.inactive {
@@ -149,19 +149,19 @@
   transform: translateX(-50%);
   white-space: nowrap;
   font-family: monospace;
-  font-size: 0.7rem; /* Slightly smaller */
+  font-size: 1rem;
   font-weight: bold;
   letter-spacing: 0.1em; /* tracking-widest */
-  margin-top: 1rem;
   transition: all 0.5s ease;
 }
 
+/* Separate Date Positions for Top/Bottom */
 .node-date.top {
-  top: 0.5rem; /* Tighter */
+  top: 0.8rem; /* Tighter */
 }
 
 .node-date.bottom {
-  top: -2rem; /* Tighter */
+  top: -2.2rem; /* Tighter */
 }
 
 .node-date.active {
@@ -188,11 +188,11 @@
 
 /* Push cards further away from center to avoid overlap with badge */
 .content-card.top {
-  bottom: calc(50% + 48px); /* Increased from 40px to give space for badge */
+  bottom: calc(50% + 95px); /* Adjusted to match connection line */
 }
 
 .content-card.bottom {
-  top: calc(50% + 48px); /* Increased from 40px to give space for badge */
+  top: calc(50% + 95px); /* Adjusted to match connection line */
 }
 
 .content-card.active {
@@ -202,29 +202,30 @@
 
 .content-card.inactive-top {
   opacity: 0.2;
-  transform: translateY(1.5rem); /* Reduced movement */
+  transform: translateY(2rem);
 }
 
 .content-card.inactive-bottom {
   opacity: 0.2;
-  transform: translateY(-1.5rem); /* Reduced movement */
+  transform: translateY(-2rem);
 }
 
 /* Price Badge */
 .price-badge-wrapper {
   position: absolute;
   z-index: 20;
-  transition: all 0.7s ease-out; /* Removed cubic-bezier bounce */
+  transition: all 0.7s ease-out;
   left: 50%;
   transform: translateX(-50%);
 }
 
+/* Separate Badge Positions for Top/Bottom */
 .price-badge-wrapper.top {
-  bottom: -2.3rem; /* Moved further down (away from card content) */
+  bottom: -3rem; /* Tighter spacing */
 }
 
 .price-badge-wrapper.bottom {
-  top: -2.3rem; /* Moved further up (away from card content) */
+  top: -3rem; /* Tighter spacing */
 }
 
 .price-badge-wrapper.active {
@@ -246,7 +247,7 @@
   position: relative;
   background: linear-gradient(to right, #f59e0b, #d97706);
   color: white;
-  padding: 0.25rem 0.75rem; /* Compact padding */
+  padding: 0.3rem 0.8rem; /* More compact padding */
   box-shadow: 0 10px 15px -3px rgba(120, 53, 15, 0.2);
   border-radius: 9999px;
   border: 1px solid rgba(251, 191, 36, 0.5);
@@ -260,51 +261,55 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%) rotate(45deg);
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.6rem;
+  height: 0.6rem;
   background-color: #d97706;
 }
 
+/* Adjust Arrow Positions */
 .badge-arrow.top {
-  top: -0.25rem;
+  top: -0.3rem; /* Top of badge (pointing up to card? or should be bottom?) */
+  /* User wants badge associated with node usually, but visually it connects to card */
+  /* Let's keep it consistent: Badge is between Card and Node */
+  /* If Top Card: Badge is below Card. Arrow at Top connects to Card. */
 }
 
 .badge-arrow.bottom {
-  bottom: -0.25rem;
+  bottom: -0.3rem; /* Bottom of badge. Connects to Card (which is below). */
 }
 
 .badge-text {
   font-family: 'Playfair Display', serif;
   font-weight: bold;
-  font-size: 0.75rem; /* Smaller text */
+  font-size: 1rem;
   letter-spacing: 0.025em;
 }
 
 /* Brand Name */
 .brand-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.5rem; /* Reduced significantly */
+  font-size: 2rem;
   font-weight: 900;
   letter-spacing: -0.05em;
-  line-height: 1;
+  line-height: 1; /* Compact */
   white-space: nowrap;
   position: relative;
   -webkit-text-stroke: 1px #d6d3d1;
   color: transparent;
   margin: 0;
-  margin-bottom: 0; /* Extremely tight */
+  margin-bottom: 0.2rem; /* Tiny margin */
 }
 
 @media (min-width: 768px) {
   .brand-name {
-    font-size: 1.75rem; /* Compact desktop size */
+    font-size: 2.2rem;
   }
 }
 
 .brand-name-fill {
   position: absolute;
   inset: 0;
-  color: #1c1917; /* stone-900 */
+  color: #3E2723; /* Dark Brown */
   overflow: hidden;
   transition: width 1s ease-out;
   -webkit-text-stroke: 0px;
@@ -313,30 +318,27 @@
 /* Title & Description */
 .card-title {
   font-family: 'Playfair Display', serif;
-  font-size: 0.9rem; /* Reduced */
+  font-size: 1.2rem;
   font-weight: bold;
-  color: #b45309; /* amber-700 */
-  margin-bottom: 0.1rem; /* Very tight */
-  line-height: 1.1; /* Tighter line height */
+  color: #b45309; /* amber-700 - Keep as highlight */
+  margin-bottom: 0.2rem; /* Compact */
+  line-height: 1.1;
   transition: all 0.7s ease;
   transition-delay: 0.2s;
 }
 
 .card-desc {
   font-family: 'Lato', sans-serif;
-  font-size: 0.65rem; /* Very small to fit */
-  color: #78716c; /* stone-500 */
-  line-height: 1.35;
+  font-size: 0.6rem;
+  color: #5D4037; /* Brown */
+  line-height: 1.3; /* Compact */
   transition: all 0.7s ease;
   transition-delay: 0.3s;
-  max-width: 95%; /* Increased max-width */
-  /* Removed line-clamp to show full text */
-  /* display: -webkit-box; */
-  /* -webkit-line-clamp: 2; */
-  /* -webkit-box-orient: vertical; */
-  /* overflow: hidden; */
-  white-space: normal; /* Allow wrapping */
+  max-width: 95%;
+  white-space: normal;
+  margin-top: 0;
 }
+
 
 .card-title.inactive, .card-desc.inactive {
   opacity: 0;

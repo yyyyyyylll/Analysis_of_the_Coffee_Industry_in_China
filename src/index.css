@@ -266,6 +266,7 @@ html, body {
   width: 100%;
   border-radius: 0;
   overflow-y: auto; /* Allow reading content */
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Ensure indicator is positioned correctly */
@@ -334,7 +335,7 @@ html, body {
 /* Main Content Section - Now inside Slider */
 .slider-content {
   min-height: 100vh;
-  padding: 4rem 2rem;
+  padding: 4rem 0; /* Removed horizontal padding to allow full-width backgrounds */
   /* background-color is handled by the slider curve */
   color: var(--paper-bg);
   /* display/flex handled in component for transition */
@@ -537,7 +538,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--coffee-brown); /* Match main content background */
+  /* background-color: var(--coffee-brown); Removed to avoid overlap issues */
 }
 
 /* Cover Section */
