@@ -19,6 +19,264 @@ import {
   getStarbucksWordCloudOption
 } from './chartOptions';
 
+const ResponsiveStarbucksCityChart = () => {
+  const containerRef = useRef(null);
+  const chartRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const isUpdatingGraphic = useRef(false);
+
+  useEffect(() => {
+    const observeTarget = containerRef.current;
+    if (!observeTarget) return;
+
+    const resizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const { width, height } = entry.contentRect;
+        setDimensions({ width, height });
+      }
+    });
+
+    resizeObserver.observe(observeTarget);
+    return () => resizeObserver.unobserve(observeTarget);
+  }, []);
+
+  const updateGraphic = () => {
+    const chart = chartRef.current?.getEchartsInstance();
+    if (!chart) return;
+    
+    // Avoid infinite loop: if we just triggered an update, ignore the finished event from that update
+    if (isUpdatingGraphic.current) {
+        isUpdatingGraphic.current = false;
+        return;
+    }
+
+    const option = chart.getOption();
+    const series = option.series;
+    if (!series || series.length === 0) return;
+
+    // Use convertToPixel to get exact coordinates regardless of layout
+    // Assuming axis 0
+    const p0 = chart.convertToPixel({ xAxisIndex: 0, yAxisIndex: 0 }, [0, 0]);
+    const p1 = chart.convertToPixel({ xAxisIndex: 0, yAxisIndex: 0 }, [1, 0]);
+    if (!p0 || !p1) return;
+
+    // Calculate bar width in pixels (60% of band width)
+    const categoryWidth = Math.abs(p1[0] - p0[0]);
+    const barWidth = categoryWidth * 0.6;
+    const halfBarWidth = barWidth / 2;
+
+    const elements = [];
+    const dataLen = series[0].data.length;
+
+    // Iterate columns (gap between j-1 and j)
+    for (let j = 1; j < dataLen; ++j) {
+      // Get X coordinates for the gap
+      const prevCenter = chart.convertToPixel({ xAxisIndex: 0, yAxisIndex: 0 }, [j - 1, 0]);
+      const currCenter = chart.convertToPixel({ xAxisIndex: 0, yAxisIndex: 0 }, [j, 0]);
+      
+      const leftX = prevCenter[0] + halfBarWidth;
+      const rightX = currCenter[0] - halfBarWidth;
+
+      let prevStack = 0;
+      let currStack = 0;
+
+      // Iterate series (stack layers)
+      for (let i = 0; i < series.length; ++i) {
+        const prevVal = series[i].data[j - 1];
+        const currVal = series[i].data[j];
+        
+        // Calculate cumulative stack values
+        const prevTopVal = prevStack + prevVal;
+        const currTopVal = currStack + currVal;
+
+        // Get Y coordinates via convertToPixel
+        // Use seriesIndex i for correctness (though axis mapping is same)
+        const prevBottomPt = chart.convertToPixel({ seriesIndex: i }, [j - 1, prevStack]);
+        const prevTopPt = chart.convertToPixel({ seriesIndex: i }, [j - 1, prevTopVal]);
+        const currBottomPt = chart.convertToPixel({ seriesIndex: i }, [j, currStack]);
+        const currTopPt = chart.convertToPixel({ seriesIndex: i }, [j, currTopVal]);
+
+        // Points order: TopLeft, BottomLeft, BottomRight, TopRight
+        // Note: Y increases downwards in screen pixels, but values increase upwards.
+        // convertToPixel handles the mapping.
+        // We want to fill the area between prev stack and curr stack.
+        
+        const points = [
+          [leftX, prevTopPt[1]],     // Top Left
+          [leftX, prevBottomPt[1]],  // Bottom Left
+          [rightX, currBottomPt[1]], // Bottom Right
+          [rightX, currTopPt[1]]     // Top Right
+        ];
+
+        elements.push({
+          type: 'polygon',
+          shape: { points },
+          style: {
+            fill: series[i].itemStyle.color,
+            opacity: 0.18
+          },
+          silent: true
+        });
+
+        prevStack = prevTopVal;
+        currStack = currTopVal;
+      }
+    }
+
+    // Set the flag to ignore the next finished event caused by this setOption
+    isUpdatingGraphic.current = true;
+    chart.setOption({
+      graphic: elements
+    });
+  };
+
+  const onChartReady = (chart) => {
+    chart.on('finished', updateGraphic);
+  };
+
+  // Only render chart if we have valid dimensions
+  const shouldRender = dimensions.width > 0 && dimensions.height > 0;
+
+  return (
+    <div ref={containerRef} style={{ width: '100%', height: '100%' }}>
+      {shouldRender && (
+        <ReactECharts 
+          ref={chartRef}
+          option={getStarbucksCityOption(dimensions.width, dimensions.height)} 
+          style={{ width: '100%', height: '100%' }} 
+          opts={{ renderer: 'canvas' }}
+          onChartReady={onChartReady}
+        />
+      )}
+    </div>
+  );
+};
+
+const ResponsiveLuckinCityChart = () => {
+  const containerRef = useRef(null);
+  const chartRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const isUpdatingGraphic = useRef(false);
+
+  useEffect(() => {
+    const observeTarget = containerRef.current;
+    if (!observeTarget) return;
+
+    const resizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const { width, height } = entry.contentRect;
+        setDimensions({ width, height });
+      }
+    });
+
+    resizeObserver.observe(observeTarget);
+    return () => resizeObserver.unobserve(observeTarget);
+  }, []);
+
+  const updateGraphic = () => {
+    const chart = chartRef.current?.getEchartsInstance();
+    if (!chart) return;
+    
+    // Avoid infinite loop
+    if (isUpdatingGraphic.current) {
+        isUpdatingGraphic.current = false;
+        return;
+    }
+
+    const option = chart.getOption();
+    const series = option.series;
+    if (!series || series.length === 0) return;
+
+    // Use convertToPixel to get exact coordinates regardless of layout
+    const p0 = chart.convertToPixel({ xAxisIndex: 0, yAxisIndex: 0 }, [0, 0]);
+    const p1 = chart.convertToPixel({ xAxisIndex: 0, yAxisIndex: 0 }, [1, 0]);
+    if (!p0 || !p1) return;
+
+    // Calculate bar width in pixels (60% of band width)
+    const categoryWidth = Math.abs(p1[0] - p0[0]);
+    const barWidth = categoryWidth * 0.6;
+    const halfBarWidth = barWidth / 2;
+
+    const elements = [];
+    const dataLen = series[0].data.length;
+
+    // Iterate columns (gap between j-1 and j)
+    for (let j = 1; j < dataLen; ++j) {
+      // Get X coordinates for the gap
+      const prevCenter = chart.convertToPixel({ xAxisIndex: 0, yAxisIndex: 0 }, [j - 1, 0]);
+      const currCenter = chart.convertToPixel({ xAxisIndex: 0, yAxisIndex: 0 }, [j, 0]);
+      
+      const leftX = prevCenter[0] + halfBarWidth;
+      const rightX = currCenter[0] - halfBarWidth;
+
+      let prevStack = 0;
+      let currStack = 0;
+
+      // Iterate series (stack layers)
+      for (let i = 0; i < series.length; ++i) {
+        const prevVal = series[i].data[j - 1];
+        const currVal = series[i].data[j];
+        
+        // Calculate cumulative stack values
+        const prevTopVal = prevStack + prevVal;
+        const currTopVal = currStack + currVal;
+
+        // Get Y coordinates via convertToPixel
+        const prevBottomPt = chart.convertToPixel({ seriesIndex: i }, [j - 1, prevStack]);
+        const prevTopPt = chart.convertToPixel({ seriesIndex: i }, [j - 1, prevTopVal]);
+        const currBottomPt = chart.convertToPixel({ seriesIndex: i }, [j, currStack]);
+        const currTopPt = chart.convertToPixel({ seriesIndex: i }, [j, currTopVal]);
+
+        const points = [
+          [leftX, prevTopPt[1]],     // Top Left
+          [leftX, prevBottomPt[1]],  // Bottom Left
+          [rightX, currBottomPt[1]], // Bottom Right
+          [rightX, currTopPt[1]]     // Top Right
+        ];
+
+        elements.push({
+          type: 'polygon',
+          shape: { points },
+          style: {
+            fill: series[i].itemStyle.color,
+            opacity: 0.18
+          },
+          silent: true
+        });
+
+        prevStack = prevTopVal;
+        currStack = currTopVal;
+      }
+    }
+
+    // Set the flag to ignore the next finished event caused by this setOption
+    isUpdatingGraphic.current = true;
+    chart.setOption({
+      graphic: elements
+    });
+  };
+
+  const onChartReady = (chart) => {
+    chart.on('finished', updateGraphic);
+  };
+
+  const shouldRender = dimensions.width > 0 && dimensions.height > 0;
+
+  return (
+    <div ref={containerRef} style={{ width: '100%', height: '100%' }}>
+      {shouldRender && (
+        <ReactECharts 
+          ref={chartRef}
+          option={getLuckinCityOption(dimensions.width, dimensions.height)} 
+          style={{ width: '100%', height: '100%' }} 
+          opts={{ renderer: 'canvas' }}
+          onChartReady={onChartReady}
+        />
+      )}
+    </div>
+  );
+};
+
 // Helper Component for Full Width Text
 const FullWidthText = ({ children }) => (
   <div style={{ 
@@ -231,7 +489,7 @@ const PageTwo = ({ onCupRef, hideCup = false }) => {
               瑞幸的门店分布明显更加分散，其增长重心持续向二线及以下城市外移。2023—2024 年间，瑞幸在二线、三线及以下城市的门店占比合计已超过一半，且低线城市占比仍在上升。这种布局意味着更低的租金、人力和运营成本，也为高密度铺店和标准化复制提供了空间条件，使规模化降本在空间层面具备可行性。
             </p>
           ),
-          chart: <ReactECharts option={getLuckinCityOption()} style={{ height: '100%', width: '100%' }} />
+          chart: <ResponsiveLuckinCityChart />
         },
         {
           text: (
@@ -239,7 +497,7 @@ const PageTwo = ({ onCupRef, hideCup = false }) => {
               相比之下，星巴克的门店结构高度集中在高线城市。一线与新一线城市始终占据其门店布局的绝对主体，二线及以下城市占比明显偏低。这种空间选择虽然有利于维持品牌形象和客单价，但也意味着更高的固定成本和更弱的成本弹性。
             </p>
           ),
-          chart: <ReactECharts option={getStarbucksCityOption()} style={{ height: '100%', width: '100%' }} />
+          chart: <ResponsiveStarbucksCityChart />
         }
       ]} />
 

@@ -34,20 +34,27 @@ function pickStarbucksColor() {
 
 export const getLuckinRevenueOption = () => ({
   backgroundColor: 'transparent',
+
   title: {
     text: '瑞幸2019-2024总净收入及增长率',
     left: 'center',
     top: 10,
-    textStyle: { color: '#4B3621', fontSize: 16, fontWeight: 'bold' }
+    textStyle: { color: '#000', fontSize: 16, fontWeight: 'bold' }
   },
+
   tooltip: {
     trigger: 'axis',
-    axisPointer: { type: 'cross', crossStyle: { color: '#999' } }
+    axisPointer: {
+      type: 'cross',
+      crossStyle: { color: '#999' }
+    }
   },
+
   legend: {
     top: 45,
-    data: ['总净收入', '净收入增长率']
+    data: ['总净收入（亿美元）', '增长率（%）']
   },
+
   grid: {
     top: 90,
     left: '8%',
@@ -55,46 +62,67 @@ export const getLuckinRevenueOption = () => ({
     bottom: '12%',
     containLabel: true
   },
-  xAxis: {
-    type: 'category',
-    data: ['2019', '2020', '2021', '2022', '2023', '2024'],
-    axisPointer: { type: 'shadow' }
-  },
+
+  xAxis: [
+    {
+      type: 'category',
+      data: ['2019', '2020', '2021', '2022', '2023', '2024'],
+      axisPointer: { type: 'shadow' }
+    }
+  ],
+
   yAxis: [
     {
       type: 'value',
-      name: '总净收入（亿元）',
-      axisLine: { show: true },
-      splitLine: { show: true, lineStyle: { type: 'dashed' } },
+      name: '总净收入（亿美元）',
+      axisLine: { show: true }, // 左纵轴实线
+      splitLine: {
+        show: true,
+        lineStyle: { type: 'dashed' } // 顶部开放：不使用实线封顶
+      },
       axisLabel: { formatter: '{value}' }
     },
     {
       type: 'value',
       name: '增长率（%）',
+      min: 0,
+      max: 100, // 最高值 100%
       axisLine: { show: true },
       splitLine: { show: false },
       axisLabel: { formatter: '{value}%' }
     }
   ],
+
   series: [
     {
-      name: '总净收入',
+      name: '总净收入（亿美元）',
       type: 'bar',
       barMaxWidth: 40,
-      itemStyle: { color: '#8EC1E8' },
-      tooltip: { valueFormatter: value => value + ' 亿元' },
-      data: [30.25, 40.33, 79.65, 132.93, 249.03, 326.89] // 2024E estimated as average or sum
+      itemStyle: { color: '#A8D5A2' }, // 浅绿色柱子
+      tooltip: {
+        valueFormatter: function (value) {
+          return value + ' 亿美元';
+        }
+      },
+      data: [4.35, 6.18, 12.5, 19.27, 35.08, 47.24]
     },
     {
-      name: '净收入增长率',
+      name: '增长率（%）',
       type: 'line',
       yAxisIndex: 1,
+      showSymbol: true,
       symbol: 'circle',
-      symbolSize: 8,
-      lineStyle: { color: '#D64545', width: 3 },
-      itemStyle: { color: '#D64545' },
-      tooltip: { valueFormatter: value => value + ' %' },
-      data: [259.8, 33.3, 97.5, 66.9, 87.3, 31.2]
+      symbolSize: 8, // 可交互圆点
+      lineStyle: { color: '#5B3A29', width: 3 }, // 深棕色折线
+      itemStyle: { color: '#5B3A29' },
+      emphasis: { focus: 'series' },
+      tooltip: {
+        valueFormatter: function (value) {
+          return value == null ? '-' : value + ' %';
+        }
+      },
+      // 2019 为基期（增长率为空），用 null 让折线从 2020 开始显示
+      data: [null, 33.3, 97.5, 66.9, 87.3, 38.4]
     }
   ]
 });
@@ -102,7 +130,7 @@ export const getLuckinRevenueOption = () => ({
 export const getLuckinProfitOption = () => ({
   backgroundColor: 'transparent',
   title: {
-    text: '瑞幸2019-2024营业利润及营业利润率',
+    text: '瑞幸2019-2024利润及利润率',
     left: 'center',
     top: 10,
     textStyle: { color: '#000', fontSize: 16, fontWeight: 'bold' }
@@ -111,24 +139,28 @@ export const getLuckinProfitOption = () => ({
     trigger: 'axis',
     axisPointer: { type: 'cross', crossStyle: { color: '#999' } }
   },
-  legend: { top: 45, data: ['营业利润', '营业利润率'] },
+  legend: { top: 45, data: ['利润（千元）', '利润率（%）'] },
   grid: { top: 90, left: '8%', right: '8%', bottom: '12%', containLabel: true },
-  xAxis: {
-    type: 'category',
-    data: ['2019', '2020', '2021', '2022', '2023', '2024'],
-    axisPointer: { type: 'shadow' }
-  },
+  xAxis: [
+    {
+      type: 'category',
+      data: ['2019', '2020', '2021', '2022', '2023', '2024'],
+      axisPointer: { type: 'shadow' }
+    }
+  ],
   yAxis: [
     {
       type: 'value',
-      name: '营业利润（亿元）',
+      name: '利润（千元）',
       axisLine: { show: true },
       splitLine: { show: true, lineStyle: { type: 'dashed' } },
       axisLabel: { formatter: '{value}' }
     },
     {
       type: 'value',
-      name: '营业利润率（%）',
+      name: '利润率（%）',
+      min: -10,
+      max: 100,
       axisLine: { show: true },
       splitLine: { show: false },
       axisLabel: { formatter: '{value}%' }
@@ -136,25 +168,25 @@ export const getLuckinProfitOption = () => ({
   ],
   series: [
     {
-      name: '营业利润',
+      name: '利润（千元）',
       type: 'bar',
       barMaxWidth: 40,
-      itemStyle: {
-        color: params => params.value >= 0 ? '#8EC1E8' : '#D6EAF8'
-      },
-      tooltip: { valueFormatter: value => value + ' 亿元' },
-      data: [-32.12, -25.87, -5.39, 11.56, 30.26, 40.54]
+      itemStyle: { color: '#A8D5A2' },
+      tooltip: { valueFormatter: value => value + ' 千元' },
+      data: [-317294, -162324, -512178, 279201, 2887641, 4208349]
     },
     {
-      name: '营业利润率',
+      name: '利润率（%）',
       type: 'line',
       yAxisIndex: 1,
+      showSymbol: true,
       symbol: 'circle',
       symbolSize: 8,
-      lineStyle: { color: '#D64545', width: 3 },
-      itemStyle: { color: '#D64545' },
+      lineStyle: { color: '#5B3A29', width: 3 },
+      itemStyle: { color: '#5B3A29' },
+      emphasis: { focus: 'series' },
       tooltip: { valueFormatter: value => value + ' %' },
-      data: [-106.2, -64.1, -6.8, 8.7, 12.1, 12.4]
+      data: [-7.3, -2.6, -4.1, 2.1, 8.2, 8.9]
     }
   ]
 });
@@ -171,35 +203,52 @@ export const getLuckinCostOption = () => ({
     trigger: 'axis',
     axisPointer: { type: 'cross', crossStyle: { color: '#999' } },
     formatter: function (params) {
-      var year = params && params.length ? params[0].axisValue : '';
-      var lines = [year];
+      const year = params && params.length ? params[0].axisValue : '';
+      const lines = [year];
+
       params.forEach(function (p) {
-        if (p.seriesName === '总运营费用') lines.push(p.marker + ' 总运营费用：' + p.value + ' 亿元');
-        if (p.seriesName === '材料成本占比') {
-          var cost1 = (p.data && p.data.cost != null) ? p.data.cost : '-';
-          lines.push(p.marker + ' ①材料成本：' + cost1 + ' 亿元');
-          lines.push('　　②材料成本占比：' + p.value + '%');
+        if (p.seriesName === '总运营费用') {
+          lines.push(p.marker + ' 总运营费用：' + p.value + ' 千元');
         }
+
         if (p.seriesName === '门店运营费用占比') {
-          var cost2 = (p.data && p.data.cost != null) ? p.data.cost : '-';
-          lines.push(p.marker + ' ①门店运营费用：' + cost2 + ' 亿元');
+          const cost = (p.data && p.data.cost != null) ? p.data.cost : '-';
+          lines.push(p.marker + ' ①门店运营费用：' + cost + ' 千元');
           lines.push('　　②门店运营费用占比：' + p.value + '%');
         }
+
+        if (p.seriesName === '材料成本费用占比') {
+          const cost = (p.data && p.data.cost != null) ? p.data.cost : '-';
+          lines.push(p.marker + ' ①材料成本费用：' + cost + ' 千元');
+          lines.push('　　②材料成本费用占比：' + p.value + '%');
+        }
       });
+
       return lines.join('<br/>');
     }
   },
-  legend: { top: 45, data: ['总运营费用', '材料成本占比', '门店运营费用占比'] },
-  grid: { top: 90, left: '8%', right: '8%', bottom: '12%', containLabel: true },
-  xAxis: {
-    type: 'category',
-    data: ['2019', '2020', '2021', '2022', '2023', '2024'],
-    axisPointer: { type: 'shadow' }
+  legend: {
+    top: 45,
+    data: ['总运营费用', '门店运营费用占比', '材料成本费用占比']
   },
+  grid: {
+    top: 90,
+    left: '8%',
+    right: '8%',
+    bottom: '12%',
+    containLabel: true
+  },
+  xAxis: [
+    {
+      type: 'category',
+      data: ['2019', '2020', '2021', '2022', '2023', '2024'],
+      axisPointer: { type: 'shadow' }
+    }
+  ],
   yAxis: [
     {
       type: 'value',
-      name: '总运营费用（亿元）',
+      name: '总运营费用（千元）',
       axisLine: { show: true },
       splitLine: { show: true, lineStyle: { type: 'dashed' } },
       axisLabel: { formatter: '{value}' }
@@ -219,39 +268,50 @@ export const getLuckinCostOption = () => ({
       name: '总运营费用',
       type: 'bar',
       barMaxWidth: 40,
-      itemStyle: { color: '#8EC1E8' },
-      data: [62.37, 66.20, 85.04, 121.37, 218.77, 286.35]
-    },
-    {
-      name: '材料成本占比',
-      type: 'line',
-      yAxisIndex: 1,
-      symbol: 'circle',
-      symbolSize: 8,
-      lineStyle: { color: '#2F6BFF', width: 3 },
-      data: [
-        { value: 47.9, cost: 14.49 },
-        { value: 43.1, cost: 17.38 },
-        { value: 40.5, cost: 32.26 },
-        { value: 39.7, cost: 52.77 },
-        { value: 45.3, cost: 112.81 },
-        { value: 46.5, cost: 152.00 }
-      ]
+      itemStyle: { color: '#A8D5A2' },
+      tooltip: {
+        valueFormatter: function (value) {
+          return value + ' 千元';
+        }
+      },
+      data: [6237049, 6620686, 8504377, 12136803, 21877548, 30936753]
     },
     {
       name: '门店运营费用占比',
       type: 'line',
       yAxisIndex: 1,
+      showSymbol: true,
       symbol: 'circle',
       symbolSize: 8,
-      lineStyle: { color: '#D64545', width: 3 },
+      lineStyle: { color: '#1565C0', width: 3 },
+      itemStyle: { color: '#1565C0' },
+      emphasis: { focus: 'series' },
       data: [
-        { value: 57.7, cost: 17.45 },
-        { value: 58.0, cost: 23.39 },
-        { value: 46.4, cost: 36.95 },
-        { value: 43.9, cost: 58.35 },
-        { value: 38.8, cost: 96.62 },
-        { value: 40.8, cost: 133.37 }
+        { value: 62.9, cost: 3920970 },
+        { value: 54.2, cost: 3585184 },
+        { value: 52.5, cost: 4463164 },
+        { value: 51.4, cost: 6232878 },
+        { value: 47.1, cost: 10294355 },
+        { value: 50.8, cost: 15702519 }
+      ]
+    },
+    {
+      name: '材料成本费用占比',
+      type: 'line',
+      yAxisIndex: 1,
+      showSymbol: true,
+      symbol: 'circle',
+      symbolSize: 8,
+      lineStyle: { color: '#C62828', width: 3 },
+      itemStyle: { color: '#C62828' },
+      emphasis: { focus: 'series' },
+      data: [
+        { value: 26.0, cost: 1623324 },
+        { value: 30.1, cost: 1995380 },
+        { value: 37.6, cost: 3198552 },
+        { value: 42.7, cost: 5178963 },
+        { value: 49.8, cost: 10892214 },
+        { value: 45.6, cost: 14115299 }
       ]
     }
   ]
@@ -530,141 +590,492 @@ export const getLuckinCityOption = (width = 600, height = 400) => {
     [0.16, 0.18], // 三线
     [0.10, 0.11]  // 三线及以下
   ];
+
+  // 计算每一年总和，用于归一化 (Match reference logic)
+  const totalData = [];
+  for (let i = 0; i < rawData[0].length; ++i) {
+    let sum = 0;
+    for (let j = 0; j < rawData.length; ++j) sum += rawData[j][i];
+    totalData.push(sum);
+  }
+
   const color = ['#2E7D32', '#1565C0', '#EF6C00', '#6A1B9A', '#C62828'];
   const seriesNames = ['一线城市', '新一线城市', '二线城市', '三线城市', '三线及以下城市'];
   
-  // Transpose logic for stacked bar if needed, but here it's simpler
-  // Data structure: each series has [2023_val, 2024_val]
   const series = seriesNames.map((name, sid) => ({
     name,
     type: 'bar',
     stack: 'total',
     barWidth: '60%',
     itemStyle: { color: color[sid] },
-    label: { show: true, formatter: p => p.value ? (Math.round(p.value * 1000) / 10) + '%' : '' },
-    data: rawData[sid]
+    label: { 
+      show: true, 
+      formatter: p => p.value == null ? '' : (Math.round(p.value * 1000) / 10) + '%' 
+    },
+    emphasis: { focus: 'series' },
+    data: rawData[sid].map((d, did) => 
+      totalData[did] <= 0 ? 0 : d / totalData[did]
+    )
   }));
+
+  // Grid matches Starbucks for consistency
+  const grid = {
+    left: 100,
+    right: 80,
+    top: 80,
+    bottom: 60
+  };
 
   return {
     backgroundColor: 'transparent',
-    title: { text: '2023-2024瑞幸城市分布情况', left: 'center', top: 10, textStyle: { fontSize: 16, fontWeight: 'bold' } },
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: v => (Math.round(v * 1000) / 10) + '%' },
+    title: { 
+      text: '2023-2024瑞幸城市分布情况', 
+      left: 'center', 
+      top: 10, 
+      textStyle: { color: '#000', fontSize: 16, fontWeight: 'bold' } 
+    },
+    tooltip: { 
+      trigger: 'axis', 
+      axisPointer: { type: 'shadow' }, 
+      valueFormatter: v => (Math.round(v * 1000) / 10) + '%' 
+    },
     legend: { top: 45, data: seriesNames },
-    grid: { left: '10%', right: '10%', top: 90, bottom: 60, containLabel: true },
-    xAxis: { type: 'category', data: ['2023', '2024'] },
-    yAxis: { type: 'value', name: '百分比（%）', min: 0, max: 1, axisLabel: { formatter: v => Math.round(v * 100) + '%' } },
+    grid,
+    xAxis: { 
+      type: 'category', 
+      data: ['2023', '2024'],
+      axisPointer: { type: 'shadow' }
+    },
+    yAxis: { 
+      type: 'value', 
+      name: '百分比（%）', 
+      min: 0, 
+      max: 1, 
+      axisLine: { show: true },
+      splitLine: {
+        show: true,
+        lineStyle: { type: 'dashed' }
+      },
+      axisLabel: { formatter: v => Math.round(v * 100) + '%' } 
+    },
     series
   };
 };
 
 export const getStarbucksCityOption = (width = 600, height = 400) => {
   const rawData = [
-    [0.3008, 0.3165],
-    [0.3091, 0.3350],
-    [0.1688, 0.1899],
-    [0.0820, 0.0963],
-    [0.0479, 0.0623]
+    [0.3008, 0.3165], // 一线城市
+    [0.3091, 0.3350], // 新一线城市
+    [0.1688, 0.1899], // 二线城市
+    [0.0820, 0.0963], // 三线城市
+    [0.0479, 0.0623]  // 三线及以下城市
   ];
-  const color = ['#2E7D32', '#1565C0', '#EF6C00', '#6A1B9A', '#C62828'];
-  const seriesNames = ['一线城市', '新一线城市', '二线城市', '三线城市', '三线及以下城市'];
-  
-  const series = seriesNames.map((name, sid) => ({
-    name,
-    type: 'bar',
-    stack: 'total',
-    barWidth: '60%',
-    itemStyle: { color: color[sid] },
-    label: { show: true, formatter: p => p.value ? (Math.round(p.value * 1000) / 10) + '%' : '' },
-    data: rawData[sid]
-  }));
+
+  // 计算每一年总和，用于归一化
+  const totalData = [];
+  for (let i = 0; i < rawData[0].length; ++i) {
+    let sum = 0;
+    for (let j = 0; j < rawData.length; ++j) sum += rawData[j][i];
+    totalData.push(sum);
+  }
+
+  const grid = {
+    left: 100,
+    right: 80,
+    top: 80,
+    bottom: 60
+  };
+
+  // 依赖传入的 width 和 height 来计算 graphic
+  // 注意：如果容器尺寸变化，这里计算的 graphic 坐标可能不会自动更新，除非重新调用此函数。
+  const gridWidth = width - grid.left - grid.right;
+  const gridHeight = height - grid.top - grid.bottom;
+  const categoryWidth = gridWidth / rawData[0].length;
+  const barWidth = categoryWidth * 0.6;
+  const barPadding = (categoryWidth - barWidth) / 2;
+
+  const color = [
+    '#2E7D32', // 一线城市（深绿）
+    '#1565C0', // 新一线城市（蓝）
+    '#EF6C00', // 二线城市（橙）
+    '#6A1B9A', // 三线城市（紫）
+    '#C62828'  // 三线及以下城市（红）
+  ];
+
+  const seriesNames = [
+    '一线城市',
+    '新一线城市',
+    '二线城市',
+    '三线城市',
+    '三线及以下城市'
+  ];
+
+  const series = seriesNames.map((name, sid) => {
+    return {
+      name,
+      type: 'bar',
+      stack: 'total',
+      barWidth: '60%',
+      itemStyle: { color: color[sid] },
+      label: {
+        show: true,
+        formatter: (params) =>
+          params.value == null ? '' : (Math.round(params.value * 1000) / 10) + '%'
+      },
+      emphasis: { focus: 'series' },
+      data: rawData[sid].map((d, did) =>
+        totalData[did] <= 0 ? 0 : d / totalData[did]
+      )
+    };
+  });
+
+  // 移除在Option生成时手动计算Graphic的逻辑，改为在组件中通过convertToPixel动态计算
+  // 以避免像素对齐误差导致的显示错误（如“模糊阴影”）
 
   return {
     backgroundColor: 'transparent',
-    title: { text: '2023-2024星巴克城市分布情况', left: 'center', top: 10, textStyle: { fontSize: 16, fontWeight: 'bold' } },
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: v => (Math.round(v * 1000) / 10) + '%' },
-    legend: { top: 45, data: seriesNames },
-    grid: { left: '10%', right: '10%', top: 90, bottom: 60, containLabel: true },
-    xAxis: { type: 'category', data: ['2023', '2024'] },
-    yAxis: { type: 'value', name: '百分比（%）', min: 0, max: 1, axisLabel: { formatter: v => Math.round(v * 100) + '%' } },
+    title: {
+      text: '2023-2024星巴克城市分布情况',
+      left: 'center',
+      top: 10,
+      textStyle: { color: '#000', fontSize: 16, fontWeight: 'bold' }
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: { type: 'shadow' },
+      valueFormatter: (v) => (Math.round(v * 1000) / 10) + '%'
+    },
+    legend: {
+      top: 45,
+      data: seriesNames
+    },
+    grid,
+    xAxis: {
+      type: 'category',
+      data: ['2023', '2024'],
+      axisPointer: { type: 'shadow' }
+    },
+    yAxis: {
+      type: 'value',
+      name: '百分比（%）',
+      min: 0,
+      max: 1,
+      axisLine: { show: true },
+      splitLine: {
+        show: true,
+        lineStyle: { type: 'dashed' }
+      },
+      axisLabel: { formatter: (v) => Math.round(v * 100) + '%' }
+    },
     series
   };
 };
 
-export const getFrequencyOption = () => ({
-  backgroundColor: 'transparent',
-  title: {
-    text: '2025年中国消费者咖啡饮用频率',
-    subtext: '内圈：大类占比 | 外圈：详细占比',
-    left: 'center',
-    top: 10,
-    textStyle: { fontSize: 26, fontWeight: 'bold' }
-  },
-  tooltip: { trigger: 'item', formatter: '{a} <br/>{b}: {c} ({d}%)' },
-  series: [
-    {
-      name: '大类占比',
-      type: 'pie',
-      selectedMode: 'single',
-      radius: [0, '30%'],
-      label: { position: 'inner', fontSize: 14, color: '#fff' },
-      labelLine: { show: false },
-      data: [
-        { value: 62.4, name: '一周一杯及以上', itemStyle: { color: '#5470c6' } },
-        { value: 37.6, name: '一周不到一杯', itemStyle: { color: '#91cc75' } }
-      ]
-    },
-    {
-      name: '详细占比',
-      type: 'pie',
-      radius: ['45%', '60%'],
-      labelLine: { length: 30 },
-      label: {
-        formatter: '{b|{b}}\n{hr|}\n{c|{c}%}',
-        rich: {
-          b: { fontSize: 16, lineHeight: 33, align: 'center' },
-          hr: { borderColor: '#aaa', width: '100%', borderWidth: 0.5, height: 0 },
-          c: { fontSize: 16, lineHeight: 33, align: 'center' }
-        }
-      },
-      data: [
-        { value: 11.2, name: '每天一杯及以上' },
-        { value: 24.5, name: '每周2-3杯' },
-        { value: 26.7, name: '每周一杯' },
-        { value: 26.3, name: '每月2-3杯' },
-        { value: 11.3, name: '每月一杯及以下' }
-      ]
-    }
-  ]
-});
+export const getFrequencyOption = () => {
+  const categories = [
+    '一天一杯以上',
+    '每周2-3杯',
+    '每周一杯',
+    '每月2-3杯',
+    '没有固定规律',
+    '基本不喝'
+  ];
 
-export const getPriceAcceptanceOption = () => ({
-  backgroundColor: 'transparent',
-  title: {
-    text: '2024-2025年中国消费者咖啡单杯价格接受度',
-    left: 'center',
-    top: 20,
-    textStyle: { fontSize: 24, fontWeight: 'bold' }
-  },
-  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-  legend: { top: 60, data: ['2024年', '2025年'] },
-  grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true, top: 100 },
-  xAxis: { type: 'value', boundaryGap: [0, 0.01], axisLabel: { formatter: '{value}%' } },
-  yAxis: { type: 'category', data: ['50元以上', '41-50元', '31-40元', '21-30元', '11-20元', '10元以下'] },
-  series: [
-    {
-      name: '2024年',
-      type: 'bar',
-      data: [1.3, 3.8, 18.6, 39.4, 28.5, 8.4],
-      itemStyle: { color: '#91cc75' }
+  const data2024 = [14.15, 32.08, 28.11, 8.68, 10.00, 6.98];
+  const data2025 = [14.55, 32.97, 30.42, 8.97, 7.76, 5.33];
+
+  const baseColors = [
+    '#FFC23A',
+    '#E07A00',
+    '#B45309',
+    '#A3A3A3',
+    '#CFCFCF',
+    '#E5E5E5'
+  ];
+
+  function hexToRgb(hex) {
+    const h = hex.replace('#', '');
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    return { r, g, b };
+  }
+
+  function lighten(hex, amount) {
+    const a = amount == null ? 0.62 : amount;
+    const c = hexToRgb(hex);
+    const r = Math.round(c.r + (255 - c.r) * a);
+    const g = Math.round(c.g + (255 - c.g) * a);
+    const b = Math.round(c.b + (255 - c.b) * a);
+    return `rgb(${r},${g},${b})`;
+  }
+
+  const innerColors = baseColors.map(c => lighten(c, 0.62));
+
+  const innerData = categories.map((name, i) => ({
+    name,
+    value: data2024[i],
+    itemStyle: { color: innerColors[i] }
+  }));
+
+  const outerData = categories.map((name, i) => ({
+    name,
+    value: data2025[i],
+    itemStyle: { color: baseColors[i] }
+  }));
+
+  const centerXY = ['50%', '52%'];
+  
+    return {
+      backgroundColor: 'transparent',
+      title: {
+        text: '消费者咖啡饮用频次（%）',
+      subtext: "2024与2025对比（单位：%）",
+      left: 'center',
+      top: 0,
+      textStyle: {
+        color: '#2f2f2f',
+        fontSize: 26,
+        fontWeight: 800,
+        fontFamily: 'system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans SC,Helvetica,Arial'
+      },
+      subtextStyle: { fontSize: 16, color: "#777", lineHeight: 22 }
     },
-    {
-      name: '2025年',
-      type: 'bar',
-      data: [0.9, 2.5, 14.2, 35.6, 36.8, 10.0],
-      itemStyle: { color: '#5470c6' }
-    }
-  ]
-});
+
+    tooltip: {
+      trigger: 'item',
+      appendToBody: true,
+      backgroundColor: 'rgba(255,255,255,0.96)',
+      borderColor: 'rgba(0,0,0,0.06)',
+      borderWidth: 1,
+      extraCssText: 'box-shadow:0 14px 40px rgba(0,0,0,0.12);border-radius:14px;padding:14px 14px;',
+      formatter: (p) => {
+        const year = p.seriesName;
+        const ring = year === '2024' ? '内圈（2024）' : '外圈（2025）';
+        const v = Number(p.value).toFixed(2);
+
+        return `
+          <div style="font-weight:800;font-size:16px;color:#111827;margin-bottom:6px">${p.name}</div>
+          <div style="color:#6b7280;font-size:12px;margin-bottom:10px">${ring}</div>
+          <div style="display:flex;align-items:baseline;gap:6px">
+            <div style="font-weight:900;font-size:18px;color:#111827">${v}%</div>
+          </div>
+        `;
+      }
+    },
+
+    legend: [
+      {
+        bottom: 5,
+        left: 'center',
+        itemWidth: 12,
+        itemHeight: 12,
+        icon: 'circle',
+        data: categories,
+        textStyle: {
+          color: '#6b7280',
+          fontSize: 12,
+          fontFamily: 'system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans SC,Helvetica,Arial'
+        }
+      }
+    ],
+
+    series: [
+      {
+        name: '2024',
+        type: 'pie',
+        center: centerXY,
+        radius: ['34%', '56%'],
+        clockwise: true,
+        avoidLabelOverlap: true,
+        label: { show: false },
+        labelLine: { show: false },
+        itemStyle: {
+          borderColor: '#fbf7f1',
+          borderWidth: 4
+        },
+        emphasis: {
+          scale: true,
+          scaleSize: 10,
+          itemStyle: {
+            shadowBlur: 18,
+            shadowColor: 'rgba(210,140,60,0.25)',
+            shadowOffsetY: 10,
+            borderWidth: 12
+          }
+        },
+        data: innerData
+      },
+      {
+        name: '2025',
+        type: 'pie',
+        center: centerXY,
+        radius: ['62%', '84%'],
+        clockwise: true,
+        avoidLabelOverlap: true,
+        label: { show: false },
+        labelLine: { show: false },
+        itemStyle: {
+          borderColor: '#fbf7f1',
+          borderWidth: 4
+        },
+        emphasis: {
+          scale: true,
+          scaleSize: 12,
+          itemStyle: {
+            shadowBlur: 20,
+            shadowColor: 'rgba(210,140,60,0.30)',
+            shadowOffsetY: 12,
+            borderWidth: 12
+          }
+        },
+        data: outerData
+      }
+    ],
+
+    graphic: [
+      {
+        type: 'group',
+        left: centerXY[0],
+        top: centerXY[1],
+        bounding: 'raw',
+        silent: true,
+
+        z: 100,
+        zlevel: 10,
+
+        children: [
+          {
+            type: 'text',
+            x: 0,
+            y: -18,
+            style: {
+              text: '2024',
+              fill: '#D97706',
+              fontSize: 46,
+              fontWeight: 900,
+              textAlign: 'center',
+              textVerticalAlign: 'middle'
+            }
+          },
+          {
+            type: 'text',
+            x: 0,
+            y: 26,
+            style: {
+              text: '2025',
+              fill: '#D97706',
+              fontSize: 46,
+              fontWeight: 900,
+              textAlign: 'center',
+              textVerticalAlign: 'middle'
+            }
+          }
+        ]
+      }
+    ]
+  };
+};
+
+export const getPriceAcceptanceOption = () => {
+  const xData = ["10元及以下","11–20元","21–30元","31–40元","41–50元","50元以上"];
+
+  const y2025 = [3.45, 30.34, 46.44, 17.24, 1.84, 0.69];
+  const y2024 = [1.17, 25.78, 55.47, 11.72, 5.08, 0.78];
+
+  return {
+    backgroundColor: 'transparent',
+    title: {
+      text: "消费者可接受的单杯咖啡价格分布",
+      subtext: "2024与2025对比（单位：%）",
+      left: "center",
+      top: 18,
+      textStyle: { fontSize: 28, fontWeight: 700, color: "#2c2c2c" },
+      subtextStyle: { fontSize: 16, color: "#777", lineHeight: 22 }
+    },
+    grid: {
+      left: 70,
+      right: 30,
+      top: 120,
+      bottom: 90
+    },
+    tooltip: {
+      trigger: "axis",
+      axisPointer: { type: "line" },
+      valueFormatter: (v) => `${v}%`
+    },
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      data: xData,
+      axisLine: { lineStyle: { color: "#ddd" } },
+      axisTick: { show: false },
+      axisLabel: { color: "#333", fontSize: 14, margin: 14 }
+    },
+    yAxis: {
+      type: "value",
+      min: 0,
+      max: 60,
+      interval: 15,
+      axisLabel: {
+        color: "#666",
+        fontSize: 14,
+        formatter: (v) => `${v}%`
+      },
+      axisLine: { show: false },
+      axisTick: { show: false },
+      splitLine: {
+        show: true,
+        lineStyle: { color: "#e9e9e9", type: "dashed" }
+      }
+    },
+    legend: {
+      left: "center",
+      bottom: 24,
+      itemWidth: 14,
+      itemHeight: 14,
+      itemGap: 28,
+      textStyle: { fontSize: 16, color: "#666" },
+      data: ["2024 接受度", "2025 接受度"]
+    },
+    series: [
+      {
+        name: "2024 接受度",
+        type: "line",
+        smooth: true,
+        symbol: "none",
+        data: y2024,
+        itemStyle: { color: "#9aa3af" },
+        lineStyle: {
+          width: 3,
+          type: "dashed",
+          color: "#9aa3af"
+        },
+        z: 2
+      },
+      {
+        name: "2025 接受度",
+        type: "line",
+        smooth: true,
+        symbol: "none",
+        data: y2025,
+        itemStyle: { color: "#b45309" },
+        lineStyle: {
+          width: 4,
+          color: "#b45309"
+        },
+        areaStyle: {
+          opacity: 1,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: "rgba(180,83,9,0.22)" },
+            { offset: 1, color: "rgba(180,83,9,0.00)" }
+          ])
+        },
+        z: 3
+      }
+    ]
+  };
+};
 
 export const getMonthConsumptionOption = () => ({
   backgroundColor: 'transparent',
