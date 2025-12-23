@@ -8,7 +8,9 @@ import ProvinceBarChartSection from './components/ProvinceBarChartSection';
 import CityPieChartSection from './components/CityPieChartSection';
 import PageTwo from './components/PageTwo';
 import PageThree from './components/PageThree';
-import coffeeCup from './assets/coffee-cup.png';
+import change1 from './assets/change1.png';
+import pageOneTitle from './assets/part1 素材/1.png';
+import pageOneImage2 from './assets/part1 素材/2.png';
 
 // Data for Scrollytelling Sections
 const SCROLLY_SECTIONS = [
@@ -47,7 +49,7 @@ const SCROLLY_SECTIONS = [
 function App() {
   const [expanded, setExpanded] = useState(false);
   const [activeSection, setActiveSection] = useState(0);
-  const [revealRadius, setRevealRadius] = useState(0);
+  const [isTransitionActive, setIsTransitionActive] = useState(false);
   const [maxRadius, setMaxRadius] = useState(0);
   const [clipCenter, setClipCenter] = useState({ x: 0, y: 0 });
   
@@ -57,10 +59,12 @@ function App() {
   const lastTouchY = useRef(0);
   const cupRef = useRef(null);
   const pageThreeRef = useRef(null);
+  const floatingCupRef = useRef(null);
   
   // Refs for animation loop
   const targetRadius = useRef(0);
   const currentRadius = useRef(0);
+  const clipCenterRef = useRef({ x: 0, y: 0 });
   const requestRef = useRef();
 
   // Refs for intersection observer
@@ -79,7 +83,6 @@ function App() {
   useEffect(() => {
     const animate = () => {
       // Linear Interpolation (Lerp): Move current towards target by 10% each frame
-      // Adjust the 0.1 factor for speed (higher = faster, lower = smoother)
       currentRadius.current += (targetRadius.current - currentRadius.current) * 0.1;
       
       // Stop updating if close enough to save resources
@@ -87,13 +90,47 @@ function App() {
          currentRadius.current = targetRadius.current;
       }
       
-      setRevealRadius(currentRadius.current);
+      const r = currentRadius.current;
+      const { x, y } = clipCenterRef.current;
+      
+      // Direct DOM manipulation
+      if (pageThreeRef.current) {
+          pageThreeRef.current.style.clipPath = `circle(${r}px at ${x}px ${y}px)`;
+          pageThreeRef.current.style.visibility = r > 0 ? 'visible' : 'hidden';
+          // Enable interaction only when fully expanded (matching original behavior)
+          const isFullyExpanded = r >= maxRadius - 5; // buffer for float precision
+          pageThreeRef.current.style.pointerEvents = isFullyExpanded ? 'auto' : 'none';
+          pageThreeRef.current.style.overflowY = isFullyExpanded ? 'auto' : 'hidden';
+      }
+
+      if (floatingCupRef.current) {
+          if (r > 0) {
+              floatingCupRef.current.style.display = 'flex';
+              floatingCupRef.current.style.top = `${y - r}px`;
+              floatingCupRef.current.style.left = `${x}px`;
+              floatingCupRef.current.style.opacity = Math.max(0, 1 - (r / (maxRadius * 0.8)));
+          } else {
+              floatingCupRef.current.style.display = 'none';
+          }
+      }
+
+      // Update state only when transitioning state changes to minimize re-renders
+      if (r > 0 && !isTransitionActive) {
+          setIsTransitionActive(true);
+      } else if (r <= 0 && isTransitionActive) {
+          setIsTransitionActive(false);
+      }
+
+      if (contentRef.current) {
+          contentRef.current.style.overflowY = r > 0 ? 'hidden' : 'auto';
+      }
+
       requestRef.current = requestAnimationFrame(animate);
     };
     
     requestRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(requestRef.current);
-  }, []);
+  }, [maxRadius, isTransitionActive]); // Depend on maxRadius and isTransitionActive (for state toggle)
 
   useEffect(() => {
     const handleWheel = (e) => {
@@ -134,8 +171,12 @@ function App() {
                const x = rect.left + rect.width / 2;
                const y = rect.top + rect.height / 2;
                setClipCenter({ x, y });
+               clipCenterRef.current = { x, y };
              } else {
-               setClipCenter({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+               const cx = window.innerWidth / 2;
+               const cy = window.innerHeight / 2;
+               setClipCenter({ x: cx, y: cy });
+               clipCenterRef.current = { x: cx, y: cy };
              }
         }
 
@@ -202,9 +243,15 @@ function App() {
          if (targetRadius.current <= 0 && isCupReady && deltaY > 0) {
             if (cupRef.current) {
                 const rect = cupRef.current.getBoundingClientRect();
-                setClipCenter({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                setClipCenter({ x, y });
+                clipCenterRef.current = { x, y };
             } else {
-                setClipCenter({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+                const cx = window.innerWidth / 2;
+                const cy = window.innerHeight / 2;
+                setClipCenter({ x: cx, y: cy });
+                clipCenterRef.current = { x: cx, y: cy };
             }
          }
 
@@ -254,7 +301,10 @@ function App() {
        
        if (cupRef.current) {
             const rect = cupRef.current.getBoundingClientRect();
-            setClipCenter({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            setClipCenter({ x, y });
+            clipCenterRef.current = { x, y };
        }
 
        const animate = (timestamp) => {
@@ -387,8 +437,33 @@ function App() {
     <div className="main-scroll-container">
       {/* Section 1: Book Image (Intro) - Normal Scroll */}
       <div className="intro-section-wrapper" style={{ minHeight: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        
-        <div className="content-container intro-section" style={{ minHeight: 'auto' }}>
+      
+      <div className="page-one-title" style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '2rem', marginTop: '2rem' }}>
+        <img src={pageOneTitle} alt="Page One Title" style={{ width: '100%', height: 'auto' }} />
+      </div>
+
+      <div className="page-one-image-2" style={{ position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+        <img src={pageOneImage2} alt="Page One Content" style={{ width: '100%', height: 'auto' }} />
+        <div style={{
+            position: 'absolute',
+            top: '45%',
+            right: '7%',
+            transform: 'translateY(-50%)',
+            width: '50%',
+            textAlign: 'justify',
+            color: '#542410', 
+            fontSize: '21px', 
+            lineHeight: '2',
+            fontWeight: 'bold',
+            fontFamily: "'SimSun', 'Songti SC', serif"
+        }}>
+            <p style={{ margin: 0 }}>
+              很长一段时间里，咖啡在中国更多集中于少数城市和人群，带有明显的场合属性。近几年，随着价格下降和供给扩张，咖啡变得更容易买到，也更频繁地进入日常生活。从消费频率、市场规模到门店密度与城市覆盖，咖啡在中国呈现出持续扩张的趋势，一个体量不断放大的行业正在形成。
+            </p>
+        </div>
+      </div>
+
+      {/* <div className="content-container intro-section" style={{ minHeight: 'auto' }}>
           <div className="content-image-wrapper">
             <img src="/src/assets/book.png" alt="Coffee History Book" className="content-image" />
           </div>
@@ -397,7 +472,7 @@ function App() {
               很长一段时间里，咖啡在中国并不属于日常消费的中心位置，它更多集中在少数城市和人群中，带有明显的场合属性。但近几年，这种距离正在被不断拉近，咖啡变得更容易被买到、更能够买得起，更频繁地进入日常生活。从消费频率到市场规模，从门店密度到城市覆盖，咖啡在中国的扩张呈现出一条持续上行的曲线。这条曲线背后，逐渐显现出一个体量庞大、结构复杂、正在快速演化的中国咖啡行业。
             </p>
           </div>
-        </div>
+        </div> */ }
       </div>
 
       {/* Scrollytelling Container */}
@@ -411,7 +486,12 @@ function App() {
               ref={el => textRefs.current[index] = el}
               data-index={index}
             >
-              <p className="content-body-text">
+              <p className="content-body-text" style={{ 
+                  color: '#f0e7da', 
+                  fontFamily: "'SimSun', 'Songti SC', serif", 
+                  fontSize: '21px', 
+                  lineHeight: '2' 
+              }}>
                 {section.text}
               </p>
             </div>
@@ -440,7 +520,12 @@ function App() {
             <img src="/src/assets/store.png" alt="Coffee Store" className="content-image" />
           </div>
           <div className="content-text-wrapper">
-            <p className="content-body-text">
+            <p className="content-body-text" style={{ 
+                color: '#f0e7da', 
+                fontFamily: "'SimSun', 'Songti SC', serif", 
+                fontSize: '17.5px', 
+                lineHeight: '2' 
+            }}>
               综合来看，中国咖啡行业的快速扩张并非偶然，在整体消费增速放缓的背景下，呈现出一条与宏观趋势并不完全同步的增长曲线。这一变化指向一个值得追问的问题——在消费环境趋紧、支出选择更谨慎的情况下，为什么咖啡，尤其是现制咖啡，反而获得了更强的生命力？要理解这一现象，不能仅停留在表面的规模和数量层面，需要进一步深入消费逻辑本身。据此，我们聚焦消费降级与情绪经济两个维度，尝试拆解它们如何共同塑造近年来中国咖啡行业的增长路径。
             </p>
           </div>
@@ -467,7 +552,7 @@ function App() {
         />
         <PageTwo 
           onCupRef={cupRef} 
-          hideCup={revealRadius > 0}
+          hideCup={isTransitionActive}
         />
       </div>
     </div>
@@ -483,7 +568,7 @@ function App() {
         className={`main-content-fixed ${expanded ? 'expanded' : ''}`}
         ref={contentRef}
         style={{ 
-           overflowY: revealRadius > 0 ? 'hidden' : 'auto', // Disable scroll during/after transition
+           overflowY: 'auto'
         }}
       >
         <div 
@@ -503,7 +588,7 @@ function App() {
              Pull to Explore 
             <span className="arrow-icon">↑</span>
         </div>
-        <div className="slider-content" style={{ paddingTop: expanded ? '0' : '4rem', transition: 'padding-top 0.5s' }}>
+        <div className="slider-content" style={{ paddingTop: expanded ? '0' : '4rem', transition: 'padding-top 0.5s', backgroundColor: '#542410' }}>
            {MainContent}
         </div>
       </section>
@@ -519,37 +604,39 @@ function App() {
           width: '100vw',
           height: '100vh',
           zIndex: 100,
-          pointerEvents: revealRadius >= maxRadius ? 'auto' : 'none',
-          clipPath: `circle(${revealRadius}px at ${clipCenter.x}px ${clipCenter.y}px)`,
+          pointerEvents: 'none',
+          clipPath: 'circle(0px at 0px 0px)',
           transition: 'none', // Continuous update
-          visibility: revealRadius > 0 ? 'visible' : 'hidden',
-          overflowY: revealRadius >= maxRadius ? 'auto' : 'hidden'
+          visibility: 'hidden',
+          overflowY: 'hidden',
+          willChange: 'clip-path' // Optimize performance
         }}
       >
         <PageThree />
       </div>
 
       {/* Floating Cup Transition Element */}
-      {revealRadius > 0 && (
-        <div 
+      <div 
+            ref={floatingCupRef}
             className="floating-cup-transition"
             style={{
                 position: 'fixed',
-                left: clipCenter.x,
-                top: clipCenter.y - revealRadius, // Moves up with the circle edge
-                width: '100px',
-                height: '100px',
+                left: 0,
+                top: 0,
+                width: '200px',
+                height: '200px',
                 transform: 'translate(-50%, -50%)',
                 zIndex: 200, // Above PageThree (100)
-                opacity: Math.max(0, 1 - (revealRadius / (maxRadius * 0.8))),
+                opacity: 0,
                 pointerEvents: 'none',
-                display: 'flex',
+                display: 'none',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                backgroundColor: 'transparent'
             }}
         >
              <img 
-                src={coffeeCup} 
+                src={change1} 
                 alt="Transition Cup" 
                 style={{ 
                   width: '100%', 
@@ -558,7 +645,6 @@ function App() {
                 }} 
               />
         </div>
-      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactECharts from 'echarts-for-react';
-import coffeeCup from '../assets/coffee-cup.png';
+import change1 from '../assets/change1.png';
 import PriceWarTimeline from './PriceWarTimeline';
 import {
   getLuckinRevenueOption,
@@ -602,17 +602,18 @@ const PageTwo = ({ onCupRef, hideCup = false }) => {
           className="coffee-cup-trigger"
           style={{
             position: 'relative',
-            width: '100px',
-            height: '100px',
+            width: '200px',
+            height: '200px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             opacity: opacity,
-            transition: 'opacity 0.2s'
+            transition: 'opacity 0.2s',
+            backgroundColor: 'transparent'
           }}
         >
           <img 
-            src={coffeeCup} 
+            src={change1} 
             alt="Next Chapter" 
             style={{ 
               width: '100%', 
