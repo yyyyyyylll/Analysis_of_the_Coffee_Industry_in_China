@@ -62,6 +62,12 @@ const ComparisonChartSection = () => {
         return res;
       }
     },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '15%',
+      containLabel: true
+    },
     legend: {
       data: [
         '中国咖啡行业市场规模（亿元）',
@@ -69,8 +75,9 @@ const ComparisonChartSection = () => {
         '中国咖啡行业市场规模增长率（%）',
         '中国现制咖啡市场规模增长率（%）'
       ],
-      bottom: 5,
-      type: 'scroll', // Reverting to scroll as per HTML
+      bottom: 0,
+      width: '80%',
+      left: 'center',
       textStyle: { color: '#F0ECE5' }
     },
     xAxis: [
@@ -87,7 +94,7 @@ const ComparisonChartSection = () => {
         type: 'value',
         name: '市场规模 (亿元)',
         min: 0,
-        axisLabel: { formatter: '{value} 亿元', color: '#F0ECE5' },
+        axisLabel: { formatter: '{value}', color: '#F0ECE5' },
         nameTextStyle: { padding: [0, 0, 0, 50], color: '#F0ECE5' },
         axisLine: { lineStyle: { color: '#F0ECE5' } },
         splitLine: { lineStyle: { color: 'rgba(240, 236, 229, 0.2)' } }
@@ -128,7 +135,7 @@ const ComparisonChartSection = () => {
   };
 
   return (
-    <div style={{ width: '100%', height: '600px' }}>
+    <div style={{ width: '100%', height: '550px' }}>
       <ReactECharts option={option} style={{ height: '100%', width: '100%' }} />
     </div>
   );

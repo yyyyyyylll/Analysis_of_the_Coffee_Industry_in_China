@@ -19,10 +19,7 @@ const CityPieChartSection = () => {
       formatter: '{b} : {c}% ({d}%)'
     },
     legend: {
-      orient: 'vertical',
-      right: '5%',
-      bottom: '5%',
-      textStyle: { color: '#F0ECE5' }
+      show: false
     },
     series: [
       {
@@ -56,7 +53,7 @@ const CityPieChartSection = () => {
   };
 
   return (
-    <div style={{ width: '100%', height: '600px' }}>
+    <div style={{ width: '100%', height: '500px' }}>
       <ReactECharts option={option} style={{ height: '100%', width: '100%' }} />
     </div>
   );

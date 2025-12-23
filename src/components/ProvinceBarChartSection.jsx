@@ -71,7 +71,7 @@ const ProvinceBarChartSection = () => {
       }
     },
     toolbox: {
-      show: true,
+      show: false,
       orient: 'vertical',
       left: 'right',
       top: 'center',
@@ -85,6 +85,7 @@ const ProvinceBarChartSection = () => {
       }
     },
     visualMap: {
+      show: false,
       min: 574,
       max: 22496,
       text: ['高', '低'],
@@ -102,7 +103,8 @@ const ProvinceBarChartSection = () => {
         name: '咖啡店数量',
         type: 'map',
         map: 'china',
-        roam: true,
+        roam: false,
+        zoom: 1.2,
         nameMap: nameMap,
         label: {
           show: true,
@@ -119,7 +121,7 @@ const ProvinceBarChartSection = () => {
   };
 
   return (
-    <div style={{ width: '100%', height: '600px' }}>
+    <div style={{ width: '100%', height: '900px' }}>
       <ReactECharts option={option} style={{ height: '100%', width: '100%' }} />
     </div>
   );

@@ -106,7 +106,7 @@ const StoreCountChartSection = () => {
   };
 
   return (
-    <div style={{ width: '100%', height: '600px' }}>
+    <div style={{ width: '100%', height: '550px' }}>
       <ReactECharts option={option} style={{ height: '100%', width: '100%' }} />
     </div>
   );

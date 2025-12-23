@@ -28,14 +28,6 @@ const ProportionChartSection = () => {
         return `${item.name}<br/>${item.marker}${item.seriesName}: ${item.value} %`;
       }
     },
-    legend: {
-      data: ['比例'],
-      bottom: '12%', // Match the spacing of the other chart
-      textStyle: {
-        color: '#F0ECE5',
-        fontSize: 12
-      }
-    },
     grid: {
       left: '3%',
       right: '4%',
@@ -94,7 +86,7 @@ const ProportionChartSection = () => {
   };
 
   return (
-    <div style={{ width: '100%', height: '600px' }}>
+    <div style={{ width: '100%', height: '500px' }}>
       <ReactECharts option={option} style={{ height: '100%', width: '100%' }} />
     </div>
   );

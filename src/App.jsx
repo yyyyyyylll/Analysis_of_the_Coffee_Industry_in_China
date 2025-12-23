@@ -11,12 +11,16 @@ import PageThree from './components/PageThree';
 import change1 from './assets/change1.png';
 import pageOneTitle from './assets/part1 素材/1.png';
 import pageOneImage2 from './assets/part1 素材/2.png';
+import pageOneDecoration from './assets/part1 素材/3(左下角下标).png';
+import pageOneDecoration2 from './assets/part1 素材/4.png';
+import pageOneDecoration3 from './assets/part1 素材/5.png';
+import pageOneDecoration6 from './assets/part1 素材/6.png';
 
 // Data for Scrollytelling Sections
 const SCROLLY_SECTIONS = [
   {
     id: 'market-growth',
-    text: "近五年，我国社会消费品零售总额增速多次出现波动，甚至出现了负增长，2024 年的增长率也仅恢复至3.5%。虽然整体消费扩张放缓，咖啡和新式茶饮市场却维持着持续增长。数据显示，新式茶饮市场规模在近五年间由 1840 亿元增长至 超3500亿元，但其在 2021 年经历短期高增长后，近几年增速回落至 5%—15% 区间。相比而言，咖啡行业的增长更快，也更稳定。中国咖啡行业整体市场规模在 2020—2024 年间由 3000 亿元增长至 7893 亿元，预计 2025 年将突破万亿元。在增速上，咖啡行业近几年持续保持超过 26%的增速，这一表现在当前消费环境中尤为亮眼。",
+    text: "近五年，我国社会消费品零售总额增速多次出现波动，甚至出现了负增长。虽然整体消费扩张放缓，咖啡和新式茶饮市场却维持着持续增长。数据显示，新式茶饮市场规模在2024年增长至超3500亿元，但其在2021年经历短期高增长后，近几年增速回落至5%—15%区间。相比而言，咖啡行业的增长更快也更稳定。中国咖啡行业整体市场规模在2024年增长至7893亿元，预计2025年将突破万亿元，且在增速上持续保持超过26%的增速，这一表现在当前消费环境中尤为亮眼。",
     chart: <ChartSection />
   },
   {
@@ -31,7 +35,7 @@ const SCROLLY_SECTIONS = [
   },
   {
     id: 'store-count',
-    text: "当现制咖啡逐渐成为行业增长的核心动力，这一变化也最直观地体现在线下门店的供给端。自 2020 年以来，现制咖啡的门店数量持续增长，由 2020 年的 108,467 家增至 2025 年的 254,730 家，整体数量规模扩大约 2.3 倍。在这一过程中，门店扩张速度保持在10%以上，在2023 年的增长率甚至达到 42.42%，为近几年最高水平。",
+    text: "当现制咖啡逐渐成为行业增长的核心动力，这一变化也最直观地体现在线下门店的供给端。自2020年以来，现制咖啡的门店数量持续增长，2020年至2025年的整体数量规模扩大约2.3倍，门店扩张速度保持在10%以上。",
     chart: <StoreCountChartSection />
   },
   {
@@ -41,14 +45,13 @@ const SCROLLY_SECTIONS = [
   },
   {
     id: 'city',
-    text: "从城市分布来看，咖啡门店的扩张已明显突破一线城市的传统边界。2025 年，三四线及以下城市的咖啡门店占比已接近整体的一半，成为门店数量增长的主要承载空间。这表明咖啡行业正在走向更广泛的城市体系，其消费基础和市场边界持续被拉宽。",
+    text: "从城市分布来看，咖啡门店的扩张已明显突破一线城市的传统边界。2025年，三四线及以下城市的咖啡门店占比已接近整体的一半，成为门店数量增长的主要承载空间，咖啡行业正在走向更广泛的城市体系。",
     chart: <CityPieChartSection />
   }
 ];
 
 function App() {
   const [expanded, setExpanded] = useState(false);
-  const [activeSection, setActiveSection] = useState(0);
   const [isTransitionActive, setIsTransitionActive] = useState(false);
   const [maxRadius, setMaxRadius] = useState(0);
   const [clipCenter, setClipCenter] = useState({ x: 0, y: 0 });
@@ -66,9 +69,6 @@ function App() {
   const currentRadius = useRef(0);
   const clipCenterRef = useRef({ x: 0, y: 0 });
   const requestRef = useRef();
-
-  // Refs for intersection observer
-  const textRefs = useRef([]);
 
   useEffect(() => {
     const updateMaxRadius = () => {
@@ -333,35 +333,7 @@ function App() {
     };
   }, [expanded, maxRadius]);
 
-  // Intersection Observer setup
-  useEffect(() => {
-    if (!expanded) return;
 
-    const observerOptions = {
-      root: contentRef.current, // Use the scrollable container as root
-      rootMargin: '-40% 0px -40% 0px', // Trigger when element is in the middle 20% of screen
-      threshold: 0
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const index = Number(entry.target.dataset.index);
-          setActiveSection(index);
-        }
-      });
-    }, observerOptions);
-
-    textRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => {
-      textRefs.current.forEach((ref) => {
-        if (ref) observer.unobserve(ref);
-      });
-    };
-  }, [expanded]); // Re-run when expanded changes to attach to correct root
 
   // Background Image Canvas Logic
   useEffect(() => {
@@ -475,42 +447,148 @@ function App() {
         </div> */ }
       </div>
 
-      {/* Scrollytelling Container */}
-      <div className="scrolly-container">
-        {/* Left Column: Scrolling Text */}
-        <div className="scrolly-left">
-          {SCROLLY_SECTIONS.map((section, index) => (
-            <div 
-              key={section.id} 
-              className={`scrolly-text-block ${activeSection === index ? 'active' : ''}`}
-              ref={el => textRefs.current[index] = el}
-              data-index={index}
-            >
-              <p className="content-body-text" style={{ 
-                  color: '#f0e7da', 
-                  fontFamily: "'SimSun', 'Songti SC', serif", 
-                  fontSize: '21px', 
-                  lineHeight: '2' 
-              }}>
-                {section.text}
-              </p>
+      {/* Scrollytelling Container - Linear Layout */}
+      <div className="scrolly-container-linear" style={{ display: 'flex', flexDirection: 'column', maxWidth: '1200px', margin: '0 auto', width: '90%' }}>
+        {SCROLLY_SECTIONS.map((section, index) => (
+            <React.Fragment key={section.id}>
+            {section.id === 'province' ? (
+                <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center', 
+                    minHeight: '80vh', 
+                    marginBottom: '4rem',
+                    width: '100%'
+                }}>
+                    <div style={{ width: '100%', marginTop: '-340px' }}>
+                        {section.chart}
+                    </div>
+                </div>
+            ) : (
+            <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                minHeight: '80vh', 
+                marginBottom: '4rem',
+                paddingTop: section.id === 'store-count' ? '60px' : '0',
+                marginTop: section.id === 'city' ? '-150px' : '0'
+            }}>
+                <div style={{ width: '40%', paddingRight: '2rem', boxSizing: 'border-box', position: 'relative' }}>
+                    <p className="content-body-text" style={{ 
+                        color: '#f0e7da', 
+                        fontFamily: "'SimSun', 'Songti SC', serif", 
+                        fontSize: '21px', 
+                        lineHeight: '2',
+                        position: 'relative',
+                        zIndex: 1,
+                        top: section.id === 'proportion' ? '-40px' : (section.id === 'comparison' ? '-30px' : (section.id === 'store-count' ? '-40px' : (section.id === 'city' ? '60px' : '0')))
+                    }}>
+                        {section.text}
+                    </p>
+                    {section.id === 'market-growth' && (
+                        <img 
+                            src={pageOneDecoration} 
+                            alt="Decoration" 
+                            style={{ 
+                                position: 'absolute', 
+                                bottom: '-150px', 
+                                left: '-200px', 
+                                width: '390px', 
+                                height: 'auto',
+                                opacity: 1,
+                                zIndex: 0
+                            }} 
+                        />
+                    )}
+                    {section.id === 'proportion' && (
+                        <img 
+                            src={pageOneDecoration2} 
+                            alt="Decoration" 
+                            style={{ 
+                                position: 'absolute', 
+                                bottom: '-300px', 
+                                right: '-370px', 
+                                width: '800px', 
+                                height: 'auto',
+                                opacity: 1,
+                                zIndex: 0
+                            }}   
+                        />
+                    )}
+                    {section.id === 'comparison' && (
+                        <>
+                            <img 
+                                src={pageOneDecoration} 
+                                alt="Decoration Left" 
+                                style={{ 
+                                    position: 'absolute', 
+                                    bottom: '-300px', 
+                                    left: '-200px', 
+                                    width: '390px', 
+                                    height: 'auto',
+                                    opacity: 1,
+                                    zIndex: 0
+                                }} 
+                            />
+                            <img 
+                                src={pageOneDecoration2} 
+                                alt="Decoration Right" 
+                                style={{ 
+                                    position: 'absolute', 
+                                    bottom: '-220px', 
+                                    right: '-370px', 
+                                    width: '800px', 
+                                    height: 'auto',
+                                    opacity: 1,
+                                    zIndex: 0
+                                }} 
+                            />
+                        </>
+                    )}
+                    {section.id === 'store-count' && (
+                        <img 
+                            src={pageOneDecoration3} 
+                            alt="Decoration" 
+                            style={{ 
+                                position: 'absolute', 
+                                bottom: '-240px', 
+                                left: '-260px', 
+                                width: '800px', 
+                                height: 'auto',
+                                opacity: 1,
+                                zIndex: 0
+                            }} 
+                        />
+                    )}
+                </div>
+                <div style={{ width: '60%' }}>
+                    {section.chart}
+                </div>
             </div>
-          ))}
-        </div>
-
-        {/* Right Column: Sticky Charts */}
-        <div className="scrolly-right">
-          <div className="chart-stack">
-            {SCROLLY_SECTIONS.map((section, index) => (
-              <div 
-                key={section.id} 
-                className={`chart-layer ${activeSection === index ? 'active' : ''}`}
-              >
-                {section.chart}
-              </div>
-            ))}
-          </div>
-        </div>
+            )}
+            {section.id === 'store-count' && (
+                <div style={{ position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '4rem', marginTop: '-240px' }}>
+                    <img src={pageOneDecoration6} alt="Province Distribution Decoration" style={{ width: '115%', height: 'auto' }} />
+                    <div style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -70%)',
+                        width: '87%',
+                        textAlign: 'justify',
+                        color: '#f0e7da', 
+                        fontSize: '21px', 
+                        letterSpacing: '1.5px',
+                        lineHeight: '1.8',
+                        fontFamily: "'SimSun', 'Songti SC', serif",
+                        fontWeight: 'bold'
+                    }}>
+                        从省域分布来看，2025年中国咖啡门店呈现出明显的区域集聚特征，整体集中于东部和南部沿海地区。经济体量大、人口密集、城市化水平较高的省份成为咖啡门店分布的集中区域，其中广东省断层领先，而中西部和部分东北省份门店数量相对较少。
+                    </div>
+                </div>
+            )}
+            </React.Fragment>
+        ))}
       </div>
 
       {/* Section 8: Conclusion Text (Outro) - Sticky Wrapper */}
