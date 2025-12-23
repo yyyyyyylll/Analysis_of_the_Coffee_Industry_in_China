@@ -594,16 +594,38 @@ function App() {
       </div>
 
       {/* Section 8: Conclusion Text (Outro) - Sticky Wrapper */}
-      <div className="outro-sticky-wrapper" style={{ padding: 0 }}>
-        <img 
-            src={pageOneDecoration7} 
-            alt="Transition Decoration" 
-            style={{ 
-                width: '100vw', 
-                height: '100vh', 
-                objectFit: 'cover' 
-            }} 
-        />
+      <div className="outro-sticky-wrapper" style={{ padding: 0, marginTop: '-300px' }}>
+        <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
+            <img 
+                src={pageOneDecoration7} 
+                alt="Transition Decoration" 
+                style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover' 
+                }} 
+            />
+            <div style={{
+                position: 'absolute',
+                top: 'calc(50% + 30px)',
+                right: '10%',
+                transform: 'translateY(-50%)',
+                width: '40%',
+                textAlign: 'justify',
+                color: '#542410', 
+                fontSize: '21px', 
+                lineHeight: '2',
+                fontFamily: "'SimSun', 'Songti SC', serif",
+                fontWeight: 'bold'
+            }}>
+                <p style={{ margin: 0 }}>
+                    综合来看，中国咖啡行业的快速扩张并非偶然，在整体消费增速放缓的背景下，呈现出一条与宏观趋势并不完全同步的增长曲线。在消费环境趋紧的情况下，为什么现制咖啡反而获得了更强的生命力？
+                </p>
+                <p style={{ margin: 0 }}>
+                    对这一现象的解读需要回到消费逻辑本身。基于此，本文从消费降级与情绪经济两个维度，分析它们如何共同推动近年中国咖啡行业的发展。
+                </p>
+            </div>
+        </div>
       </div>
 
       {/* Section 9: Cover Image (bg1.png) - Slides over */}
