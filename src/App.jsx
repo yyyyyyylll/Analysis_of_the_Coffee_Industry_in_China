@@ -9,7 +9,6 @@ import CityPieChartSection from './components/CityPieChartSection';
 import PageTwo from './components/PageTwo';
 import PageThree from './components/PageThree';
 import coffeeCup from './assets/coffee-cup.png';
-import title1 from './assets/title1.png';
 
 // Data for Scrollytelling Sections
 const SCROLLY_SECTIONS = [
@@ -388,11 +387,8 @@ function App() {
     <div className="main-scroll-container">
       {/* Section 1: Book Image (Intro) - Normal Scroll */}
       <div className="intro-section-wrapper" style={{ minHeight: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '0', marginBottom: '-4rem' }}>
-          <img src={title1} alt="Main Title" style={{ width: '45%', height: 'auto' }} />
-        </div>
         
-        <div className="content-container intro-section" style={{ minHeight: 'auto', paddingTop: '0', marginTop: '-2rem' }}>
+        <div className="content-container intro-section" style={{ minHeight: 'auto' }}>
           <div className="content-image-wrapper">
             <img src="/src/assets/book.png" alt="Coffee History Book" className="content-image" />
           </div>

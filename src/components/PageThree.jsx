@@ -44,7 +44,7 @@ const PageThree = () => {
   const chartColStyle = {
     width: '48%',
     height: '400px',
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    backgroundColor: 'transparent',
     borderRadius: '12px',
     padding: '10px'
   };

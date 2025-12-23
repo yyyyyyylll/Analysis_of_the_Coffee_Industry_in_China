@@ -1151,7 +1151,7 @@ export const getConsumptionScenesOption = () => {
   const axisMax = Math.ceil(maxVal / 5) * 5;
 
   return {
-    backgroundColor: '#ffffff',
+    backgroundColor: 'transparent',
     title: {
       text: '消费者咖啡饮用场景分布',
       left: 'center',

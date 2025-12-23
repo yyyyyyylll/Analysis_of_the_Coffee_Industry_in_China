@@ -71,7 +71,7 @@ const StickyWordCloudSection = ({ items }) => {
     height: '400px', // Fixed height for chart area
     position: 'sticky',
     top: 'calc(50vh - 200px)', // Center vertically in viewport
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    backgroundColor: 'transparent',
     borderRadius: '12px',
     padding: '10px',
     overflow: 'hidden' // Hide overflowing transitions
