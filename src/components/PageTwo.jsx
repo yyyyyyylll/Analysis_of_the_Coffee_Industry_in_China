@@ -13,6 +13,7 @@ import image10 from '../assets/part2-1素材/10.png';
 import imagePart2_2 from '../assets/part2-2素材/2.png';
 import decoration3 from '../assets/part2-2素材/3.png';
 import imagePart2_2_4 from '../assets/part2-2素材/4.png';
+import paperBg from '../assets/part2-2素材/5.png';
 import PriceWarTimeline from './PriceWarTimeline';
 import {
   getLuckinRevenueOption,
@@ -290,14 +291,15 @@ const ResponsiveLuckinCityChart = () => {
 };
 
 // Helper Component for Full Width Text
-const FullWidthText = ({ children }) => (
+const FullWidthText = ({ children, style }) => (
   <div style={{ 
     width: '100%', 
     marginBottom: '60px', 
     fontSize: '21px', 
     lineHeight: '42px', 
     color: '#4B3621',
-    textAlign: 'justify'
+    textAlign: 'justify',
+    ...style
   }}>
     {children}
   </div>
@@ -889,7 +891,8 @@ const PageTwo = ({ onCupRef, hideCup = false }) => {
         marginLeft: 'calc(50% - 50vw)',
         overflow: 'hidden',
         lineHeight: 0,
-        marginBottom: '2em' // Add some space before the next section
+        marginTop: '-80px',
+        // marginBottom removed to avoid gap
       }}>
         <img 
           src={imagePart2_2_4} 
@@ -902,91 +905,119 @@ const PageTwo = ({ onCupRef, hideCup = false }) => {
         />
       </div>
 
-      {/* Block 5: Intro to Wordcloud */}
-      <FullWidthText>
-        <p style={{ fontWeight: 'bold', marginBottom: '1em' }}>
-          同时，价格理性的提升，也催生了新的消费文化。在社交媒体上，随处可见年轻消费者自发形成的有关消费平价咖啡的讨论。
-        </p>
-      </FullWidthText>
-
-      {/* Scrolly Group 4: Wordclouds */}
-      <ScrollyGroup items={[
-        {
-          text: (
-            <p>
-              围绕瑞幸的消费讨论高度集中在价格与省钱逻辑之上。“9.9”“便宜”“性价比”“优惠”“折扣”“薅羊毛”“划算”“平替”“省钱”“预算”等词汇占据核心位置，远高于对口感、风味或品质的描述。这表明消费者谈论瑞幸时，首先关注的并非产品本身，而是价格是否足够低、是否值得买。与此同时，“日常”“通勤”“打工人”“学生”“买得起”等高频词，显示瑞幸已被嵌入一种以控制支出为前提的日常消费场景之中。整体来看，这张词云反映的并不是消费者减少咖啡消费，而是在消费降级语境下，消费者主动通过比价、囤券和选择低价品牌，将咖啡转化为一种可被精打细算地持续消费的日常支出。
+      {/* Colored Background Section for the Rest of the Content */}
+      <div style={{
+        width: '100vw',
+        marginLeft: 'calc(50% - 50vw)',
+        backgroundColor: '#e4c7c0',
+        paddingTop: '60px',
+        paddingBottom: '80px',
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: '-580px'
+      }}>
+        <div style={{ width: '85%', maxWidth: '1200px' }}>
+          
+          {/* Block 5: Intro to Wordcloud */}
+          <FullWidthText>
+            <p style={{ fontWeight: 'bold', marginBottom: '1em', fontSize: '21px', lineHeight: '42px' }}>
+              同时，价格理性的提升，也催生了新的消费文化。在社交媒体上，随处可见年轻消费者自发形成的有关消费平价咖啡的讨论。
             </p>
-          ),
-          chart: <ReactECharts option={getLuckinWordCloudOption()} style={{ height: '100%', width: '100%' }} />
-        },
-        {
-          text: (
-            <p>
-              相较于瑞幸，星巴克的词云呈现出一种更矛盾、也更拉扯的消费叙事。一方面，价格相关词汇同样占据核心位置，“价格”“性价比”“优惠”“折扣”等高频出现，说明在消费降级语境下，星巴克同样被纳入了比价和精打细算的讨论框架之中，消费者不再默认接受其原有定价，而是频繁计算值不值、贵不贵、有没有更便宜的买法。另一方面，与瑞幸相比，星巴克词云中“贵”“太贵”“不太值”“值不值”“价格差”等评价性和犹疑性词汇更加突出，显示消费者对其价格的接受度存在更强分化。与瑞幸以低价日常消费为主的明确定位不同，星巴克在消费降级语境下更多被当作需要权衡、对比甚至寻找平替的对象，其品牌溢价正在被反复检验。
+          </FullWidthText>
+
+          {/* Extracted Luckin Text */}
+          <FullWidthText>
+            <p style={{ fontSize: '21px', lineHeight: '42px' }}>
+              围绕瑞幸的消费讨论高度集中在价格与省钱逻辑之上。“9.9”“便宜”“性价比”“优惠”“折扣”“薅羊毛”“划算”“省钱”等词汇占据核心位置，远高于对口感、风味或品质的描述。这表明消费者谈论瑞幸时，往往将其视为一种极致性价比的符号，“好喝”的前提是“便宜”，一旦价格优势不再，其品牌吸引力可能面临挑战。
             </p>
-          ),
-          chart: <ReactECharts option={getStarbucksWordCloudOption()} style={{ height: '100%', width: '100%' }} />
-        }
-      ]} />
+          </FullWidthText>
 
-      {/* Block 6: Conclusion 2 */}
-      <FullWidthText>
-        <div style={{ backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '8px' }}>
-          <p>
-            总体来看，消费降级并未削弱咖啡需求，而是重塑了消费者的消费方式。随着价格敏感度上升，消费者通过压低单杯支出、提高饮用频率，将咖啡重新纳入可负担的日常开销之中。价格理性取代品牌忠诚，性价比成为核心判断标准，低价现制咖啡由此获得稳定需求基础，而中高价咖啡则不断接受“值不值”的现实检验。这种以精打细算为特征的消费转向，构成了价格战能够持续的重要需求前提。
-          </p>
-        </div>
-      </FullWidthText>
+          {/* Charts Side-by-Side */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginBottom: '60px' }}>
+            {/* Luckin Chart */}
+            <div style={{ width: '48%', height: '500px' }}>
+              <ReactECharts option={getLuckinWordCloudOption()} style={{ height: '100%', width: '100%' }} />
+            </div>
+            {/* Starbucks Chart */}
+            <div style={{ width: '48%', height: '500px' }}>
+              <ReactECharts option={getStarbucksWordCloudOption()} style={{ height: '100%', width: '100%' }} />
+            </div>
+          </div>
 
-      {/* Block 7: Final Conclusion / Transition */}
-      <FullWidthText>
-        <p style={{ 
-          fontSize: '24px', 
-          lineHeight: '48px', 
-          fontWeight: 'bold', 
-          textAlign: 'center'
-        }}>
-          消费者的价格理性，为价格战的持续提供了可能，但价格战得以长期维持，更离不开企业在成本控制与供应链端的深耕。没有供给端的成本压缩与效率提升，低价策略便无法成为常态化的商业模式。因此，理解这场价格战的本质，必须深入到供给侧，探究企业如何在压低价格的同时，依然维持着庞大的商业版图。
-        </p>
-      </FullWidthText>
+          {/* Extracted Starbucks Text */}
+          <FullWidthText style={{ marginTop: '-50px' }}>
+            <p style={{ fontSize: '21px', lineHeight: '42px' }}>
+              相较于瑞幸，星巴克的词云呈现出一种更矛盾、也更拉扯的消费叙事。一方面，“价格”“性价比”“优惠”等价格相关词汇同样占据核心位置，说明在消费降级语境下，星巴克同样被纳入了比价和精打细算的讨论框架之中，消费者不再默认接受其原有定价，而是频繁计算贵不贵、有没有更便宜的买法。另一方面，与瑞幸相比，星巴克词云中“贵”“太贵”“不太值”“值不值”等评价性和犹疑性词汇更加突出，显示消费者对其价格的接受度存在更强分化。区别于瑞幸，星巴克更多被当作需要对比权衡，甚至寻找平替的对象，其品牌溢价的合理性正在被反复检验。
+            </p>
+          </FullWidthText>
 
-      {/* Transition Trigger Element */}
-      <div 
-        className="transition-trigger-container" 
-        style={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center', 
-          marginTop: '80px',
-          marginBottom: '30vh',
-          cursor: 'pointer'
-        }}
-      >
-        <div 
-          ref={onCupRef}
-          className="coffee-cup-trigger"
-          style={{
-            position: 'relative',
-            width: '200px',
-            height: '200px',
+          {/* Block 6: Conclusion 2 */}
+          <div style={{
+            width: 'calc(100vw - 100px)',
+            marginLeft: 'calc(50% - 50vw + 100px)',
+            backgroundImage: `url(${paperBg})`,
+            backgroundSize: '100% 100%',
+            backgroundRepeat: 'no-repeat',
+            padding: '220px 0',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            opacity: opacity,
-            transition: 'opacity 0.2s',
-            backgroundColor: 'transparent'
-          }}
-        >
-          <img 
-            src={change1} 
-            alt="Next Chapter" 
+            marginBottom: '30px',
+            marginTop: '-200px'
+          }}>
+            <div style={{ maxWidth: '1200px', width: '85%', padding: '0 40px' }}>
+              <p style={{
+                 fontSize: '21px',
+                 lineHeight: '42px',
+                 margin: 0,
+                 color: '#542410',
+                 marginLeft: '160px',
+                 transform: 'translateY(40px)'
+              }}>
+                总体来看，消费降级并未削弱咖啡需求，而是重塑了消费者的消费方式。随着价格敏感度上升，消费者通过压低单杯支出、提高饮用频率，将咖啡纳入可负担的日常开销之中。价格理性取代了品牌忠诚，性价比成为核心判断标准，这种以精打细算为特征的消费转向，构成了价格战能够持续的重要需求前提。
+              </p>
+            </div>
+          </div>
+
+          {/* Transition Trigger Element */}
+          <div 
+            className="transition-trigger-container" 
             style={{ 
-              width: '100%', 
-              height: 'auto',
-              objectFit: 'contain'
-            }} 
-          />
-          {/* Pulse effect or hint could go here */}
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              marginTop: '0px',
+              marginBottom: '30vh',
+              cursor: 'pointer'
+            }}
+          >
+            <div 
+              ref={onCupRef}
+              className="coffee-cup-trigger"
+              style={{
+                position: 'relative',
+                width: '500px',
+                height: '500px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                opacity: opacity,
+                transition: 'opacity 0.2s',
+                backgroundColor: 'transparent'
+              }}
+            >
+              <img 
+                src={change1} 
+                alt="Next Chapter" 
+                style={{ 
+                  width: '100%', 
+                  height: 'auto',
+                  objectFit: 'contain'
+                }} 
+              />
+              {/* Pulse effect or hint could go here */}
+            </div>
+          </div>
         </div>
       </div>
     </div>

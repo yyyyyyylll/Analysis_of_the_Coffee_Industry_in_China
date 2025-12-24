@@ -2,6 +2,8 @@ import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import StickyWordCloudSection from './StickyWordCloudSection';
 import CollabCardStack from './CollabCardStack';
+import coverImg from '../assets/数据新闻-part3素材/2.png';
+import titleImg from '../assets/数据新闻-part3素材/3.png';
 // import CollabFrequencyChart from './CollabFrequencyChart';
 import {
   getLuckinOfficialWordCloudOption,
@@ -60,41 +62,105 @@ const PageThree = () => {
     <div className="page-three-container" style={{ 
       width: '100%', 
       minHeight: '100vh', 
-      backgroundColor: '#F0A861', // Orange background
-      padding: '40px 0',
+      backgroundColor: '#f0d4b5', // Light beige background
+      padding: '0',
       boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center'
     }}>
+      {/* Cover Image */}
+      <div style={{ 
+        width: '100vw', 
+        overflow: 'hidden' 
+      }}>
+        <img 
+          src={coverImg} 
+          style={{ 
+            width: '100%', 
+            height: 'auto',
+            display: 'block'
+          }} 
+          alt="Page Three Cover" 
+        />
+      </div>
+
       <div className="page-three-content" style={{ 
         maxWidth: '1200px', 
         margin: '0 auto', 
         width: '85%',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: '40px 0'
       }}>
-        <h2 style={{ 
-          fontSize: '36px', 
-          fontWeight: 'bold', 
-          marginTop: '60px', 
-          marginBottom: '40px', 
-          textAlign: 'center',
-          color: '#000000'
+        {/* Title Image with Overlay Text */}
+        <div style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '60px',
+          marginBottom: '40px',
+          position: 'relative' // Enable absolute positioning for children
         }}>
-          三、咖啡背后的情绪经济
-        </h2>
+          <img 
+            src={titleImg} 
+            style={{ 
+              width: '145%', 
+              maxWidth: 'none',
+              height: 'auto',
+              marginLeft: '0%'
+            }} 
+            alt="咖啡背后的情绪经济" 
+          />
+          
+          {/* Text 1 Overlay */}
+          <div style={{
+            position: 'absolute',
+            top: '35%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '110%', // Match image width scale roughly or keep it constrained
+            maxWidth: '1200px', // Optional constraint
+            padding: '0 40px',
+            boxSizing: 'border-box',
+            textAlign: 'justify',
+            color: '#542410', // Dark brown color
+            fontSize: '21px',
+            lineHeight: '42px',
+            fontFamily: '"SimSun", "Songti SC", serif'
+          }}>
+            <p style={{ margin: 0, marginLeft: '20px' }}>
+              在“消费降级”的大背景下，咖啡逐渐被赋予新的角色，转变为一种承载情绪、连接文化、激活社交的载体。
+            </p>
+          </div>
 
-        <p style={fullWidthTextStyle}>
-          在“消费降级”的大背景下，咖啡逐渐被赋予新的角色，转变为一种承载情绪、连接文化、激活社交的载体。
-        </p>
+          {/* Text 2 Overlay */}
+          <div style={{
+            position: 'absolute',
+            top: '55%',
+            left: 'calc(38% - 55px)', // Adjusted: Moved left by 5px from -50px to -55px
+            width: 'calc(65% - 115px)', // Adjusted: Right moved right 20px -> Width increases by 25px (net -115px)
+            textAlign: 'justify',
+            color: '#542410', // Dark brown color
+            fontSize: '21px',
+            lineHeight: '42px',
+            fontFamily: '"SimSun", "Songti SC", serif'
+          }}>
+             <p style={{ margin: 0 }}>
+              随着现制咖啡价格持续下探，品牌在营销中不再只强调风味或配方，而是通过IP联名、限定活动等方式，为产品叠加文化与情感意涵，塑造更强的品牌吸引力与用户黏性。
+            </p>
+          </div>
+        </div>
 
-        {/* Section 1 */}
-        <div style={sectionTitleStyle}>1. 情绪价值成为新的品宣策略</div>
-        
-        <div style={{...fullWidthTextStyle, marginBottom: '20px'}}>
-            随着现制咖啡价格持续下探，品牌在营销中不再只强调风味或配方，而是通过IP联名、限定活动等方式，为产品叠加文化与情感意涵，塑造更强的品牌吸引力与用户黏性。<br/><br/>
+        <div style={{
+            ...fullWidthTextStyle, 
+            marginBottom: '20px',
+            fontSize: '21px',
+            lineHeight: '42px',
+            padding: '0 45px',
+            boxSizing: 'border-box'
+        }}>
             从星巴克与瑞幸这两家代表性企业来看，联名与限定活动正从偶发性的营销事件，转变为常态化的产品策略。数据显示，星巴克自2022年起明显提高了联名与限定活动的频率。瑞幸的节奏则更为密集，近四年间，其联名活动频率更高，截至2025年11月，瑞幸本年度联名及限定次数达47次，月均超过4次。联名已不再是“试水”，而成为可复制、可预期的上新方式。
         </div>
 
