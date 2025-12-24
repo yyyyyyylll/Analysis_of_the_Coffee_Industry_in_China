@@ -2,8 +2,10 @@ import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import StickyWordCloudSection from './StickyWordCloudSection';
 import CollabCardStack from './CollabCardStack';
+import TimelineChart from './TimelineChart';
 import coverImg from '../assets/数据新闻-part3素材/2.png';
 import titleImg from '../assets/数据新闻-part3素材/3.png';
+import section2Img from '../assets/数据新闻-part3素材/5.png';
 // import CollabFrequencyChart from './CollabFrequencyChart';
 import {
   getLuckinOfficialWordCloudOption,
@@ -15,10 +17,10 @@ import {
 
 const PageThree = () => {
   const commonTextStyle = {
-    color: '#000000',
+    color: '#542410',
     fontFamily: '"SimSun", "Songti SC", serif',
-    fontSize: '18px',
-    lineHeight: '1.8',
+    fontSize: '21px',
+    lineHeight: '42px',
     textAlign: 'justify'
   };
 
@@ -55,6 +57,8 @@ const PageThree = () => {
   const fullWidthTextStyle = {
     width: '100%',
     marginBottom: '40px',
+    padding: '0 45px',
+    boxSizing: 'border-box',
     ...commonTextStyle
   };
 
@@ -159,53 +163,93 @@ const PageThree = () => {
             fontSize: '21px',
             lineHeight: '42px',
             padding: '0 45px',
-            boxSizing: 'border-box'
+            boxSizing: 'border-box',
+            marginTop: '42px',
+            color: '#542410'
         }}>
             从星巴克与瑞幸这两家代表性企业来看，联名与限定活动正从偶发性的营销事件，转变为常态化的产品策略。数据显示，星巴克自2022年起明显提高了联名与限定活动的频率。瑞幸的节奏则更为密集，近四年间，其联名活动频率更高，截至2025年11月，瑞幸本年度联名及限定次数达47次，月均超过4次。联名已不再是“试水”，而成为可复制、可预期的上新方式。
         </div>
 
-        <CollabCardStack />
-
-        {/* Placeholder for future chart */}
-        <div style={{
-            width: '100%',
-            height: '400px',
-            // border: '2px dashed #ccc', // Optional: visualization of placeholder
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '40px',
-            color: '#888'
-        }}>
-            {/* 待设计图表区域 */}
+        {/* Timeline Chart Section */}
+        <div style={{ width: '100%', marginBottom: '40px' }}>
+            <TimelineChart />
         </div>
 
-        <StickyWordCloudSection 
-          items={[
-            {
-              text: '这种策略的转变，也体现在品牌的内容传播中。从两者的小红书官方账号来看，瑞幸的传播重点落在“联名”、“新品”、“打卡”、“纸袋”等，与其快速上新、主打性价比的经营模式相契合。',
-              chartOption: getLuckinOfficialWordCloudOption()
-            },
-            {
-              text: '星巴克则更倾向于使用“快乐”、“一起”、“分享”等情感向词汇，呼应其强调社交互动与休闲体验的定位。',
-              chartOption: getStarbucksOfficialWordCloudOption()
-            }
-          ]} 
-        />
+        <div style={{
+            ...fullWidthTextStyle, 
+            marginBottom: '40px',
+            fontSize: '21px',
+            lineHeight: '42px',
+            color: '#542410',
+            padding: '0 45px',
+            boxSizing: 'border-box'
+        }}>
+            这种策略的转变，也体现在品牌的内容传播中。从两者的小红书官方账号来看，瑞幸的传播重点落在“联名”、“新品”、“打卡”、“纸袋”等，与其快速上新、主打性价比的经营模式相契合。星巴克则更倾向于使用“快乐”、“一起”、“分享”等情感向词汇，呼应其强调社交互动与休闲体验的定位。
+        </div>
 
-        <p style={fullWidthTextStyle}>
+        <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+            height: '400px',
+            marginBottom: '40px'
+        }}>
+            <div style={{ width: '48%', height: '100%' }}>
+               <ReactECharts option={getLuckinOfficialWordCloudOption()} style={{ width: '100%', height: '100%' }} />
+            </div>
+            <div style={{ width: '48%', height: '100%' }}>
+               <ReactECharts option={getStarbucksOfficialWordCloudOption()} style={{ width: '100%', height: '100%' }} />
+            </div>
+        </div>
+
+        <p style={{
+          ...fullWidthTextStyle,
+          fontSize: '21px',
+          lineHeight: '42px',
+          color: '#542410',
+          padding: '0 45px',
+          boxSizing: 'border-box'
+        }}>
           换言之，咖啡品牌正在通过联名营销与情绪化传播，将一杯咖啡包装为可打卡、可分享、可讨论的社交话题。在价格战日趋白热化的市场中，情绪价值正成为品牌差异化竞争的关键抓手。
         </p>
 
         {/* Section 2 */}
-        <div style={sectionTitleStyle}>2. 联名咖啡成为低门槛的消费者情绪补给</div>
+        <div style={{ 
+            width: '120%', 
+            marginLeft: '0%', 
+            marginTop: '-160px',
+            marginBottom: '40px',
+            position: 'relative'
+        }}>
+            <img 
+                src={section2Img} 
+                style={{ width: '100%', height: 'auto', display: 'block' }} 
+                alt="联名咖啡成为低门槛的消费者情绪补给" 
+            />
+            
+            {/* Text Overlay for Section 2 */}
+            <div style={{
+                position: 'absolute',
+                top: 'calc(25% + 100px)', // Adjusted: Moved down by 100px
+                left: '10%', // Adjust based on visual needs
+                width: '60%',
+                color: '#f0e7da', // Updated color
+                fontSize: '24px', // Updated font size
+                lineHeight: '48px', // Updated line height
+                fontFamily: '"SimSun", "Songti SC", serif',
+                textAlign: 'justify',
+                paddingRight: '50px', // Added right padding
+                boxSizing: 'border-box'
+            }}>
+                当代都市生活中，咖啡已经超越提神饮料的功能，逐步演变为市民调节情绪、表达自我的一种日常仪式。无论是在通勤途中或是休闲时刻，越来越多人习惯用一杯咖啡来“续命”，也为这一寻常动作注入了情感意义。
+            </div>
+        </div>
 
-        <div style={rowStyle}>
-          <div style={textColStyle}>
-            当代都市生活中，咖啡已经超越提神饮料的功能，逐步演变为市民调节情绪、表达自我的一种日常仪式。无论是在通勤途中或是休闲时刻，越来越多人习惯用一杯咖啡来“续命”，也为这一寻常动作注入了情感意义。<br/><br/>
+        <div style={{ ...rowStyle, marginTop: '60px' }}>
+          <div style={{ ...textColStyle, width: '40%', paddingLeft: '45px', boxSizing: 'border-box' }}>
             消费场景的数据印证了这一趋势。2025年，近半数（47.89%）消费者选择在学习或工作时饮用咖啡，另有45.2%的人在休闲放松时将咖啡作为精神补给。相比之下，传统印象中与商务、会议相关的场景并不突出。这说明咖啡的消费动机日益个人化、情绪化。
           </div>
-          <div style={chartColStyle}>
+          <div style={{ ...chartColStyle, height: '530px', width: '60%', boxSizing: 'border-box' }}>
             <ReactECharts option={getConsumptionScenesOption()} style={{ width: '100%', height: '100%' }} />
           </div>
         </div>
@@ -214,6 +258,10 @@ const PageThree = () => {
           这种消费心态的转变，也深刻影响着年轻人的社交行为与自我表达。越来越多的消费者主动参与品牌联名打卡、收集限定周边、在社交平台分享专属搭配。<br/><br/>
           分析微博等社交平台的热度数据可见联名活动的爆发力，瑞幸与茅台的联名在2023年创造超3.8亿阅读量，与《猫和老鼠》的联名在2024年收获近2.5亿阅读；星巴克与MBTI、费翔等IP或人物的合作同样引发广泛讨论。这些联名之所以能吸引超高热度，正是因为它们触动了消费者的情感记忆与文化认同，让咖啡超越个人消费行为，成为人们记录情怀、表达身份、寻求共鸣的生活仪式。
         </p>
+
+        <div style={{ width: '100%', marginBottom: '40px', marginTop: '-150px' }}>
+          <CollabCardStack />
+        </div>
 
         <StickyWordCloudSection 
           items={[

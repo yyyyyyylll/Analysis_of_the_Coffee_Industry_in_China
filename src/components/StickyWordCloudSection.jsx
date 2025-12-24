@@ -54,10 +54,10 @@ const StickyWordCloudSection = ({ items }) => {
   };
   
   const textBlockStyle = {
-    color: '#000000',
+    color: '#542410',
     fontFamily: '"SimSun", "Songti SC", serif',
-    fontSize: '18px',
-    lineHeight: '1.8',
+    fontSize: '21px',
+    lineHeight: '42px',
     textAlign: 'justify',
     minHeight: '80vh', // Ensure significant scroll distance for each item
     display: 'flex',
