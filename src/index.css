@@ -719,6 +719,20 @@ html, body {
   opacity: 0.9;
 }
 
+/* Bottom Right Decoration */
+.bottom-right-decoration {
+  position: absolute;
+  bottom: 70px;
+  right: 100px;
+  width: auto; /* Allow natural width */
+  max-width: 182px; /* Increased by 1.1x from 165px */
+  height: auto;
+  z-index: 10;
+  pointer-events: none;
+  mix-blend-mode: multiply; /* Consistent with top-left */
+  opacity: 1;
+}
+
 .hero-subtitle-wrapper {
   position: absolute;
   left: 50%;
@@ -739,7 +753,7 @@ html, body {
 
 .subtitle-decoration-326 {
   position: absolute;
-  top: 54px;
+  top: 44px;
   right: -45px;
   width: 140px; /* Adjust size relative to the 2.1x scaled container */
   height: auto;

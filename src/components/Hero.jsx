@@ -5,12 +5,14 @@ import leftImg from '../assets/part0_asset/324.png';
 import rightImg from '../assets/part0_asset/323.png';
 import topLeftDeco from '../assets/part0_asset/325.png';
 import deco326 from '../assets/part0_asset/326.png';
+import bottomRightDeco from '../assets/part0_asset/1.png';
 // Slider is no longer used here, it's replaced by the main content transition in App.jsx
 
 export default function Hero() {
   return (
     <section className="hero">
       <img src={topLeftDeco} alt="Decoration Top Left" className="top-left-decoration" />
+      <img src={bottomRightDeco} alt="Decoration Bottom Right" className="bottom-right-decoration" />
       <div className="watermark-grid">
         {/* Optional: Add a grid background if time permits */}
       </div>

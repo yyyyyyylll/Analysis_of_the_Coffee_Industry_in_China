@@ -60,7 +60,7 @@ const PageFour = () => {
           </div>
         </div>
         
-        <div style={{ width: '88%', marginTop: '-300px', marginBottom: '30px', position: 'relative', zIndex: 3 }}>
+        <div style={{ width: '88%', marginTop: '-300px', marginBottom: '-70px', position: 'relative', zIndex: 3 }}>
           <img src={img6} alt="Part 4 Illustration 3" style={{ width: '100%', height: 'auto', display: 'block' }} />
           <div style={{
             position: 'absolute',
