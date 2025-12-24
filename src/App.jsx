@@ -62,6 +62,7 @@ function App() {
   const canvasRef = useRef(null);
   const lastTouchY = useRef(0);
   const cupRef = useRef(null);
+  const floatingCupRef = useRef(null);
   const pageThreeRef = useRef(null);
   
   // Refs for animation loop
@@ -103,14 +104,26 @@ function App() {
           pageThreeRef.current.style.overflowY = isFullyExpanded ? 'auto' : 'hidden';
       }
 
-      // Move the cup up as the circle grows
-      if (cupRef.current) {
+      // Sync Floating Cup Logic
+      if (cupRef.current && floatingCupRef.current) {
           if (r > 0) {
-              // Cup moves up by the radius amount to stay on the edge
-              // Assuming clip center (x,y) matches cup center initially
-              cupRef.current.style.transform = `translateY(-${r}px)`;
+              // Hide original cup
+              cupRef.current.style.opacity = '0';
+              
+              // Get static position of original cup
+              const rect = cupRef.current.getBoundingClientRect();
+              
+              // Show and position floating cup
+              floatingCupRef.current.style.display = 'flex';
+              floatingCupRef.current.style.width = `${rect.width}px`;
+              floatingCupRef.current.style.height = `${rect.height}px`;
+              floatingCupRef.current.style.left = `${rect.left}px`;
+              // Move up by r relative to original position
+              floatingCupRef.current.style.top = `${rect.top - r}px`;
           } else {
-              cupRef.current.style.transform = 'none';
+              // Reset
+              cupRef.current.style.opacity = '1';
+              floatingCupRef.current.style.display = 'none';
           }
       }
 
@@ -671,6 +684,30 @@ function App() {
            {MainContent}
         </div>
       </section>
+
+      {/* Floating Cup Transition Layer */}
+      <div 
+        ref={floatingCupRef}
+        style={{
+          position: 'fixed',
+          zIndex: 1000,
+          display: 'none', 
+          justifyContent: 'center',
+          alignItems: 'center',
+          pointerEvents: 'none',
+          backgroundColor: 'transparent'
+        }}
+      >
+        <img 
+          src={change1} 
+          alt="Floating Cup" 
+          style={{ 
+            width: '100%', 
+            height: 'auto',
+            objectFit: 'contain'
+          }} 
+        />
+      </div>
 
       {/* Page Three Overlay */}
       <div 

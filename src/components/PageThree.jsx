@@ -5,6 +5,7 @@ import TimelineChart from './TimelineChart';
 import coverImg from '../assets/数据新闻-part3素材/2.png';
 import titleImg from '../assets/数据新闻-part3素材/3.png';
 import section2Img from '../assets/数据新闻-part3素材/5.png';
+import conclusionImg from '../assets/数据新闻-part3素材/6.png';
 // import CollabFrequencyChart from './CollabFrequencyChart';
 import {
   getLuckinOfficialWordCloudOption,
@@ -294,9 +295,41 @@ const PageThree = () => {
             </div>
         </div>
 
-        <p style={fullWidthTextStyle}>
-          情绪经济的成功，恰因它精准切中了现代生活的一种普遍心态：人们渴望在日常的微小消费中，获得即时的慰藉与确幸。用一杯平价的咖啡，换取片刻的情绪舒缓和无需言说的社交默契。这种广泛而真切的心理共鸣，让咖啡持续融入更多的生活场景与消费周期之中，为品牌创造了可持续的情感连接，进而支撑了整个市场的渗透与扩容。
-        </p>
+        <div style={{
+          width: '110%',
+          position: 'relative',
+          marginBottom: '40px',
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '40px'
+        }}>
+          <img 
+            src={conclusionImg} 
+            style={{ 
+              width: '100%', 
+              height: 'auto',
+              display: 'block'
+            }} 
+            alt="Conclusion Background" 
+          />
+          <div style={{
+            position: 'absolute',
+            top: '48%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '65%', 
+            height: 'auto',
+            textAlign: 'justify',
+            color: '#542410',
+            fontSize: '24px',
+            lineHeight: '48px',
+            fontFamily: '"SimSun", "Songti SC", serif',
+            padding: '0 20px',
+            boxSizing: 'border-box'
+          }}>
+            情绪经济的成功，恰因它精准切中了现代生活的一种普遍心态：人们渴望在日常的微小消费中，获得即时的慰藉与确幸。用一杯平价的咖啡，换取片刻的情绪舒缓和无需言说的社交默契。这种广泛而真切的心理共鸣，让咖啡持续融入更多的生活场景与消费周期之中，为品牌创造了可持续的情感连接，进而支撑了整个市场的渗透与扩容。
+          </div>
+        </div>
       </div>
     </div>
   );
