@@ -63,7 +63,6 @@ function App() {
   const lastTouchY = useRef(0);
   const cupRef = useRef(null);
   const pageThreeRef = useRef(null);
-  const floatingCupRef = useRef(null);
   
   // Refs for animation loop
   const targetRadius = useRef(0);
@@ -104,14 +103,14 @@ function App() {
           pageThreeRef.current.style.overflowY = isFullyExpanded ? 'auto' : 'hidden';
       }
 
-      if (floatingCupRef.current) {
+      // Move the cup up as the circle grows
+      if (cupRef.current) {
           if (r > 0) {
-              floatingCupRef.current.style.display = 'flex';
-              floatingCupRef.current.style.top = `${y - r}px`;
-              floatingCupRef.current.style.left = `${x}px`;
-              floatingCupRef.current.style.opacity = Math.max(0, 1 - (r / (maxRadius * 0.8)));
+              // Cup moves up by the radius amount to stay on the edge
+              // Assuming clip center (x,y) matches cup center initially
+              cupRef.current.style.transform = `translateY(-${r}px)`;
           } else {
-              floatingCupRef.current.style.display = 'none';
+              cupRef.current.style.transform = 'none';
           }
       }
 
@@ -167,18 +166,10 @@ function App() {
 
         // Initialize clip center if starting transition
         if (targetRadius.current <= 0 && isCupReady && e.deltaY > 0) {
-             if (cupRef.current) {
-               const rect = cupRef.current.getBoundingClientRect();
-               const x = rect.left + rect.width / 2;
-               const y = rect.top + rect.height / 2;
-               setClipCenter({ x, y });
-               clipCenterRef.current = { x, y };
-             } else {
-               const cx = window.innerWidth / 2;
-               const cy = window.innerHeight / 2;
-               setClipCenter({ x: cx, y: cy });
-               clipCenterRef.current = { x: cx, y: cy };
-             }
+             const cx = window.innerWidth / 2;
+             const cy = window.innerHeight / 2;
+             setClipCenter({ x: cx, y: cy });
+             clipCenterRef.current = { x: cx, y: cy };
         }
 
         const isTransitioning = targetRadius.current > 0 && targetRadius.current < maxRadius;
@@ -242,18 +233,10 @@ function App() {
 
          // Initialize center if starting
          if (targetRadius.current <= 0 && isCupReady && deltaY > 0) {
-            if (cupRef.current) {
-                const rect = cupRef.current.getBoundingClientRect();
-                const x = rect.left + rect.width / 2;
-                const y = rect.top + rect.height / 2;
-                setClipCenter({ x, y });
-                clipCenterRef.current = { x, y };
-            } else {
-                const cx = window.innerWidth / 2;
-                const cy = window.innerHeight / 2;
-                setClipCenter({ x: cx, y: cy });
-                clipCenterRef.current = { x: cx, y: cy };
-            }
+            const cx = window.innerWidth / 2;
+            const cy = window.innerHeight / 2;
+            setClipCenter({ x: cx, y: cy });
+            clipCenterRef.current = { x: cx, y: cy };
          }
 
          const isTransitioning = targetRadius.current > 0 && targetRadius.current < maxRadius;
@@ -710,37 +693,6 @@ function App() {
       >
         <PageThree />
       </div>
-
-      {/* Floating Cup Transition Element */}
-      <div 
-            ref={floatingCupRef}
-            className="floating-cup-transition"
-            style={{
-                position: 'fixed',
-                left: 0,
-                top: 0,
-                width: '200px',
-                height: '200px',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 200, // Above PageThree (100)
-                opacity: 0,
-                pointerEvents: 'none',
-                display: 'none',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'transparent'
-            }}
-        >
-             <img 
-                src={change1} 
-                alt="Transition Cup" 
-                style={{ 
-                  width: '100%', 
-                  height: 'auto',
-                  objectFit: 'contain'
-                }} 
-              />
-        </div>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import StickyWordCloudSection from './StickyWordCloudSection';
 import CollabCardStack from './CollabCardStack';
 import TimelineChart from './TimelineChart';
 import coverImg from '../assets/数据新闻-part3素材/2.png';
@@ -75,14 +74,18 @@ const PageThree = () => {
     }}>
       {/* Cover Image */}
       <div style={{ 
-        width: '100vw', 
+        width: '100%', 
+        position: 'relative',
+        paddingBottom: '50.6%',
         overflow: 'hidden' 
       }}>
         <img 
           src={coverImg} 
           style={{ 
-            width: '100%', 
-            height: 'auto',
+            position: 'absolute',
+            width: '101%', 
+            top: '-11.11%',
+            left: '-0.5%',
             display: 'block'
           }} 
           alt="Page Three Cover" 
@@ -263,18 +266,33 @@ const PageThree = () => {
           <CollabCardStack />
         </div>
 
-        <StickyWordCloudSection 
-          items={[
-            {
-              text: '广受欢迎的联名热潮也同样沉淀在小红书用户的日常讨论中，消费者围绕咖啡的叙事已高度情感化与场景化。在瑞幸的相关讨论中，“打卡”、“好看”、“可爱”与“打工人”高频出现，联名IP也被反复提起。',
-              chartOption: getLuckinUserEmotionWordCloudOption()
-            },
-            {
-              text: '星巴克的“氛围”、“仪式感”、“出片”、“治愈”等词则显示用户通过购买与分享获取即时情绪补给。对许多为了情怀买单的消费者而言，联名咖啡是具备情绪满足和收藏价值的记忆载体，回应了他们对情绪价值与社交表达的双重需求。',
-              chartOption: getStarbucksUserEmotionWordCloudOption()
-            }
-          ]} 
-        />
+        <div style={{
+            ...fullWidthTextStyle,
+            marginTop: '-150px',
+            marginBottom: '40px',
+            fontSize: '21px',
+            lineHeight: '42px',
+            color: '#542410',
+            padding: '0 45px',
+            boxSizing: 'border-box'
+        }}>
+            广受欢迎的联名热潮也同样沉淀在小红书用户的日常讨论中，消费者围绕咖啡的叙事已高度情感化与场景化。在瑞幸的相关讨论中，“打卡”、“好看”、“可爱”与“打工人”高频出现，联名IP也被反复提起。星巴克的“氛围”、“仪式感”、“出片”、“治愈”等词则显示用户通过购买与分享获取即时情绪补给。对许多为了情怀买单的消费者而言，联名咖啡是具备情绪满足和收藏价值的记忆载体，回应了他们对情绪价值与社交表达的双重需求。
+        </div>
+
+        <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+            height: '400px',
+            marginBottom: '40px'
+        }}>
+            <div style={{ width: '48%', height: '100%' }}>
+               <ReactECharts option={getLuckinUserEmotionWordCloudOption()} style={{ width: '100%', height: '100%' }} />
+            </div>
+            <div style={{ width: '48%', height: '100%' }}>
+               <ReactECharts option={getStarbucksUserEmotionWordCloudOption()} style={{ width: '100%', height: '100%' }} />
+            </div>
+        </div>
 
         <p style={fullWidthTextStyle}>
           情绪经济的成功，恰因它精准切中了现代生活的一种普遍心态：人们渴望在日常的微小消费中，获得即时的慰藉与确幸。用一杯平价的咖啡，换取片刻的情绪舒缓和无需言说的社交默契。这种广泛而真切的心理共鸣，让咖啡持续融入更多的生活场景与消费周期之中，为品牌创造了可持续的情感连接，进而支撑了整个市场的渗透与扩容。

@@ -986,8 +986,10 @@ const PageTwo = ({ onCupRef, hideCup = false }) => {
               display: 'flex', 
               flexDirection: 'column', 
               alignItems: 'center', 
-              marginTop: '0px',
-              marginBottom: '30vh',
+              justifyContent: 'center',
+              marginTop: '-230px',
+              minHeight: '100vh',
+              marginBottom: '0',
               cursor: 'pointer'
             }}
           >
@@ -996,8 +998,8 @@ const PageTwo = ({ onCupRef, hideCup = false }) => {
               className="coffee-cup-trigger"
               style={{
                 position: 'relative',
-                width: '500px',
-                height: '500px',
+                width: '1000px',
+                height: '1000px',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
