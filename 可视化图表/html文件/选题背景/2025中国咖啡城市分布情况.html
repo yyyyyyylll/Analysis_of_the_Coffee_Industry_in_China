@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+
+    
+</head>
+<body >
+    <style>.box { justify-content:center; display:flex; flex-wrap:wrap;  } </style>
+    <div class="box">
+                <div id="0dcc50068b234907ac8f0d4cb2feba08" class="chart-container" style="width:1000px; height:600px; "></div>
+    <script>
+        var chart_0dcc50068b234907ac8f0d4cb2feba08 = echarts.init(
+            document.getElementById('0dcc50068b234907ac8f0d4cb2feba08'), 'white', {renderer: 'canvas'});
+        var option_0dcc50068b234907ac8f0d4cb2feba08 = {
+    "backgroundColor": "transparent",
+    "title": {
+        "text": "2025\u4e2d\u56fd\u5496\u5561\u57ce\u5e02\u5206\u5e03\u60c5\u51b5",
+        "left": "center",
+        "top": 10,
+        "textStyle": {
+            "color": "#000",
+            "fontSize": 16,
+            "fontWeight": "bold"
+        }
+    },
+    "tooltip": {
+        "trigger": "item",
+        "formatter": "{b} : {c}% ({d}%)"
+    },
+    "legend": {
+        "orient": "vertical",
+        "left": "left",
+        "top": "middle"
+    },
+    "series": [
+        {
+            "name": "2025\u5e74\u5496\u5561\u57ce\u5e02\u5206\u5e03",
+            "type": "pie",
+            "radius": "55%",
+            "center": [
+                "50%",
+                "55%"
+            ],
+            "data": [
+                {
+                    "value": 14.1,
+                    "name": "\u4e00\u7ebf\u57ce\u5e02"
+                },
+                {
+                    "value": 23.5,
+                    "name": "\u65b0\u4e00\u7ebf\u57ce\u5e02"
+                },
+                {
+                    "value": 18.2,
+                    "name": "\u4e8c\u7ebf\u57ce\u5e02"
+                },
+                {
+                    "value": 44.2,
+                    "name": "\u4e09\u56db\u7ebf\u53ca\u4ee5\u4e0b\u57ce\u5e02"
+                }
+            ],
+            "itemStyle": {
+                "borderColor": "#fff",
+                "borderWidth": 2
+            },
+            "emphasis": {
+                "itemStyle": {
+                    "shadowBlur": 10,
+                    "shadowOffsetX": 0,
+                    "shadowColor": "rgba(0, 0, 0, 0.4)"
+                }
+            },
+            "label": {
+                "formatter": "{b}\n{c}%",
+                "color": "#333"
+            }
+        }
+    ]
+};
+        chart_0dcc50068b234907ac8f0d4cb2feba08.setOption(option_0dcc50068b234907ac8f0d4cb2feba08);
+    </script>
+<br/>    </div>
+    <script>
+    </script>
+</body>
+</html>

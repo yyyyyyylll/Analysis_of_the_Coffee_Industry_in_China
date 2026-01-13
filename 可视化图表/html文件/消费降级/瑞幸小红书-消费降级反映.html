@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts-wordcloud.min.js"></script>
+
+    
+</head>
+<body >
+    <style>.box { justify-content:center; display:flex; flex-wrap:wrap;  } </style>
+    <div class="box">
+                <div id="72d6ff72812a40078a824bc64de55615" class="chart-container" style="width:1000px; height:600px; "></div>
+    <script>
+        var chart_72d6ff72812a40078a824bc64de55615 = echarts.init(
+            document.getElementById('72d6ff72812a40078a824bc64de55615'), 'white', {renderer: 'canvas'});
+        var option_72d6ff72812a40078a824bc64de55615 = {
+    "backgroundColor": "transparent",
+    "title": {
+        "text": "\u745e\u5e78\u5c0f\u7ea2\u4e66-\u6d88\u8d39\u964d\u7ea7\u53cd\u6620",
+        "subtext": "\u5173\u952e\u8bcd\uff1a\u6d88\u8d39\u3001\u4e70\u3001\u4ef7\u683c",
+        "left": "center",
+        "top": 8,
+        "itemGap": 4,
+        "textStyle": {
+            "fontSize": 15,
+            "fontWeight": "normal",
+            "color": "#333"
+        },
+        "subtextStyle": {
+            "fontSize": 12,
+            "color": "#666"
+        }
+    },
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "formatter": function (p) { return p.name + '<br/>\u8bcd\u9891\uff1a' + p.value; }
+    },
+    "series": [
+        {
+            "type": "wordCloud",
+            "shape": "circle",
+            "sizeRange": [
+                12,
+                72
+            ],
+            "rotationRange": [
+                0,
+                0
+            ],
+            "rotationStep": 0,
+            "gridSize": 6,
+            "drawOutOfBound": false,
+            "top": 50,
+            "textStyle": {
+                "fontFamily": "sans-serif",
+                "color":                 function () {                    var darkBlues  = ['#1F4E79', '#1E3A5F', '#2B579A'];                    var lightBlues = ['#8EC1E8', '#A9D5F5', '#B7DFF7'];                    var browns     = ['#8B6B4F', '#A07B5A'];                    var greys      = ['#6F6F6F', '#8A8A8A'];                    var r = Math.random();                    if (r < 0.40) return darkBlues[Math.floor(Math.random() * darkBlues.length)];                    if (r < 0.70) return lightBlues[Math.floor(Math.random() * lightBlues.length)];                    if (r < 0.90) return browns[Math.floor(Math.random() * browns.length)];                    return greys[Math.floor(Math.random() * greys.length)];                }            
+            },
+            "emphasis": {
+                "focus": "self",
+                "textStyle": {
+                    "shadowBlur": 8,
+                    "shadowColor": "rgba(0,0,0,0.25)"
+                }
+            },
+            "data": [
+                {
+                    "name": "\u8054\u540d",
+                    "value": 195
+                },
+                {
+                    "name": "\u4ef7\u683c",
+                    "value": 122
+                },
+                {
+                    "name": "\u75af\u72c2\u52a8\u7269\u57ce",
+                    "value": 96
+                },
+                {
+                    "name": "\u5976\u8336",
+                    "value": 84
+                },
+                {
+                    "name": "\u6d88\u8d39\u8005",
+                    "value": 82
+                },
+                {
+                    "name": "\u4e70",
+                    "value": 81
+                },
+                {
+                    "name": "...",
+                    "value": 76
+                },
+                {
+                    "name": "9.9",
+                    "value": 76
+                },
+                {
+                    "name": "\u65b0\u54c1",
+                    "value": 75
+                },
+                {
+                    "name": "\u8d1d\u679c",
+                    "value": 75
+                },
+                {
+                    "name": "\u661f\u5df4\u514b",
+                    "value": 72
+                },
+                {
+                    "name": "\u6027\u4ef7\u6bd4",
+                    "value": 70
+                },
+                {
+                    "name": "\u4fbf\u5b9c",
+                    "value": 68
+                },
+                {
+                    "name": "\u745e\u5e78",
+                    "value": 67
+                },
+                {
+                    "name": "\u6d3b\u52a8",
+                    "value": 66
+                },
+                {
+                    "name": "\u4f18\u60e0",
+                    "value": 64
+                },
+                {
+                    "name": "\u5496\u5561",
+                    "value": 63
+                },
+                {
+                    "name": "\u4e00\u676f",
+                    "value": 62
+                },
+                {
+                    "name": "\u771f\u7684",
+                    "value": 61
+                },
+                {
+                    "name": "\u6253\u5361",
+                    "value": 60
+                },
+                {
+                    "name": "\u95e8\u5e97",
+                    "value": 59
+                },
+                {
+                    "name": "\u5238",
+                    "value": 58
+                },
+                {
+                    "name": "\u8585\u7f8a\u6bdb",
+                    "value": 57
+                },
+                {
+                    "name": "\u4f1a\u5458",
+                    "value": 56
+                },
+                {
+                    "name": "\u5212\u7b97",
+                    "value": 55
+                },
+                {
+                    "name": "\u6298\u6263",
+                    "value": 54
+                },
+                {
+                    "name": "\u63a8\u8350",
+                    "value": 53
+                },
+                {
+                    "name": "\u4e70\u4e00\u9001\u4e00",
+                    "value": 52
+                },
+                {
+                    "name": "\u4fbf\u5b9c\u70b9",
+                    "value": 51
+                },
+                {
+                    "name": "\u5957\u9910",
+                    "value": 50
+                },
+                {
+                    "name": "\u5bf9\u6bd4",
+                    "value": 49
+                },
+                {
+                    "name": "\u5e73\u66ff",
+                    "value": 48
+                },
+                {
+                    "name": "\u9884\u7b97",
+                    "value": 47
+                },
+                {
+                    "name": "\u7701\u94b1",
+                    "value": 46
+                },
+                {
+                    "name": "\u8d35",
+                    "value": 45
+                },
+                {
+                    "name": "\u503c\u4e0d\u503c",
+                    "value": 44
+                },
+                {
+                    "name": "\u4e0d\u592a\u503c",
+                    "value": 43
+                },
+                {
+                    "name": "\u592a\u8d35",
+                    "value": 42
+                },
+                {
+                    "name": "\u964d\u4ef7",
+                    "value": 41
+                },
+                {
+                    "name": "\u6da8\u4ef7",
+                    "value": 40
+                },
+                {
+                    "name": "\u79ef\u5206",
+                    "value": 39
+                },
+                {
+                    "name": "\u661f\u793c\u5361",
+                    "value": 38
+                },
+                {
+                    "name": "\u56e2\u8d2d",
+                    "value": 37
+                },
+                {
+                    "name": "\u5916\u5356",
+                    "value": 36
+                },
+                {
+                    "name": "\u81ea\u53d6",
+                    "value": 35
+                },
+                {
+                    "name": "\u4e0b\u5355",
+                    "value": 34
+                },
+                {
+                    "name": "\u5e73\u53f0",
+                    "value": 33
+                },
+                {
+                    "name": "\u4fc3\u9500",
+                    "value": 32
+                },
+                {
+                    "name": "\u9650\u65f6",
+                    "value": 31
+                },
+                {
+                    "name": "\u79d2\u6740",
+                    "value": 30
+                },
+                {
+                    "name": "\u56e4",
+                    "value": 29
+                },
+                {
+                    "name": "\u65e5\u5e38",
+                    "value": 28
+                },
+                {
+                    "name": "\u901a\u52e4",
+                    "value": 27
+                },
+                {
+                    "name": "\u6253\u5de5\u4eba",
+                    "value": 26
+                },
+                {
+                    "name": "\u5b66\u751f",
+                    "value": 25
+                },
+                {
+                    "name": "\u4e70\u5f97\u8d77",
+                    "value": 24
+                },
+                {
+                    "name": "\u80fd\u7701\u5219\u7701",
+                    "value": 23
+                },
+                {
+                    "name": "\u81ea\u5df1\u505a",
+                    "value": 22
+                },
+                {
+                    "name": "\u5728\u5bb6",
+                    "value": 21
+                },
+                {
+                    "name": "\u529e\u516c\u5ba4",
+                    "value": 20
+                },
+                {
+                    "name": "\u901f\u6eb6",
+                    "value": 19
+                },
+                {
+                    "name": "\u5496\u5561\u8c46",
+                    "value": 18
+                },
+                {
+                    "name": "\u6302\u8033",
+                    "value": 17
+                },
+                {
+                    "name": "\u7f8e\u5f0f",
+                    "value": 16
+                },
+                {
+                    "name": "\u62ff\u94c1",
+                    "value": 15
+                },
+                {
+                    "name": "\u51b7\u8403",
+                    "value": 14
+                },
+                {
+                    "name": "\u62b9\u8336",
+                    "value": 13
+                },
+                {
+                    "name": "\u5de7\u514b\u529b",
+                    "value": 12
+                },
+                {
+                    "name": "\u7126\u7cd6",
+                    "value": 11
+                },
+                {
+                    "name": "\u9999\u6c14",
+                    "value": 10
+                },
+                {
+                    "name": "\u53e3\u611f",
+                    "value": 9
+                },
+                {
+                    "name": "\u6d53\u90c1",
+                    "value": 8
+                },
+                {
+                    "name": "\u4e1d\u6ed1",
+                    "value": 7
+                },
+                {
+                    "name": "\u987a\u6ed1",
+                    "value": 6
+                },
+                {
+                    "name": "\u679c\u9999",
+                    "value": 5
+                },
+                {
+                    "name": "\u575a\u679c",
+                    "value": 4
+                },
+                {
+                    "name": "\u70ed\u91cf",
+                    "value": 3
+                },
+                {
+                    "name": "\u5c11\u7cd6",
+                    "value": 3
+                },
+                {
+                    "name": "\u52a0\u7cd6",
+                    "value": 3
+                },
+                {
+                    "name": "\u5927\u676f",
+                    "value": 3
+                },
+                {
+                    "name": "\u4e2d\u676f",
+                    "value": 2
+                },
+                {
+                    "name": "\u5c0f\u676f",
+                    "value": 2
+                },
+                {
+                    "name": "\u91cf",
+                    "value": 2
+                },
+                {
+                    "name": "\u95e8\u5e97\u4ef7",
+                    "value": 2
+                },
+                {
+                    "name": "\u4f18\u60e0\u5238",
+                    "value": 2
+                },
+                {
+                    "name": "\u4ef7\u683c\u53cb\u597d",
+                    "value": 2
+                },
+                {
+                    "name": "\u4fbf\u5b9c\u5f88\u591a",
+                    "value": 2
+                },
+                {
+                    "name": "\u4fbf\u5b9c\u597d\u559d",
+                    "value": 2
+                },
+                {
+                    "name": "\u4e70\u5496\u5561",
+                    "value": 2
+                },
+                {
+                    "name": "\u4e70\u996e\u54c1",
+                    "value": 2
+                },
+                {
+                    "name": "\u70b9\u5355",
+                    "value": 2
+                },
+                {
+                    "name": "\u5468\u672b",
+                    "value": 2
+                },
+                {
+                    "name": "\u60f3\u4e70",
+                    "value": 2
+                },
+                {
+                    "name": "\u9009\u62e9",
+                    "value": 2
+                },
+                {
+                    "name": "\u540c\u6b3e",
+                    "value": 2
+                },
+                {
+                    "name": "\u6298",
+                    "value": 2
+                },
+                {
+                    "name": "\u7701",
+                    "value": 2
+                },
+                {
+                    "name": "\u63a7\u5236\u9884\u7b97",
+                    "value": 2
+                },
+                {
+                    "name": "\u5212\u4e0d\u5212\u7b97",
+                    "value": 2
+                },
+                {
+                    "name": "\u4ef7\u683c\u5dee",
+                    "value": 2
+                },
+                {
+                    "name": "\u6d88\u8d39",
+                    "value": 2
+                },
+                {
+                    "name": "\u4e70\u5230",
+                    "value": 1
+                },
+                {
+                    "name": "\u5fc5\u987b",
+                    "value": 1
+                },
+                {
+                    "name": "\u5458\u5de5",
+                    "value": 1
+                },
+                {
+                    "name": "\u5feb\u6765",
+                    "value": 1
+                }
+            ]
+        }
+    ]
+};
+        chart_72d6ff72812a40078a824bc64de55615.setOption(option_72d6ff72812a40078a824bc64de55615);
+    </script>
+<br/>    </div>
+    <script>
+    </script>
+</body>
+</html>

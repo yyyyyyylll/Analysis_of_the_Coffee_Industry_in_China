@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+
+    
+</head>
+<body >
+    <style>.box { justify-content:center; display:flex; flex-wrap:wrap;  } </style>
+    <div class="box">
+                <div id="93e948c24f5d4d56bb908a6fd9114599" class="chart-container" style="width:1000px; height:600px; "></div>
+    <script>
+        var chart_93e948c24f5d4d56bb908a6fd9114599 = echarts.init(
+            document.getElementById('93e948c24f5d4d56bb908a6fd9114599'), 'white', {renderer: 'canvas'});
+        var option_93e948c24f5d4d56bb908a6fd9114599 = {
+    "backgroundColor": "transparent",
+    "title": {
+        "text": "\u661f\u5df4\u514b2022-2025\u8fd0\u8425\u8d39\u7528\u60c5\u51b5",
+        "left": "center",
+        "top": 10,
+        "textStyle": {
+            "color": "#000",
+            "fontSize": 16,
+            "fontWeight": "bold"
+        }
+    },
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "cross",
+            "crossStyle": {
+                "color": "#999"
+            }
+        },
+        "formatter": function (params) {  var year = params && params.length ? params[0].axisValue : '';  var lines = [year];  params.forEach(function (p) {    if (p.seriesName === '\u4e2d\u56fd\u603b\u8fd0\u8425\u8d39\u7528') {      lines.push(p.marker + ' \u4e2d\u56fd\u603b\u8fd0\u8425\u8d39\u7528\uff1a' + p.value + ' \u767e\u4e07\u7f8e\u5143');    }    if (p.seriesName === '\u4ea7\u54c1\u548c\u5206\u9500\u6210\u672c\u5360\u6bd4') {      var cost1 = (p.data && p.data.cost != null) ? p.data.cost : '-';      lines.push(p.marker + ' \u2460\u4e2d\u56fd\u4ea7\u54c1\u548c\u5206\u9500\u6210\u672c\uff1a' + cost1 + ' \u767e\u4e07\u7f8e\u5143');      lines.push('\u3000\u3000\u2461\u4ea7\u54c1\u548c\u5206\u9500\u6210\u672c\u5360\u6bd4\uff1a' + p.value + '%');    }    if (p.seriesName === '\u95e8\u5e97\u8fd0\u8425\u8d39\u7528\u5360\u6bd4') {      var cost2 = (p.data && p.data.cost != null) ? p.data.cost : '-';      lines.push(p.marker + ' \u2460\u4e2d\u56fd\u95e8\u5e97\u8fd0\u8425\u8d39\u7528\uff1a' + cost2 + ' \u767e\u4e07\u7f8e\u5143');      lines.push('\u3000\u3000\u2461\u95e8\u5e97\u8fd0\u8425\u8d39\u7528\u5360\u6bd4\uff1a' + p.value + '%');    }  });  return lines.join('<br/>');}
+    },
+    "toolbox": {
+        "feature": {
+            "dataView": {
+                "show": true,
+                "readOnly": false
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar"
+                ]
+            },
+            "restore": {
+                "show": true
+            },
+            "saveAsImage": {
+                "show": true
+            }
+        }
+    },
+    "legend": {
+        "top": 45,
+        "data": [
+            "\u4e2d\u56fd\u603b\u8fd0\u8425\u8d39\u7528",
+            "\u4ea7\u54c1\u548c\u5206\u9500\u6210\u672c\u5360\u6bd4",
+            "\u95e8\u5e97\u8fd0\u8425\u8d39\u7528\u5360\u6bd4"
+        ]
+    },
+    "grid": {
+        "top": 90,
+        "left": "8%",
+        "right": "8%",
+        "bottom": "12%",
+        "containLabel": true
+    },
+    "xAxis": [
+        {
+            "type": "category",
+            "data": [
+                "2022",
+                "2023",
+                "2024",
+                "2025"
+            ],
+            "axisPointer": {
+                "type": "shadow"
+            }
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "value",
+            "name": "\u4e2d\u56fd\u603b\u8fd0\u8425\u8d39\u7528\uff08\u767e\u4e07\u7f8e\u5143\uff09",
+            "axisLine": {
+                "show": true
+            },
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "type": "dashed"
+                }
+            },
+            "axisLabel": {
+                "formatter": "{value}"
+            }
+        },
+        {
+            "type": "value",
+            "name": "\u5360\u51c0\u6536\u5165\u6bd4\u91cd\uff08%\uff09",
+            "min": 0,
+            "max": 100,
+            "axisLine": {
+                "show": true
+            },
+            "splitLine": {
+                "show": false
+            },
+            "axisLabel": {
+                "formatter": "{value}%"
+            }
+        }
+    ],
+    "series": [
+        {
+            "name": "\u4e2d\u56fd\u603b\u8fd0\u8425\u8d39\u7528",
+            "type": "bar",
+            "barMaxWidth": 40,
+            "itemStyle": {
+                "color": "#A8D5A2"
+            },
+            "tooltip": {
+                "valueFormatter": function (value) { return value + ' \u767e\u4e07\u7f8e\u5143'; }
+            },
+            "data": [
+                2648.13,
+                2576.04,
+                2581.05,
+                2776.08
+            ]
+        },
+        {
+            "name": "\u4ea7\u54c1\u548c\u5206\u9500\u6210\u672c\u5360\u6bd4",
+            "type": "line",
+            "yAxisIndex": 1,
+            "showSymbol": true,
+            "symbol": "circle",
+            "symbolSize": 8,
+            "lineStyle": {
+                "color": "#2F6BFF",
+                "width": 3
+            },
+            "itemStyle": {
+                "color": "#2F6BFF"
+            },
+            "emphasis": {
+                "focus": "series"
+            },
+            "data": [
+                {
+                    "value": 34.0,
+                    "cost": 1021.98
+                },
+                {
+                    "value": 34.8,
+                    "cost": 1073.48
+                },
+                {
+                    "value": 35.1,
+                    "cost": 1055.57
+                },
+                {
+                    "value": 35.2,
+                    "cost": 1111.47
+                }
+            ]
+        },
+        {
+            "name": "\u95e8\u5e97\u8fd0\u8425\u8d39\u7528\u5360\u6bd4",
+            "type": "line",
+            "yAxisIndex": 1,
+            "showSymbol": true,
+            "symbol": "circle",
+            "symbolSize": 8,
+            "lineStyle": {
+                "color": "#D64545",
+                "width": 3
+            },
+            "itemStyle": {
+                "color": "#D64545"
+            },
+            "emphasis": {
+                "focus": "series"
+            },
+            "data": [
+                {
+                    "value": 38.9,
+                    "cost": 1171.14
+                },
+                {
+                    "value": 36.9,
+                    "cost": 1136.32
+                },
+                {
+                    "value": 38.4,
+                    "cost": 1155.67
+                },
+                {
+                    "value": 39.5,
+                    "cost": 1247.2
+                }
+            ]
+        }
+    ]
+};
+        chart_93e948c24f5d4d56bb908a6fd9114599.setOption(option_93e948c24f5d4d56bb908a6fd9114599);
+    </script>
+<br/>    </div>
+    <script>
+    </script>
+</body>
+</html>

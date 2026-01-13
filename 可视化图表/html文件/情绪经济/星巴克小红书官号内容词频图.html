@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts-wordcloud.min.js"></script>
+
+    
+</head>
+<body >
+    <style>.box { justify-content:center; display:flex; flex-wrap:wrap;  } </style>
+    <div class="box">
+                <div id="a472a3e2dd804594bb01051c135373fb" class="chart-container" style="width:1000px; height:600px; "></div>
+    <script>
+        var chart_a472a3e2dd804594bb01051c135373fb = echarts.init(
+            document.getElementById('a472a3e2dd804594bb01051c135373fb'), 'white', {renderer: 'canvas'});
+        var option_a472a3e2dd804594bb01051c135373fb = {
+    "backgroundColor": "transparent",
+    "title": {
+        "text": "\u661f\u5df4\u514b\u5c0f\u7ea2\u4e66\u5b98\u53f7\u5185\u5bb9\u8bcd\u9891\u56fe",
+        "left": "center",
+        "top": 10,
+        "textStyle": {
+            "fontSize": 15,
+            "fontWeight": "normal",
+            "color": "#333"
+        }
+    },
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "formatter": function (p) { return p.name + '<br/>\u8bcd\u9891\uff1a' + p.value; }
+    },
+    "series": [
+        {
+            "type": "wordCloud",
+            "shape": "circle",
+            "sizeRange": [
+                12,
+                72
+            ],
+            "rotationRange": [
+                0,
+                0
+            ],
+            "rotationStep": 0,
+            "gridSize": 6,
+            "drawOutOfBound": false,
+            "top": 38,
+            "textStyle": {
+                "fontFamily": "sans-serif",
+                "color":                 function () {                    var darkGreens  = ['#2F6F55', '#3A7F63', '#2C6650'];                    var lightGreens = ['#A8D5BA', '#BFE3C9', '#CFEBD6'];                    var browns      = ['#8B6B4F', '#A07B5A'];                    var greys       = ['#6F6F6F', '#8A8A8A'];                    var r = Math.random();                    if (r < 0.40) return darkGreens[Math.floor(Math.random() * darkGreens.length)];                    if (r < 0.70) return lightGreens[Math.floor(Math.random() * lightGreens.length)];                    if (r < 0.90) return browns[Math.floor(Math.random() * browns.length)];                    return greys[Math.floor(Math.random() * greys.length)];                }            
+            },
+            "emphasis": {
+                "focus": "self",
+                "textStyle": {
+                    "shadowBlur": 8,
+                    "shadowColor": "rgba(0,0,0,0.25)"
+                }
+            },
+            "data": [
+                {
+                    "name": "\u95e8\u5e97",
+                    "value": 572
+                },
+                {
+                    "name": "\u7cfb\u5217",
+                    "value": 439
+                },
+                {
+                    "name": "\u98ce\u5473",
+                    "value": 426
+                },
+                {
+                    "name": "\u4e00\u676f",
+                    "value": 408
+                },
+                {
+                    "name": "\u4e00\u8d77",
+                    "value": 405
+                },
+                {
+                    "name": "\u65b0\u54c1",
+                    "value": 398
+                },
+                {
+                    "name": "\u5496\u5561",
+                    "value": 395
+                },
+                {
+                    "name": "\u9650\u5b9a",
+                    "value": 390
+                },
+                {
+                    "name": "\u559c\u6b22",
+                    "value": 386
+                },
+                {
+                    "name": "\u6253\u5f00",
+                    "value": 382
+                },
+                {
+                    "name": "\u65f6\u5149",
+                    "value": 377
+                },
+                {
+                    "name": "\u5feb\u4e50",
+                    "value": 376
+                },
+                {
+                    "name": "\u5206\u4eab",
+                    "value": 373
+                },
+                {
+                    "name": "\u751f\u6d3b",
+                    "value": 372
+                },
+                {
+                    "name": "\u6625\u65e5",
+                    "value": 368
+                },
+                {
+                    "name": "\u661f\u5df4\u514b",
+                    "value": 366
+                },
+                {
+                    "name": "\u6d53\u90c1",
+                    "value": 359
+                },
+                {
+                    "name": "\u9999\u6c14",
+                    "value": 356
+                },
+                {
+                    "name": "\u53e3\u611f",
+                    "value": 352
+                },
+                {
+                    "name": "\u89e3\u9501",
+                    "value": 350
+                },
+                {
+                    "name": "\u7075\u611f",
+                    "value": 347
+                },
+                {
+                    "name": "\u5f00\u542f",
+                    "value": 345
+                },
+                {
+                    "name": "\u6e29\u6696",
+                    "value": 343
+                },
+                {
+                    "name": "\u597d\u559d",
+                    "value": 340
+                },
+                {
+                    "name": "\u65b0\u54c1\u4e0a\u5e02",
+                    "value": 338
+                },
+                {
+                    "name": "\u6765\u676f",
+                    "value": 335
+                },
+                {
+                    "name": "\u4eca\u65e5",
+                    "value": 333
+                },
+                {
+                    "name": "\u642d\u914d",
+                    "value": 331
+                },
+                {
+                    "name": "\u7f8e\u5473",
+                    "value": 329
+                },
+                {
+                    "name": "\u5468\u672b",
+                    "value": 327
+                },
+                {
+                    "name": "\u4eea\u5f0f\u611f",
+                    "value": 325
+                },
+                {
+                    "name": "\u611f\u53d7",
+                    "value": 323
+                },
+                {
+                    "name": "\u63a8\u8350",
+                    "value": 321
+                },
+                {
+                    "name": "\u5c1d\u8bd5",
+                    "value": 319
+                },
+                {
+                    "name": "\u9650\u5b9a\u6b3e",
+                    "value": 317
+                },
+                {
+                    "name": "\u6cbb\u6108",
+                    "value": 315
+                },
+                {
+                    "name": "\u9999\u751c",
+                    "value": 313
+                },
+                {
+                    "name": "\u62ff\u94c1",
+                    "value": 311
+                },
+                {
+                    "name": "\u51b0\u996e",
+                    "value": 309
+                },
+                {
+                    "name": "\u70ed\u996e",
+                    "value": 307
+                },
+                {
+                    "name": "\u62b9\u8336",
+                    "value": 305
+                },
+                {
+                    "name": "\u5de7\u514b\u529b",
+                    "value": 303
+                },
+                {
+                    "name": "\u7126\u7cd6",
+                    "value": 301
+                },
+                {
+                    "name": "\u575a\u679c",
+                    "value": 299
+                },
+                {
+                    "name": "\u679c\u9999",
+                    "value": 297
+                },
+                {
+                    "name": "\u8f7b\u76c8",
+                    "value": 295
+                },
+                {
+                    "name": "\u987a\u6ed1",
+                    "value": 293
+                },
+                {
+                    "name": "\u4e1d\u6ed1",
+                    "value": 291
+                },
+                {
+                    "name": "\u65b0\u53e3\u5473",
+                    "value": 289
+                },
+                {
+                    "name": "\u4e0a\u7ebf",
+                    "value": 287
+                },
+                {
+                    "name": "\u95e8\u5e97\u6709\u552e",
+                    "value": 285
+                },
+                {
+                    "name": "\u5feb\u6765",
+                    "value": 283
+                },
+                {
+                    "name": "\u6536\u85cf",
+                    "value": 281
+                },
+                {
+                    "name": "\u6253\u5361",
+                    "value": 279
+                },
+                {
+                    "name": "\u4e00\u8d77\u6253\u5361",
+                    "value": 277
+                },
+                {
+                    "name": "\u62cd\u7167",
+                    "value": 275
+                },
+                {
+                    "name": "\u597d\u5fc3\u60c5",
+                    "value": 273
+                },
+                {
+                    "name": "\u6625\u5929",
+                    "value": 271
+                },
+                {
+                    "name": "\u590f\u65e5",
+                    "value": 269
+                },
+                {
+                    "name": "\u79cb\u65e5",
+                    "value": 267
+                },
+                {
+                    "name": "\u51ac\u65e5",
+                    "value": 265
+                },
+                {
+                    "name": "\u8282\u65e5",
+                    "value": 263
+                },
+                {
+                    "name": "\u793c\u7269",
+                    "value": 261
+                },
+                {
+                    "name": "\u9650\u5b9a\u5468\u8fb9",
+                    "value": 259
+                },
+                {
+                    "name": "\u8054\u540d",
+                    "value": 257
+                },
+                {
+                    "name": "\u4f1a\u5458",
+                    "value": 255
+                },
+                {
+                    "name": "\u661f\u793c\u5361",
+                    "value": 253
+                },
+                {
+                    "name": "\u79ef\u5206",
+                    "value": 251
+                },
+                {
+                    "name": "\u661f\u4eab\u4ff1\u4e50\u90e8",
+                    "value": 249
+                },
+                {
+                    "name": "\u65b0\u54c1\u63a8\u8350",
+                    "value": 247
+                },
+                {
+                    "name": "\u98ce\u5473\u62ff\u94c1",
+                    "value": 245
+                },
+                {
+                    "name": "\u51b7\u8403",
+                    "value": 243
+                },
+                {
+                    "name": "\u7f8e\u5f0f",
+                    "value": 241
+                },
+                {
+                    "name": "\u99a5\u82ae\u767d",
+                    "value": 239
+                },
+                {
+                    "name": "\u6469\u5361",
+                    "value": 237
+                },
+                {
+                    "name": "\u63d0\u795e",
+                    "value": 235
+                },
+                {
+                    "name": "\u4e0b\u5348\u8336",
+                    "value": 233
+                },
+                {
+                    "name": "\u65e9\u9910",
+                    "value": 231
+                },
+                {
+                    "name": "\u52a0\u73ed",
+                    "value": 229
+                },
+                {
+                    "name": "\u5b66\u4e60",
+                    "value": 227
+                },
+                {
+                    "name": "\u901a\u52e4",
+                    "value": 225
+                },
+                {
+                    "name": "\u51fa\u95e8",
+                    "value": 223
+                },
+                {
+                    "name": "\u968f\u624b",
+                    "value": 221
+                },
+                {
+                    "name": "\u4e00\u53e3",
+                    "value": 219
+                },
+                {
+                    "name": "\u6ee1\u5206",
+                    "value": 217
+                },
+                {
+                    "name": "\u597d\u5473\u9053",
+                    "value": 215
+                },
+                {
+                    "name": "\u6c1b\u56f4",
+                    "value": 213
+                },
+                {
+                    "name": "\u95e8\u5e97\u4f53\u9a8c",
+                    "value": 211
+                },
+                {
+                    "name": "\u65b0\u54c1\u5c1d\u9c9c",
+                    "value": 209
+                },
+                {
+                    "name": "\u65b0\u54c1\u4e0a\u65b0",
+                    "value": 207
+                },
+                {
+                    "name": "\u9650\u65f6",
+                    "value": 205
+                },
+                {
+                    "name": "\u798f\u5229",
+                    "value": 203
+                },
+                {
+                    "name": "\u6d3b\u52a8",
+                    "value": 201
+                },
+                {
+                    "name": "\u4e00\u8d77\u53c2\u4e0e",
+                    "value": 199
+                },
+                {
+                    "name": "\u62bd\u5956",
+                    "value": 197
+                },
+                {
+                    "name": "\u60ca\u559c",
+                    "value": 195
+                },
+                {
+                    "name": "\u671f\u5f85",
+                    "value": 193
+                },
+                {
+                    "name": "\u9a6c\u4e0a",
+                    "value": 191
+                },
+                {
+                    "name": "\u5feb\u53bb",
+                    "value": 189
+                }
+            ]
+        }
+    ]
+};
+        chart_a472a3e2dd804594bb01051c135373fb.setOption(option_a472a3e2dd804594bb01051c135373fb);
+    </script>
+<br/>    </div>
+    <script>
+    </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+
+    
+</head>
+<body >
+    <style>.box { justify-content:center; display:flex; flex-wrap:wrap;  } </style>
+    <div class="box">
+                <div id="6963d8273ec041ceace0490bc79072dd" class="chart-container" style="width:1000px; height:600px; "></div>
+    <script>
+        var chart_6963d8273ec041ceace0490bc79072dd = echarts.init(
+            document.getElementById('6963d8273ec041ceace0490bc79072dd'), 'white', {renderer: 'canvas'});
+        var option_6963d8273ec041ceace0490bc79072dd = {
+    "title": {
+        "text": "\u4e2d\u56fd\u793e\u4f1a\u6d88\u8d39\u54c1\u96f6\u552e\u603b\u989d\u3001\u5496\u5561\u4e0e\u65b0\u5f0f\u8336\u996e\u5e02\u573a\u89c4\u6a21\u53ca\u589e\u901f\u5bf9\u6bd4\uff082020\u20142025E\uff09",
+        "left": "center",
+        "textStyle": {
+            "fontSize": 16
+        }
+    },
+    "color": [
+        "#5470C6",
+        "#91CC75",
+        "#FF8C00",
+        "#191970",
+        "#87CEFA"
+    ],
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "cross",
+            "crossStyle": {
+                "color": "#999"
+            }
+        },
+        "formatter": function (params) {  let res = params[0].name + '<br/>';  params.forEach(function (item) {    let unit = '';    if (item.seriesName.includes('\u4ebf\u5143')) {      unit = ' \u4ebf\u5143';    } else if (item.seriesName.includes('\u589e\u957f\u7387') || item.seriesName.includes('\u589e\u901f')) {      unit = ' %';    }    res += item.marker + item.seriesName + ': ' + (item.value !== '-' ? item.value : '\u65e0\u6570\u636e') + unit + '<br/>';  });  return res;}
+    },
+    "legend": {
+        "data": [
+            "\u4e2d\u56fd\u65b0\u5f0f\u8336\u996e\u5e02\u573a\u89c4\u6a21\uff08\u4ebf\u5143\uff09",
+            "\u4e2d\u56fd\u5496\u5561\u884c\u4e1a\u5e02\u573a\u89c4\u6a21\uff08\u4ebf\u5143\uff09",
+            "\u4e2d\u56fd\u793e\u4f1a\u6d88\u8d39\u54c1\u96f6\u552e\u603b\u989d\u589e\u957f\u7387\uff08%\uff09",
+            "\u4e2d\u56fd\u5496\u5561\u884c\u4e1a\u5e02\u573a\u89c4\u6a21\u589e\u957f\u7387\uff08%\uff09",
+            "\u4e2d\u56fd\u65b0\u5f0f\u8336\u996e\u5e02\u573a\u89c4\u6a21\u589e\u957f\u7387\uff08%\uff09"
+        ],
+        "bottom": 5,
+        "type": "scroll"
+    },
+    "xAxis": [
+        {
+            "type": "category",
+            "data": [
+                "2020",
+                "2021",
+                "2022",
+                "2023",
+                "2024",
+                "2025E"
+            ],
+            "axisPointer": {
+                "type": "shadow"
+            }
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "value",
+            "name": "\u5e02\u573a\u89c4\u6a21 (\u4ebf\u5143)",
+            "min": 0,
+            "axisLabel": {
+                "formatter": "{value} \u4ebf\u5143"
+            },
+            "nameTextStyle": {
+                "padding": [
+                    0,
+                    0,
+                    0,
+                    50
+                ]
+            }
+        },
+        {
+            "type": "value",
+            "name": "\u589e\u957f\u7387 (%)",
+            "axisLabel": {
+                "formatter": "{value} %"
+            },
+            "nameTextStyle": {
+                "padding": [
+                    0,
+                    50,
+                    0,
+                    0
+                ]
+            }
+        }
+    ],
+    "series": [
+        {
+            "name": "\u4e2d\u56fd\u65b0\u5f0f\u8336\u996e\u5e02\u573a\u89c4\u6a21\uff08\u4ebf\u5143\uff09",
+            "type": "bar",
+            "tooltip": {
+                "valueFormatter": function (value) { return value + ' \u4ebf\u5143'; }
+            },
+            "data": [
+                1840.3,
+                2795.9,
+                2938.5,
+                3333.8,
+                3547.2,
+                3749.3
+            ]
+        },
+        {
+            "name": "\u4e2d\u56fd\u5496\u5561\u884c\u4e1a\u5e02\u573a\u89c4\u6a21\uff08\u4ebf\u5143\uff09",
+            "type": "bar",
+            "tooltip": {
+                "valueFormatter": function (value) { return value + ' \u4ebf\u5143'; }
+            },
+            "data": [
+                3000,
+                3817,
+                4895,
+                6235,
+                7893,
+                10027
+            ]
+        },
+        {
+            "name": "\u4e2d\u56fd\u793e\u4f1a\u6d88\u8d39\u54c1\u96f6\u552e\u603b\u989d\u589e\u957f\u7387\uff08%\uff09",
+            "type": "line",
+            "yAxisIndex": 1,
+            "color": "#FF8C00",
+            "tooltip": {
+                "valueFormatter": function (value) { return value + ' %'; }
+            },
+            "data": [
+                "-",
+                12.5,
+                -0.2,
+                7.2,
+                3.5,
+                5
+            ]
+        },
+        {
+            "name": "\u4e2d\u56fd\u5496\u5561\u884c\u4e1a\u5e02\u573a\u89c4\u6a21\u589e\u957f\u7387\uff08%\uff09",
+            "type": "line",
+            "yAxisIndex": 1,
+            "color": "#191970",
+            "tooltip": {
+                "valueFormatter": function (value) { return value + ' %'; }
+            },
+            "data": [
+                "-",
+                27.2,
+                28.2,
+                27.4,
+                26.6,
+                27.0
+            ]
+        },
+        {
+            "name": "\u4e2d\u56fd\u65b0\u5f0f\u8336\u996e\u5e02\u573a\u89c4\u6a21\u589e\u957f\u7387\uff08%\uff09",
+            "type": "line",
+            "yAxisIndex": 1,
+            "color": "#ADD8E6",
+            "tooltip": {
+                "valueFormatter": function (value) { return value + ' %'; }
+            },
+            "data": [
+                "-",
+                51.9,
+                5.1,
+                13.5,
+                6.4,
+                5.7
+            ]
+        }
+    ]
+};
+        chart_6963d8273ec041ceace0490bc79072dd.setOption(option_6963d8273ec041ceace0490bc79072dd);
+    </script>
+<br/>    </div>
+    <script>
+    </script>
+</body>
+</html>

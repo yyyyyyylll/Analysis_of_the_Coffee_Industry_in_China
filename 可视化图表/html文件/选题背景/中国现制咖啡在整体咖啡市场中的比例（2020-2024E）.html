@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+
+    
+</head>
+<body >
+    <style>.box { justify-content:center; display:flex; flex-wrap:wrap;  } </style>
+    <div class="box">
+                <div id="00b0e2f4c77f4e09bdb46c66d859f3ca" class="chart-container" style="width:1000px; height:600px; "></div>
+    <script>
+        var chart_00b0e2f4c77f4e09bdb46c66d859f3ca = echarts.init(
+            document.getElementById('00b0e2f4c77f4e09bdb46c66d859f3ca'), 'white', {renderer: 'canvas'});
+        var option_00b0e2f4c77f4e09bdb46c66d859f3ca = {
+    "title": {
+        "text": "\u4e2d\u56fd\u73b0\u5236\u5496\u5561\u5728\u6574\u4f53\u5496\u5561\u5e02\u573a\u4e2d\u7684\u6bd4\u4f8b\uff082020-2024E\uff09",
+        "left": "center",
+        "textStyle": {
+            "fontSize": 16
+        }
+    },
+    "color": [
+        "#191970"
+    ],
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow"
+        },
+        "formatter": function (params) {  const item = params[0];  return `${item.name}<br/>${item.marker}${item.seriesName}: ${item.value} %`;}
+    },
+    "legend": {
+        "data": [
+            "\u6bd4\u4f8b"
+        ],
+        "bottom": 10
+    },
+    "xAxis": {
+        "type": "category",
+        "data": [
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024E"
+        ],
+        "axisLabel": {
+            "interval": 0,
+            "rotate": 0
+        }
+    },
+    "yAxis": {
+        "type": "value",
+        "name": "\u6bd4\u4f8b (%)",
+        "min": 0,
+        "max": 50,
+        "interval": 10,
+        "axisLabel": {
+            "formatter": "{value} %"
+        }
+    },
+    "series": [
+        {
+            "name": "\u6bd4\u4f8b",
+            "type": "line",
+            "itemStyle": {
+                "color": "#191970"
+            },
+            "lineStyle": {
+                "width": 3
+            },
+            "data": [
+                18.5,
+                24.5,
+                31.1,
+                40.2,
+                44.6
+            ]
+        }
+    ]
+};
+        chart_00b0e2f4c77f4e09bdb46c66d859f3ca.setOption(option_00b0e2f4c77f4e09bdb46c66d859f3ca);
+    </script>
+<br/>    </div>
+    <script>
+    </script>
+</body>
+</html>
